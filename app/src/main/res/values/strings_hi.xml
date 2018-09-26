@@ -1,0 +1,1058 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+	<string name="hello_world">Hello World</string>
+    
+    <!-- XHQ -->
+    <string name="advanced_setup">Advanced</string>
+    <!-- <string name="master_clear_title">Factory Data Reset</string> -->
+    
+    
+    <!-- Advance Settings, App Manage-->
+    <string name="tv2_app_manage">Calculating</string>
+    <string name="tv_version_aap_manage">Current Version</string>
+    <string name="tv_total_aap_manage">Total</string>
+    <string name="tv_data_aap_manage">Data</string>
+    <string name="btn_clear_cache_app_manage">Clear Cache</string>
+    <string name="tv1_title_clear_cache">Confirm To Delete Cached Data?</string>
+    <!-- <string name="tv1_title_clear_cache">Confirm Delete Cached Data?</string> -->
+    <string name="tv2_content_clear_cache">The system will permanently delete this application all cached data,Including personalized Settings, account login information.</string>
+   <!--  <string name="tv3_content_clear_cache">Including personalized Settings, account login information.</string> -->
+    <string name="tv1_clean_dialog">Wait A Moment...</string>
+	<string name="tv2_clean_dialog">cleaning</string>
+	
+	<!-- Advance Setting, time set -->
+    <string name="tv_date_format_select">Select A Date Format</string>
+    <string name="tv_date_format">Date Format</string>
+    <string name="tv_time_format">Time Format</string>
+    <string name="tv_time_setting_title">Time</string>
+    <string name="tv_time_setting">Time Setting</string>
+    <string name="tv_date_setting">Data Setting</string>
+    <string name="tv_npt_address_title">NTP Address</string>
+    <string name="tv_npt_address">Main NTP</string>
+    <string name="et_address_hint">Please Input NTP Address"</string>
+    <string name="tv_prepare_npt_address">Backup NTP</string>
+    <string name="et_prepare_npt_addr_hint">Please Input Backup NTP Address</string>
+    <string name="toast_ntp_isempty">NTP address can not be empty</string>
+    <string name="tv_year_month_day">YEAR-MONTH-DAY</string>
+    <string name="tv_month_day_year">MONTH-DAY-YEAR</string>
+    <string name="tv_day_month_year">DAY-MONTH-YEAR</string>
+    <string name="tv_time_format_24H">18:00</string>
+    <string name="tv_time_format_12H">P.M 06:00</string>
+    <string name="tv_time_zone_beijing">Beijing Time GMT+8:00</string>
+    
+    <string name="tv_colon">:</string>
+    
+    <!-- Advanced Set, Language Set -->
+    <string name="language_setting">Language</string>
+    
+    <!-- Advanced Set, Master Clear -->
+    <string name="tv_keep_user_info">Reserve The User Information</string>
+    <string name="tv_keep_network_info">Reserve Network Information</string>
+    <!-- XHQ -->
+    
+	
+    <string name="ethernet_settings_title">Ethernet</string>
+    <!-- Settings main menu category heading. System (Updates, data, accessibility, about phone). [CHAR LIMIT=40] -->
+
+    <!-- Ethernet configuration dialog -->
+    <string name="eth_con_type_dhcp">DHCP</string>
+    <string name="eth_con_type_dhcpplus">IPoE</string>
+    <string name="eth_con_type_manual">Static IP</string>
+    <string name="eth_con_type_pppoe">PPPoE</string>
+    <string name="eth_con_type_static_ipv6">Static IPV6</string>
+    <string name="eth_ipaddr">IP address</string>
+    <string name="eth_gw">Default gateway</string>
+    <string name="eth_mask">Netmask</string>
+    <string name="eth_static_cfg">Static Network Config</string>
+    <string name="eth_dns">DNS</string>
+    <string name="eth_dns1">DNS1</string>
+    <string name="eth_dns2">DNS2</string>
+    <string name="eth_mac">MAC address</string>
+    <string name="eth_dhcp_successed">Connected</string>
+    <string name="eth_dhcp_getting">Obtaining IP address\u2026</string>
+    <string name="eth_static_getting">Connecting\u2026</string>
+    <string name="eth_dhcp_cancel">Disconnected</string>
+    <string name="eth_dhcp_failed">Connect Failed</string>
+    <string name="eth_phy_link_down">Cable not connected</string>
+    <string name="eth_phy_link_up">Cable connected</string>
+    <string name="eth_phy_link_down_check">Cable not connected,please connect your network cable first</string>
+    <string name="eth_static_connect">Connected</string>
+    <string name="eth_static_disconnecting">Disconnecting\u2026</string>
+    <string name="eth_static_disconnect_successed">Disconnected</string>
+    <string name="eth_disconected">Connect Failed</string>
+    <string name="network_interface">Network Interface List</string>
+    <string name="network_cable0">Interface 0</string>
+    <string name="network_cable1">Interface 1</string>
+    <string name="wifi_disguise">WiFi Disguise</string>
+    <string name="button_cancel">Cancel</string>
+    <string name="button_ok">OK</string>
+    <string name="check_ip">Please check your input</string>
+    <!-- begin  PPPoE network add by lWX146298 -->
+    <string name="pppoe_setting">PPPoE Setting</string>
+    <string name="pppoe_disconnect">DisConnected</string>
+    <string name="pppoe_connect">Connected</string>
+    <string name="pppoe_connecting">Connecting......</string>
+    <string name="pppoe_connect_error">UserName or Password Wrong !</string>
+    <string name="pppoe_connect_timeout">Connect Time Out !</string>
+    <string name="pppoe_connect_falied">Connect Failed</string>
+    <string name="local_network_category_title">LOCAL NETWORK SETTING</string>
+    <string name="pppoe_category_title">PPPoE NETWORK SETTING</string>
+    <string name="pppoe_switch_info">PPPoE is Enabled and will be disconnected. Are you sure to switch?</string>
+    <string name="pppoe_dialog_cannel">Cannel</string>
+    <string name="pppoe_dialog_disconnect">Sure</string>
+    <string name="pppoe_disable">Disable</string>
+    <string name="pppoe_auto_reconnect_title">PPPoE Auto Reconnect</string>
+    <string name="pppoe_auto_reconnect_summary">PPPoE will be reconnected automatically after connect Failed</string>
+    
+    <!-- Setting device name -->
+    <string name="living_room_device">living_room device</string>
+    <string name="bedroom_device">bedroom device</string>
+    <string name="dining_room_device">dining_room device</string>
+    
+    <!-- Setting wire MAC or wireless MAC -->
+     <string name="fh_device_name">Device Name</string>
+    <string name="wired_mac_address">WiredMac Address</string>
+    <string name="wireless_mac_address">WirelessMac Address</string>
+    
+
+    <!-- Settings main menu category heading. Wireless and networks (Wi-Fi, Bluetooth, data usage...). [CHAR LIMIT=40] -->
+    <string name="header_category_wireless_netservice">SHARE</string>
+    <!-- Wallpaper settings fragment title [CHAR LIMIT=30] -->
+    <string name="netservice_settings_fragment_title">start the network service</string>
+    <!-- Settings main menu category heading. Device (Sound, display, battery, applications...). [CHAR LIMIT=40] -->
+    <string name="header_category_samba">SAMBA Service</string>
+    <!-- Settings main menu category heading. Personal (Accounts, security, language, backup...). [CHAR LIMIT=40] -->
+    <string name="header_category_ftp">Ftp Service</string>
+    <!-- Settings main menu category heading. System (Updates, data, accessibility, about phone). [CHAR LIMIT=40] -->
+    <string name="header_category_nfs">Nfs Service</string>
+
+    <!-- screen scope -->
+    <string name="screen_scope">Display area set</string>
+    <string name="set_scope_top">Top offset</string>
+    <string name="set_scope_left">Left offset</string>
+    <string name="set_scope_width">Width offset</string>
+    <string name="set_scope_height">Height offset</string>
+    <string name="exit_ask">Whether to keep the current setting</string>
+    <string name="info">Prompt</string>
+    <string name="scope_outside">screen outside</string>
+    <string name="account">Account</string>
+    <string name="account_info">Account Info</string>
+    <string name="pppoe_login">PPPoE</string>
+    <string name="pass">password</string>
+    <string name="start">start</string>
+    <string name="stop">stop</string>
+    <string name="global_element">setting global parameter</string>
+    <string name="server_info">server configuration</string>
+    <string name="work_group">work group </string>
+    <string name="log_count">Log number</string>
+    <string name="serurity_level">security level</string>
+    <string name="down_setting">share setting</string>
+    <string name="down_path">mount path</string>
+    <string name="file_right">mount file permission</string>
+    <string name="directory_right">mount directory permission</string>
+    <string name="user_name">UserName</string>
+    <string name="available_info">available</string>
+    <string name="browseable_info">browseable</string>
+    <string name="writable_info">write</string>
+    <string name="default_0777">0777</string>
+    <string name="client_configuration">client configuration</string>
+    <string name="delete_client">delete a client configuration</string>
+    <string name="login_setting">login setting</string>
+    <string name="login_paths">login path</string>
+    <string name="local_setting">local setting</string>
+    <string name="record_info">record the user so uploads and downloads information</string>
+    <string name="local_user">local user</string>
+    <string name="local_time">local time</string>
+    <string name="y_n_update_system">Modify server files</string>
+    <string name="port">port</string>
+    <string name="pass_dialog">Password dialog</string>
+    <string name="newPassLabel">new password</string>
+    <string name="confirmPassLabel">confirm new password</string>
+    <string name="badPass">old password error</string>
+    <string name="label_puk2_code" msgid="302845876240219560"></string>
+    <string name="mismatchPin2">Password set error, please set again</string>
+    <string name="invalidPin2">input password (11 characters length permitted)</string>
+    <string name="port_setting">port setting</string>
+    <string name="default_21">default 21</string>
+    <string name="default_account">default radio</string>
+    <string name="default_pass">default 123456</string>
+    <string name="default_path">default /data</string>
+    <string name="new_mount">new share</string>
+    <string name="account_n_empty">please input account</string>
+    <string name="share_file_name">share file name</string>
+    <string name="share_directory">share directory</string>
+    <string name="share_file_per">share file permissions</string>
+    <string name="share_dir_per">share directory permissions</string>
+    <string name="set_name">account</string>
+    <string name="okBut">OK</string>
+    <string name="cancelBut">Cancel</string>
+    <string name="all_share">all_share</string>
+
+    <!-- image -->
+    <string name="set_screen">Image settings</string>
+    <string name="set_hue">Chroma</string>
+    <string name="set_contrast">Contrast</string>
+    <string name="set_saturation">Saturation</string>
+    <string name="tv">tv</string>
+    <string name="pc">pc</string>
+    <!-- px -->
+    <string name="set_video_tv_label">Custom display format</string>
+    <!-- television aspect ratio -->
+    <string name="video_ratio">Video aspect ratio</string>
+    <!-- maintain aspect ratio -->
+    <string name="video_cvrs">Maintain aspect ratio</string>
+
+    <!-- whether we will enable hiplayer -->
+    <string name="media_player">Media Player Option</string>
+    <!-- Whether output format adaption is enabled or not for 2D stream -->
+    <string name="output_format_adaption">Output format adaption for 2D stream</string>
+    <string name="output_format_adaption_summaryOn">Enabled</string>
+    <string name="output_format_adaption_summaryOff">Disabled</string>
+
+    <string name="display_settiongs_statusbar">Hide StatusBar</string>
+    <string name="display_settiongs_statusbar_restart">Please restart system</string>
+    <string name="sure">OK</string>
+
+    <!-- System update -->
+    <string name="n_update_f">No upgrade package</string>
+    <string name="sdcard_no_mount">Sdcard not mount</string>
+    <string name="upgrade_dialog_summary">Are you sure want to upgrade?</string>
+    <string name="discover_usb">Discovery USB device</string>
+
+    <!-- samba setting -->
+    <string name="edt_empty_hint"> cannot be empty</string>
+    <string name="add_successfully">add successfully</string>
+    <string name="start_service_successfully">start successfully</string>
+    <string name="stop_service_successfully">stop successfully</string>
+    <string name="start_service_fail">start failed</string>
+    <string name="stop_service_fail">stop failed</string>
+    <string name="batch_del_title">delete dialog</string>
+    <string name="prefs_title">delete shares</string>
+    <string name="delete_share_success">shares deleted successfully</string>
+    <string name="delete_error">delete error</string>
+    <string name="edit_share_info">edit share</string>
+    <string name="edit_successfully">edit successfully</string>
+    <string name="edit_failed">edit failed</string>
+    <string name="null_share_dir">no head informations</string>
+    <string name="dir_already_exists">share file has already existed</string>
+    <string name="share_edit_title">share edit dialog</string>
+    <string name="preference_set_success">%1$s set successfully</string>
+    <string name="preference_set_failed">%1$s set failed</string>
+    <string name="default_workgroup">WORKGROUP</string>
+    <string name="default_server_mode">user</string>
+    <string name="default_log_num">100</string>
+    <string name="default_server_info">Hi3716C</string>
+    <string name="content_format_error">content can just be digits</string>
+    <string name="samba_setting_title">Samba Server Setting</string>
+
+    <!-- ftp setting -->
+    <string name="ftp_setting_title">Ftp Server Setting</string>
+    <string name="localtime_prefs">use local time</string>
+    <string name="listen_port">port</string>
+
+    <!-- nfs setting -->
+    <string name="nfs_setting_title">Nfs Server Setting</string>
+    <string name="look_nfs_client_infos">client information</string>
+    <string name="check_client_infos">view client informations</string>
+    <string name="add_new_share">add new share</string>
+    <string name="del_one_share">delete shares</string>
+    <string name="show_infos_dlg_title">%1$s in total</string>
+    <string name="no_client_mount_infos">no client mount informations</string>
+    <string name="show_ip">ip:</string>
+    <string name="show_dir">directory:</string>
+    <string name="add_new_share_ip">Input Client Address</string>
+    <string name="add_new_share_directory">Input directory path</string>
+    <string name="add_share_dlg_title">New Share Dialog</string>
+    <string name="input_ip_empty">ip address cannot be empty</string>
+    <string name="ip_format_error">ip format error</string>
+    <string name="input_dir_empty">directory cannot be empty</string>
+    <string name="delete_share_title">Delete Dialog</string>
+    <string name="no_item_selected">No Item Selected</string>
+    <string name="nfs_share_existed">share directory has already existed</string>
+    <string name="init_no_password">No password when first used, need be set</string>
+    <string name="server_can_empty">(If client address is empty, indicate that all can
+        access)</string>
+    <string name="share_dir_hint">128 characters length permitted(just
+        number,_,character)</string>
+    <string name="registered_share_dir_chars">_0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ</string>
+    <string name="input_char_unvalidate">Input char must be number, underline, lower or upper character</string>
+    <string name="name_len_hint">128 characters length permitted</string>
+    <string name="net_bois_name">NetBIOS Name of Host</string>
+    <string name="net_host_name">Host Name</string>
+    <string name="net_name_different">Host name differs from each other</string>
+    <string name="net_bios_hint">10 characters length permitted(just number,_
+        ,character)</string>
+    <string name="pwd_empty_hint">password cannot be empty</string>
+    <string name="default_share_path">/sdcard</string>
+    <string name="xxx_not_empty_hint">%1$s can not be empty</string>
+    <string name="add_fail">Add Failed</string>
+    <string name="edit_dlg_title">Edit Dialog</string>
+    <string name="ftp_default_user">haisi</string>
+    <string name="ftp_default_path">/data</string>
+    <string name="ftp_default_port">21</string>
+    <string name="default_radio">radio</string>
+    <string name="default_net_bios">player</string>
+    <string name="enable_password">Use password for protection</string>
+    <string name="enpwd_summary">protect share when enable password</string>
+    <string name="read_only_title">set to write</string>
+    <string name="xxx_set_success">set successfully</string>
+    <string name="nfs_folder">ServerFolder</string>
+    <string name="nfs_read_only">Disable modifying contents</string>
+    <string name="old_pass">old password</string>
+    <string name="input_old_pass">input the old password</string>
+    <string name="nfs_mount_title">UNIX Mount directory tips</string>
+    <string name="nfs_mount_notify">mount -t nfs -o nolock,udp,nfsvers=2 ip:/serverFolder localFolder</string>
+    <string name="ftp_user_name_1">Anonymous</string>
+    <string name="ftp_user_name_2">admin</string>
+    <string name="samba_user_name">administrator</string>
+    <string name="nfs_server_folder">/mnt</string>
+
+    <string name="storage_information">Detailed Information</string>
+    <string name="storage_information_summary">check equipment capacity</string>
+    <!-- output mode -->
+    <string name="output_port">Output Port</string>
+    <string name="output_machine_summary">Setting Audio Output Machine</string>
+    <!-- output mode -->
+    <string name="output_mode">Output Mode</string>
+
+    <string name="output_down">HBR Degrade</string>
+
+    <!-- hdmi output -->
+    <string name="hdmi_output">HDMI Output</string>
+    <string name="bluelight_output">HBR Degrade Output</string>
+    <!-- spdif mode -->
+    <string name="sdpif_output">SPDIF Output</string>
+    <string name="setting_volume_label">Volume Setting</string>
+    <string name="NetworkConnectRemind">Please Check your Network connection!</string>
+
+    <!-- dobly mode -->
+    <string name="dobly_drc">Dolby Night Mode</string>
+    <!-- Display settings -->
+    <skip />
+
+    <string name="media_settings">"Video Output"</string>
+
+    <!-- System update -->
+    <string name="upgrade_settings_title">Memory Space</string>
+    <string name="memory_space">Memory Space</string>
+
+    <!-- Title of the Wi-fi settings entry in the left top level menu -->
+    <string name="ethernet_advanced_titlebar">Advanced Ethernet</string>
+    <string name="left_top">L/U</string>
+    <string name="ok_str">OK Change Focus</string>
+    <string name="right_bottom">R/D</string>
+    <string name="file_check">CA Check</string>
+    <string name="file_checking">CA Checking</string>
+    <string name="file_check_success">CA Check Success</string>
+    <string name="file_check_failed">CA Check Failed</string>
+    <string name="default_external_storage_title">Default storage equipment</string>
+    <string name="default_info">default storage equipment</string>
+    <string name="default_warning_title">Take effect after the restart , reboot the system immediately?</string>
+    <string name="unmount_cancle">Cancle</string>
+    <string name="default_warning_enter">Enter</string>
+
+    <!-- add ipv6 info  -->
+    <string name="ipv6_disable">Disable</string>
+    <string name="display_ipv6">Ipv6</string>
+    <string name="ipv6">Ipv6 Settings</string>
+    <string name="ipv6_enable">Enable</string>
+    <string name="ipv6_connect">Connected</string>
+    <string name="ipv6_connect_success">IPV6 Connect Success</string>
+    <string name="ipv6_connecting">IPV6 Connecting......</string>
+    <string name="ipv6_connect_failed">IPV6 Connect Failed !</string>
+    <string name="ipv6_connect_failed_auto">Connect Failed ! Please wait to reconnect</string>
+    <string name="pppoe_auth_failed">Authentication Failed ! Please cheak the username and passwd</string>
+    <string name="ipv6_disconnect">DisConnected</string>
+    <string name="ipv6_disconnecting">DisConnecting......</string>
+    <string name="ipv6_disconnet_failed">DisConnected Failed !</string>
+    <!--option 60 -->
+    <string name="option">DHCP OPTION</string>
+    <string name="option_60">Option60</string>
+    <string name="option_125">Option125</string>
+    <string name="option_username">UserName</string>
+    <string name="option_pwd">PassWord</string>
+    <string name="option_button_ok">Save</string>
+    <string name="option_button_cancle">Cancle</string>
+    <string name="option_tips">Please input below information.</string>
+
+    <string name="ipv6_static">Static IP</string>
+    <string name="ipv6_dhcp">DHCP</string>
+    <string name="ipv6_ip">IP</string>
+    <string name="ipv6_ip_txt">IP</string>
+    <string name="ipv6_gateway_txt">Gateway</string>
+    <string name="ipv6_prefix_length_txt">Prefix Length</string>
+    <string name="ipv6_dns">DNS</string>
+    <string name="ipv6_dns2_txt">DNS2</string>
+    <string name="ipv6_dns1_txt">DNS1</string>
+
+    <string name="auto_reconnect">Auto Reconnect</string>
+    <string name="net_auto_reconnect">NETWORK AUTO RECONNECT</string>
+    <string name="user_info">User Info</string>
+    <string name="option_save">Save</string>
+    <string name="auto_reconnecting">Reconnecting…</string>
+    
+    <!-- add -->
+    <string name="title">Settings</string>
+    <string name="title_network">Network</string>
+    <string name="title_px">Resolution</string>
+    <string name="title_area"> Adaptation</string>
+    <string name="title_stb_tube">Health Manager</string>
+    <string name="title_box">STB Name</string>
+    <string name="title_upgrade">Upgrade</string>
+    <string name="title_about">About Us</string>
+    <string name="title_more">More</string>
+    <string name="stb_housekeeper_status_title">Status: %1$s</string>
+    <string name="fh_release_version">Software Version</string>
+    <string name="fh_device_number">Device Version</string>
+    
+    <string name="about_net_info">Network</string>
+    <string name="network_info">Network Information:</string>
+    <string name="manual_operation">Manual</string>
+    <string name="pppoe_mode">PPPoE</string>
+    <string name="static_ipv6">IPV6</string>
+    <string name="fh_ip_address">IP Address:</string>
+    <string name="fh_ipv6_address">IPV6 Address:</string>
+    <string name="fh_son_net_address">Subnet Mask:</string>
+    <string name="fh_ipv6_mask_len">Mask Length:</string>
+    <string name="gateway">Gateway:</string>
+    <string name="main_dns">Primary DNS</string>
+    <string name="second_dns">Secondary DNS:</string>
+    <string name="network_check_info">Information:</string>
+    <string name="business_account">Service Account:</string>
+    <string name="network_account">Network Account:</string>
+    <string name="fh_mac_address">Ethernet MAC Address</string>
+    <string name="wifi_mac_address">WifiMac Address</string>
+    <string name="system_time">System Time:</string>
+    <string name="network_mode">Network Mode:</string>
+    <string name="wifi_point">Wifi Hostpot</string>
+    <string name="wired_network">Wired Network</string>
+    <string name="status_open">Enabled</string>
+    <string name="status_close">Disabled</string>
+    <string name="status_disconnect">Disconnected</string>
+    <string name="auto_mode">DHCP</string>
+    <string name="wlan_text">WiFi</string>
+    <string name="wireless_network">Wireless Network</string>
+    <string name="diagose">Network Detective</string>
+    <string name="wifi_wps">Start WPS</string>
+    <string name="status_connected">Connected</string>
+    <string name="wlan_info">WiFi Information:</string>
+    <string name="wifi_open_tips">Turn on Wi-Fi to view available networks.</string>
+    <string name="under_line">Under line</string>
+    <string name="top_line">Top line</string>
+    <string name="icon_arrow">Icon arrow</string>
+    <string name="setting_title_icon">Setting title icon</string>
+    
+    <string name="wifi_serch_tips">Detecting wireless networks… Please wait.</string>
+    <string name="wifi_wps_overlap_error">Another Wi-Fi protected session was detected. Try again in a few minutes.</string>
+    <string name="wifi_title">WiFi</string>
+    <string name="wifi_network_setup">WPS</string>
+    <string name="wifi_wps_pin">Type PIN from access point</string>
+    <string name="proxy_not_be_use">Do not use agent</string>
+    
+    <string name="title_ethernet">Wired Network</string>
+    <string name="Network_instability">Cable connection error or MAC address conflict.</string>
+    <string name="dhcp_link_error_code">Connection failure.</string>
+    <string name="ctc_dhcp_connect">Connecting to the IPoE server… Please wait.</string>
+    <string name="test_static_connect">Connecting to the Static server… Please wait.</string>
+    <string name="test_pppoe_connect">Connecting to the PPPoE server… Please wait.</string>
+    <string name="test_dhcpplus_connect">Connecting to the IPoE server… Please wait.</string>
+    <string name="test_static6_connect">Connecting to the Static IPV6 server… Please wait.</string>
+    <string name="dhcp_configuration_info">The DHCP network was configured successfully. Network Information:</string>
+    <string name="pppoe_configuration_info">The PPPoE network was configured successfully. Network Information:</string>
+    <string name="dhcpplus_configuration_info">The IPoE network was configured successfully. Network Information:</string>
+    <string name="back">Back</string>
+    <string name="dhcp_disconnected">Failed to connect to the DHCP network.</string>
+    <string name="ctc_dhcp_disconnected">Failed to connect to the IPoE network.</string>
+    <string name="static_disconnected">Failed to connect to the Static IP network.</string>
+    <string name="pppoe_disconnected">Failed to connect to the PPPoE network.</string>
+    <string name="dhcpplus_disconnected">Failed to connect to the IPoE network.</string>
+    <string name="dhcp_disconnect_reason_netline_null">Network cable disconnected.</string>
+    <string name="btn_retry_txt">Retry</string>
+    <string name="btn_cancel_txt">Cancel</string>
+    <string name="auto_get_ip_adress">Automatically Obtain IP Address</string>
+    <string name="ip_iiiegal_characters">Illegal characters</string>
+    <string name="ipaddredittext_err">The number must between 0 and 255!</string>
+    <string name="static_connect_title">Obtain IP Address Manually</string>
+    <string name="confirm_btn">OK</string>
+    <string name="cancel_btn">Cancel</string>
+    <string name="ip_gateway_check2">The IP address and gateway IP address cannot be the same.</string>
+    <string name="ip_gateway_check">The IP address and gateway IP address are not in the same network segment.</string>
+    <string name="ip_in_use">The IP address is already in use. Please try another.</string>
+    <string name="network_detect_info">Network Detect</string>
+    <string name="onekey_detect_wire">Wired Connectivity Test</string>
+    <string name="onekey_detect_wireless">Wireless Connectivity Test</string>
+    <string name="onekey_detect_speed">Speed Test</string>
+    <string name="onekey_detect_info">Static Information</string>
+    <string name="diagose_network_connectivity_test">Neteork Connectivity Detective</string>
+    <string name="diagose_url">Diagose URL</string>
+    <string name="diagose_default_url">ntpm.iptv.gd.cn</string>
+    <!--<string name="app_name">SpeedTest</string>-->
+    <string name="diagose_start">Start Diagose</string>
+    <string name="diagose_url_error">Invalid URL，input a correct URL please.</string>
+    <string name="test_network_connect">Network Connection</string>
+    <string name="test_ip_address">IP Address Obtain</string>
+    <string name="test_netmask">GateWay</string>
+    <string name="test_timeserver">NTP Server</string>
+    <string name="test_centernetwork">Network Center</string>
+    <string name="test_dns">DNS</string>
+    <string name="stoptest">Stop</string>
+    <string name="test">Start</string>
+    <string name="diagnose_exit">Exit</string>
+    <string name="connect_test_inf_fail">Network connection error.</string>
+    <string name="connect_test_ip_fail">IP connection error. </string>
+    <string name="connect_test_gw_fail">Gateway connection error.</string>
+    <string name="connect_test_ntp_fail">NTP connection error.</string>
+    <string name="connect_test_cn_fail">Center netwrok connection error.</string>
+    <string name="connect_test_url_suc">Network connection success.</string>
+    <string name="connect_test_url_fail">Domain connection error.</string>
+    <string name="test_network_wifi">Wifi Connection</string>
+    
+    <string name="speed_start_test">Start</string>
+    <string name="network_detecting">Detecting…</string>
+    <string name="update_speed">Average rate: %s Mbps</string>
+    <string name="update_progress">Percentage: %1$s  %2$s</string>
+    <string name="update_connectionspeed">Connection time %s ms</string>
+    <string name="update_downloaded_complete">Average rate: %1$s Mbps</string>
+    <string name="conclusion_low">Network status is instablity.</string>
+    <string name="conclusion_mid">Network status is good.</string>
+    <string name="conclusion_high">Network status is amazing.</string>
+    
+    <string name="spdif_hdmi_confirm_msg">Previous setting will be restored in %1$d seconds.</string>
+    <string name="info2">Info</string>
+    <string name="button_confirm">OK</string>
+    
+    <string name="screen_scale">Display Adaptation</string>
+    <string name="app_data_size">Data &#8212; %1$s</string>
+    <string name="stb_housekeeper_title">Health Manager</string>
+    <string name="stb_housekeeper_remaining_space">Available Space</string>
+    <string name="stb_housekeeper_app">Apps</string>
+    <string name="stb_housekeeper_cache">Cache</string>
+    <string name="storage_total_space">Total Space:</string>
+    <string name="tv_stb_housekeeper_byte">MB</string>
+    <string name="storage_used_space">Used Space:</string>
+    <string name="stb_housekeeper_app_installed">Installed:</string>
+    <string name="stb_housekeeper_app_installed_number">MB</string>
+    <string name="stb_housekeeper_app_uninstall">Uninstall Apps</string>
+    <string name="stb_housekeeper_cache_can_clear">Current Cache Size:</string>
+    <string name="storage_used_btn_clear">Clear Cache</string>
+    <string name="app_null">No app to be uninstalled.</string>
+    <string name="fh_app_manager_title">Menu</string>
+    <string name="stb_tube_sort_title">Sort by %1$s</string>
+    <string name="application_sort_dialog_title">Sort By</string>
+    <string name="app_no_uninstall_toast">Select the app to be uninstalled.</string>
+    <string name="app_cache_null">The app cache size is 0. No cache clearing required.</string>
+    <string name="app_cache_clear_fail">Failed to clear the cache.</string>
+    <string name="et_stb_name_hint">Define an STB name&#8230;</string>
+    <string name="stb_name_custom_too_much">A maximum of 5 STB names can be defined.</string>
+    <string name="stb_name_custom_is_exist">The name already exists.</string>
+    <string name="stb_name_commit_fail">Failed to update the STB name.</string>
+    <string name="fh_version_info">Upgrade Info</string>
+    <string name="fh_hardware_version">Hardware Version</string>
+    <string name="fh_firmware_version">Firmware Version:</string>
+    <string name="fh_remote_version">Remote Control Version</string>
+    <string name="fh_wired_mac_address">Wired MAC</string>
+    <string name="fh_wireless_mac_address">Wireless MAC</string>
+    <string name="adb_switch_button">     </string>
+    
+    <string name="close">Closed</string>
+    <string name="open">Open</string>
+    <string name="header_category_operations">Operation Maintenance</string>
+    <string name="oper_main_setting">Operation &amp; Maintenance</string>
+    <string name="personal">Personal</string>
+    <string name="language">Language</string>
+    <string name="setting_input_method">InputMethod</string>
+    <string name="video">Video</string>
+    <string name="audio">Audio</string>
+    <string name="setting_hdmi">HDMI</string>
+    <string name="setting_spdif">SPDIF</string>
+    <string name="setting_ipv4">IPv4</string>
+    <string name="setting_ipv6">IPv6</string>
+    <string name="ipv4">IPv4</string>
+    <string name="samba">SAMBA</string>
+    <string name="header_category_ntp">NTP Setting</string>
+    <string name="setting_ntp">NTP Server</string>
+    <string name="header_category_datetime">Date and Time settings</string>
+    <string name="datetime">Set the date and time</string>
+    <string name="version_info">Version Info</string>
+    <string name="device_info">Device Info</string>
+    <string name="about_account_info">Account</string>
+    <string name="origin_setting">Oringinal Settings</string>
+    <string name="more_setting">More</string>
+    
+    <string name="setting_ratio">Ratio</string>
+    <string name="setting_cvrs">CVRS</string>
+    <string name="ntp_switch_string">Open NTP</string>
+    <string name="samba_switch_string">Open SAMBA</string>
+    <string name="ntp_address">   Main NTP Address:</string>
+    <string name="samba_name">Set Username:</string>
+    <string name="year">Year</string>
+    <string name="month">Month</string>
+    <string name="date">Day</string>
+    <string name="hour">Hour</string>
+    <string name="min">Min.</string>
+    <string name="sec">Sec.</string>
+    <string name="iptv_username">IPTV Account</string>
+    <string name="stbid">STBID</string>
+    <string name="sn">SN</string>
+    
+    <string name="stb_frame_title">Frame Setting</string>
+    <string name="stb_frame_px_setting">Resolution Setting</string>
+    <string name="stb_frame_area_setting">Area Adaptation</string>
+    <string name="stb_system_upgrade_title">System Upgrade</string>
+    <string name="stb_local_upgrade">Local Upgrade</string>
+    <string name="stb_online_upgrade">Online Upgrade</string>
+    <string name="stb_local_upgrade_title">Local Upgrade</string>
+    <string name="android_version">Android Version</string>
+    <string name="about_baseband_version">Baseband Version:</string>
+    <string name="about_kernel_version">Kernel Version</string>
+    <string name="about_build_number">Build Version</string>
+    <string name="fh_bluetooth_mac_address">Bluetooth MAC Address:</string>
+    <string name="setting_dlna">DLNA Setting</string>
+    <string name="setting_skyplay">Skyplay Setting</string>
+    
+    <string name="title_bluetooth_setting">Bluetooth Setting</string>
+    <string name="title_frame_setting">Frame Setting</string>
+    <string name="title_resolution_setting">Resolution Setting</string>
+    <string name="title_scale_screen_setting">Zoom Setting</string>
+    <string name="title_play_setting">Play Setting</string>
+    <string name="title_box_name">Box Name</string>
+    <string name="title_system_upgrade">System Upgrade</string>
+    <string name="title_local_upgrade">Local Upgrade</string>
+    <string name="title_net_upgrade">Net Upgrade</string>
+    <string name="title_volume">Volume Config</string>
+    <string name="title_about_us">About Us</string>
+    <string name="title_general_setting">General Setting</string>
+    <string name="title_network_setting">Network</string>
+    <!-- <string name="title_master_clear">Factory Data Reset</string> -->
+    <string name="title_master_clear">Reset</string>
+    <string name="title_zone_setting">Select Time Zone</string>
+    <string name="title_time_setting">Date and Time Setting</string>
+    <string name="wireless_hotspot">Wireless Hotspot</string>
+    <string name="general_setting">General Setting</string>
+    <string name="play_setting">Play Setting</string>
+    
+    <string name="settings_name">FHSettings</string>
+    <string name="fh_bluetooth_mac">Bluetooth MAC:</string>
+    
+    <string name="native_settings_prompt">.</string>
+    
+    <string name="bluetooth_switch_string">Bluetooth Switch</string>
+    <string name="discoverable_switch_string">Discoverable Switch</string>
+    <string name="inputmethod_settings_category">  </string>
+    <string name="upgradePackage_No">No Upgrade Package</string>
+    
+    <string name="maintenance_password">Maintenance Password:</string>
+    
+    <string name="tr069_settings">TR069 Setting</string>
+    <string name="tr069_setting_title">TR069 Server Settings</string>
+    <string name="tr069_main_address">Primary Address</string>
+    <string name="tr069_reserve_address">Second Address</string>
+    <string name="tr069_config">TR069 Periodic</string>
+    <string name="pulse_switcher">Periodic Enable: </string>
+    <string name="pulse_freq">Periodic Interval</string>
+    <string name="ace_setting">ACS Setting</string>
+    <string name="ace_name">ACSName </string>
+    <string name="ace_password">Password</string>
+    <string name="ace_account">ACS Account</string>
+    <string name="cpe_account">CPE Account</string>
+    <string name="iptv_version_title">IPTV Version</string>
+    <string name="iptv_setting_title">EDS Server Settings</string>
+    <string name="ott_authority_main_address">Primary Address:</string>
+    <string name="ott_authority_reserve_address">Secondary Address:</string>
+    <string name="iptv_and_ott_account">User Account</string>
+    <string name="iptv_authority_username">User Name:</string>
+    <string name="iptv_authority_userpassword">Password:</string>
+    <string name="ntp_title">NTP Server Settings</string>
+    <string name="up_title">Upgrade Server Settings</string>
+    <string name="iptv_upgrade_address">Upgrade Primary Address:</string>
+    <string name="cpe_setting">CPE Setting</string>
+    <string name="cpe_name">CPEName</string>
+    <string name="cpe_password">Password</string>
+    <string name="save_success">Settings saved successfully.</string>
+    <string name="save_fail">Settings saved Failed.</string>
+    
+    <string name="diy_string">DIY</string>
+    <string name="diy_password_txt">DIY Password:</string>
+    <string name="password_error">Password Error, Please Try Again!</string>
+    
+    <string name="cpu">CPU</string>
+    <string name="cpu_info">Quad-Core  1.5GHZ</string>
+    <string name="ram">RAM</string>
+    <string name="ram_info">1GB</string>
+    <string name="flash">FLASH</string>
+    <string name="flash_info">8GB</string>
+    <string name="upgrade_addr">Upgrade Address:</string>
+    
+    <string name="itv_business_account_settings">ITV Business Account Settings</string>
+    <string name="itv_setting_title">Authentication Address</string>
+    <string name="itv_main_address">Primary Address</string>
+    <string name="itv_reserve_address">Second Address</string>
+    <string name="business_username_and_password">Business Account And Password</string>
+    <string name="business_username">Account</string>
+    <string name="business_password">Password</string>
+    <string name="business_account_settings">Account Setting</string>
+    <string name="enter_account">Please enter account</string>
+    <string name="enter_pwd">Please enter password</string>
+    <string name="fond_size_settings">Fond Size Settings</string>
+    
+    <string name="itv_authority_server_choose">Platform Choose</string>
+    
+    <string name="hw_string">HuaWei</string>
+    <string name="zte_string">ZTE</string>
+    <string name="platform_choose">Platform Choose</string>
+    
+    <string name="static6_switch_string">Open IPV6</string>
+    <string name="static6_addr">IPV6 Address:</string>
+    <string name="static6_mask_length">Mask Length:</string>
+    <string name="static6_gateway">Default Gateway:</string>
+    <string name="static6_dns1_server">Main DNS:</string>
+    <string name="static6_dns2_server">Second DNS:</string>
+    
+    <string name="fh_master_clear_final_title">Are you sure you want to restore the factory settings?</string>
+    <string name="fh_master_clear_final_content">Warning: This operation will erase all STB business data, making it impossible to watch ITV business, please be careful operation!!!</string>
+    <string name="fh_stb_mac_address">STB MAC Address:</string>
+    <string name="fh_stbid">STBID:</string>
+    
+    <string name="fh_reboot">Reboot STB</string>
+    <string name="fh_reboot_final_title">Are you sure you want to reboot STB?</string>
+    <string name="fh_reboot_final_content">Prompting: It takes time to reboot STB, please be patient!</string>
+    
+    <!-- 3G Setting -->
+    <string name="third_gen_settings_title">3G</string>
+    <string name="third_gen_disable">Disable</string>
+    <string name="third_gen_enable">Enable</string>
+    <string name="third_gen_connected">Connected</string>
+    <string name="third_gen_insert_card">Please insert 3G card</string>
+    <string name="third_gen_connecting">Connecting......</string>
+    <string name="third_gen_connect_failed">Connect Failed !</string>
+    <string name="third_gen_disconnect">Disconnected</string>
+    <string name="third_gen_disconnecting">Disconnecting......</string>
+    <string name="third_gen_disconnet_failed">DisConnected Failed !</string>
+    <string name="third_gen_cancel">Disconnected</string>
+    <string name="third_gen_link_down">link down</string>
+    <string name="third_gen_wrong_passwd">Wrong Passwd</string>
+
+    <string name="connection_mode_category_title">CONNECTION MODE</string>
+    <string name="connection_mode_auto">Auto</string>
+    <string name="connection_mode_custom">Custom</string>
+    <string name="access_point_category_title">ACCESS POINT</string>
+    <string name="module_type_category_title">Module Type</string>
+    <string name="ip_address_category_title">IP AddRESS</string>
+    <string name="access_point">Access Point</string>
+    <string name="third_gen_apn_name">APN NAME</string>
+    <string name="third_gen_ip_address">IP ADDRESS</string>
+    <string name="third_gen_dial_number">DIAL NUMBER</string>
+    <string name="third_gen_pin_code">PIN CODE</string>
+    <string name="third_gen_user_name">USER NAME</string>
+    <string name="third_gen_user_password">USER PASSWORD</string>
+    <string name="third_gen_getting">Obtaining IP address\u2026</string>
+    <string name="third_gen_apn_name_txt">ApnName</string>
+    <string name="third_gen_access_point_txt">AccessPoint</string>
+    <string name="third_gen_dial_number_txt">DialNumber</string>
+    <string name="third_gen_pin_code_txt">PinCode</string>
+    <string name="third_gen_user_name_txt">UserName</string>
+    <string name="third_gen_user_password_txt">Password</string>
+    
+       <!-- my adding 01.21  -->
+    <string name="fh_maker_name">Manufacturer</string>
+    <string name="manufacturer_name">Fiberhome</string>
+       <!-- my adding end 01.21 end  -->
+ 
+      <!-- ethernet add 2015.01.29 -->
+    <string name="ethernet_switch_string">Open Ethernet</string>
+    <!-- end --> 
+    <!-- add 2016.05.3 -->
+     <string name="settings_title">System Setting</string>
+    <string name="frame_title_sub">&#60;&#160;&#160;</string>
+    <string name="display_sound_title">Display and Sound</string>
+    <string name="ethernet_title">Ethernet Access</string>
+    
+     <!-- add for yueme new UI -->
+    <string name="setting_title">System Setting</string>
+    <string name="account_string">Username</string>
+    <string name="password_string">Password</string>
+    <string name="authentication_string">Authentication:</string>
+    <string name="dhcp_string">DHCP</string>
+    <string name="ctc_dhcp_string">IPoE is connected</string>
+    <string name="static_string">Static IP</string>
+    <string name="ip_address_string">IP Address</string>
+    <string name="net_mask">Netmask</string>
+    <string name="def_gateway">Gateway</string>
+    <string name="pppoe_title">PPPoE</string>
+    <string name="ctc_dhcp_title">Authentication DHCP (DHCP+)</string>
+    <string name="static_title">Manually set the IP address (LAN)</string>
+    <string name="dhcp_title">Automatically obtain IP address(DHCP)</string>
+    <string name="ipv6_title">IPV6</string>
+    
+    
+    <string name="fh_server_info">Upgrade Server Address</string>
+    <string name="fh_check_upgrade">Check Upgrade</string>
+    <string name="device_names">Device Name</string>
+    <string name="device_recovery">Recovery</string>
+    <string name="fh_device_sn_number">SN</string>
+    <string name="tips">Tips</string>
+    <string name="tips_info">Are you sure to recovery?</string>
+    <string name="open_hdmi_passthough">Open HDMI Passthough</string>
+    <string name="noedid">Not supported, please choose other value</string>
+    <string name="server_tittle">Server Information</string>
+    <string name="systeminfo_tittle">Information</string>
+    <string name="font_tittle">Font Size</string>
+    <string name="resolution_tittle">Resolution</string>
+    <string name="scale_tittle">Screen Zoom</string>
+    <string name="display_tittle">Proportion</string>
+    <string name="hdmi_tittle">HDMI</string>
+    <string name="notittle"> </string>
+    
+     <string name="wireless_title">Wireless</string>
+    <string name="wireless_title_tip">Wi-Fi</string>
+    <string name="switch_on">Open</string>
+    <string name="switch_off">Off</string>
+	<string name="scale_left">Scale Left</string>
+    <string name="scale_top">Scale Top</string>
+    <string name="scale_right">Scale Right</string>
+    <string name="scale_bottom">Scale Bottom</string>
+    
+    <string name="eth_tip">Tip:</string>
+    <string name="pppoe_tip">&#183; PPPoE:PPPoE network</string>
+    <string name="dhcp_plus_tip">&#183; IPoE:DHCP with Username and Password</string>
+    <string name="lan_tip">&#183; LAN:Obtain IP Address Manually</string>
+    <string name="dhcp_tip">&#183; DHCP:Automatically Obtain IP Address</string>
+    
+    <string name="bluebooth_pair_tip">Tip: Please click "Setting" to set bluetooth!</string>
+    <string name="display_userinfo_tittle">User Info</string>
+    <string name="fh_dhcp_account">DHCP+ Account</string>
+    <string name="fh_pppoe_account">PPPoE Account</string>
+    <string name="hardware_manager">Hardware Manager</string>
+    
+    <!-- add 2016.02.17 -->
+    <string name="net_connected_none">NULL</string>
+    <string name="net_access_state">Access State</string>
+    <string name="net_access_state_connected">Connected</string>
+    <string name="net_access_state_disconnected">Disconnected</string>
+    <string name="net_access_state_connecting">Connecting</string>
+    <string name="net_access_state_disconnecting">Disconnecting</string>
+    <string name="net_access_mode">Net Access Mode</string>
+    <string name="net_access_mode_wired">Wired</string>
+    <string name="net_access_mode_wireless">Wireless</string>
+    <string name="net_access_type">Access Type</string>
+    <string name="net_access_type_ipv4">IPv4</string>
+    <string name="net_access_type_ipv6">IPv6</string>
+    <string name="net_connected_mode">Connect Mode</string>
+    <string name="net_connected_mode_ip">Static IP</string>
+    <string name="net_connected_mode_dhcp">DHCP</string>
+    <string name="net_connected_mode_ipoe">IPOE</string>
+    <string name="net_connected_mode_pppoe">PPPoE</string>
+    <string name="ethernet_lan">Ethernet-LAN</string>
+    <string name="ethernet_dhcp">Ethernet-DHCP</string>
+    <string name="ethernet_pppoe">Ethernet-PPPoE</string>
+    <string name="ethernet_ipv6">Ethernet-IPV6</string>
+    <string name="wireless_connect">WiFi-Connect</string>
+    <string name="no_connect">No Connect</string>
+    <string name="settings_pwd">Password:</string>
+    <string name="backup_ntp_address">Backup NTP Address:</string>
+    
+    <string name="set_ppoename">UserName</string>
+    <string name="set_ppoepass">Password</string>
+    
+    <string name="disconnect_btn">Disconnect</string>
+    <string name="back_btn">Back</string>
+    <string name="connect_btn">Connect</string>
+  
+    <string name="clear_config_aswell_iptv">Reserve iptv account</string>
+    <string name="clear_config_aswell_net">Reserve network information</string>
+    <string name="fh_change_iptv">IPTV message is changed, please reboot your box!</string>
+    <string name="reboot_btn">Reboot</string>
+    
+    <string name="app_manage">APP Manage</string>
+    <string name="media_center">Media Center</string>
+    <string name="network_info_tittle">Network Info</string>
+    <string name="wifi">WIFI</string>
+    <string name="ethernet">Ethernet</string>
+     
+    <string name="media_setting">Media Setting</string>
+<!-- add 2016.02.26 -->
+    <string name="auto_standby">Auto Standby</string>
+    <string name="standby_dialog_string">It will be turned off after %1$d seconds, press any key to cancel</string>
+    <string name="standby_switch_string">Open Auto Standby</string>
+    <string name="auto_standby_time">Standby Time Setting</string>
+    <string name="auto_standby_time_hours">hours</string>
+    <string name="auto_standby_time_minutes">minutes</string>
+    <string name="alert_minutes">No more than 60 minutes</string>
+	
+	<!-- add 2016.02.27 -->	 
+    <string name="zone_settings_title">Zone settings</string>
+
+    <string name="application_manager_string">Application Manage</string>
+    <string name="application_uninstall_string">App Uninstall</string>
+<!--add 2016.04.28  -->
+    <string name="onekey_detect_check">One Key Check</string>
+    <string name="check_ip_addr">IP Address</string>
+    <string name="check_gateway_addr">GW Connectivity</string>
+     <string name="check_managedomain_addr">management domain address</string>
+     <string name="check_businessauthinfo_addr">business authinfo address</string>
+     <string name="check_launcher_addr">launcher address</string>
+     <string name="check_epg_addr">EPG address</string>
+     <string name="check_ntpserver_addr">ntp connectivity</string>
+     <string name="check_dnsserver_addr">dns server address</string>
+     
+     <string name="connect_check_success">Connect successful</string>
+     <string name="connect_check_fail">Connect failed</string>
+     <string name="connect_check_unknown_host">Unknown host name</string>
+     <string name="connect_check__exception">IO Exception</string>
+
+    <!-- add 2016.04.29 -->
+    <string name="setting_input_method_fh">Set Input Method</string>
+    <!--add 2016.05.03  -->
+    <string name="adb_open_tip">Developer Mode Enable</string>
+    <string name="adb_close_tip">Developer Mode Disable</string>
+    <string name="udisk">U Disk</string>
+    <string name="sdcard">Sdcard</string>
+    <string name="audio_output">Audio Output</string>
+    <string name="notsupport">It is not support this resolurion.</string>
+    
+    <string name="test_dhcp_connect">Connecting...</string>
+  <string name="tr069_address">tr069 address</string>
+    <string name="ntp_address1">NTP address</string>
+    <string name="server_info_tittle">Server Infomation</string>
+    
+    <string name="ipv6_netmask_length">NetMask Length:</string>
+    <string name="ipv6_netmask_length_value">64</string>
+    <string name="ipv6_state_string">IPV6 State:</string>
+    <string name="ipv6_state_switch">State Switch</string>
+    <string name="ipv6_dns_server">DNS Server:</string>
+    
+    <string name="transport_mode">Play transport</string>
+    <string name="arq_mode">ARQ Setting</string>
+    <string name="ipv6_success_string">IPV6 Connect Success</string>
+
+    <!--add 2016.7.18-->
+	<string name="wifi_signal_level">Signal Level:</string>
+	<string name="net_info">Network Status</string>
+	<string name="ethernet_ipoe">Ethernet IPoE</string>
+	
+	<string name="static_addr_error">static ip address error!</string>
+	
+    <string name="ad_eth_string">Access Setting</string>
+    <string name="ad_wifi_string">Wireless Hotspot</string>
+    <string name="local_network_string">Local Network Setting</string>
+    <!--modify  title_iptv_setting by yyxie start-->
+    <string name="title_iptv_setting">Account</string>
+    <string name="update_wait_notice">Please Wait</string>
+    <!--modify  title_iptv_setting by yyxie end-->
+    <string name="title_reboot_setting">Reboot</string>
+    <string name="app_is_null">No such application exists!</string>
+    
+    <string name="link_check_string">link connectivity</string>
+    <string name="central_platform_string">central platform connectivity</string>
+    <string name="multicast_string">multicast connectivity</string>
+    
+    <string name="speed_tips">TIP: Please click "Start" button to test the network speed!</string>
+    <string name="speed_result">Test Result: %1$s bps</string>
+    <string name="speed_testing">testing...</string>
+    <string name="one_key_check_tip">Please chose IPV4 to connect!</string>
+    <string name="link_up_string">Link UP</string>
+    <string name="link_down_string">Link Down</string>
+    
+    <string name="display_play_title">Display</string>
+    <string name="ethernet_state_open">Opened</string>
+    <string name="ethernet_state_close">Closed</string>
+    <string name="account_password_error">Account or password is empty, please try again!</string>
+    <string name="show_password_string">Show Password</string>
+    
+    <string name="master_clear_text">This operation will clear all the data in the set-top box, restore to the factory state and restart, please careful operation!</string>
+    <!-- <string name="master_clear_text">Are you sure to reset the box, if this the box will reboot.</string> -->
+	<string name="reboot_tittle">Reboot</string>
+	<string name="fh_reboot_tips">This operation will close all applications and reboot the box.</string>
+	<string name="reboot_text">Are you sure to reboot the box?</string>
+	<string name="time_tittle">Time Settings</string>
+	<string name="date_format">Date Format</string>
+	<string name="time_24">Use 24-Hour Format</string>
+	<string name="date_setting">Date Settings</string>
+	<string name="ntp_setting">NTP Setting</string>
+	
+    <string name="screen_brightness">Brightness</string>
+    <string name="screen_sleep">Screen Sleep</string>
+    <string name="screen_saver">Screen Saver</string>
+    <string name="press">Press</string>
+    <string name="adjust_size">Adjust Size</string>
+    <string name="speed_restart_test">Restart</string>
+    <string name="speed_test_finish">Test Finish</string>
+  	<string name="speed_average_speed">Average Speed</string>
+  	<string name="speed_unit">MB/S</string>
+  	<string name="speed_number">0</string>
+  	<string name="scale_tips_1">Press direction Key to adjust the display area until the yellow border around the screen</string>
+  	<string name="scale_tips_2">Press back exit scale screen</string>
+    <string name="scale_tips">Switch ON / OFF Button</string>
+  	<string name="speed_test_enviorment">  Recommended Definition：1080p</string>
+	<string name="screen_saver_tips">Press any key to end the preview</string>
+	<string name="resolution_cancel">Cancel(%1$dS)</string>
+	<string name="display">Display</string>
+    <string name="play">Play</string>
+    <string name="ip_adress_is">IP：</string>
+	<string name="current_speed">current_speed：</string>
+	<string name="average_speed">average_speed：</string>
+	
+  	<string name="onekey_clear">Onekey Clear</string>
+  	<string name="cache_clear_finish">Cache Clear Finished</string>
+  	<string name="cache_clearing">Cache Clearing</string>
+
+	<string name="other_connect_string">Other Connect</string>
+	<string name="button_one_key_check">Start Detect</string>
+	
+	<!-- Add by Zhanghua -->
+    <!-- Other Connect Info -->
+    <string name="other_connect_portable_wlan">Portable WLAN hotspot</string>
+    <string name="other_connect_portable_wlan_set">Portable WLAN Settings</string>
+    <string name="other_connect_search_equipment">Search</string>
+    <string name="other_connect_portable_bluetooth">Bluetooth</string>
+    <string name="wlan_point_toast_wificonnect">You are using WIFI now,Openning WLAN may close the WIFI,Need you do this?</string>
+    <string name="other_connect_bluetooth_scan">Scan</string>
+    <string name="wlan_point_flag_ssid">SSID</string>
+    <string name="wlan_point_security">Security</string>
+    <string name="wlan_point_only_channel">Only use 24 channel</string>
+    
+    <!-- <string-array name="wlan_point_security_type">
+        <item >No password</item>
+        <item >AES</item>
+    </string-array> -->
+    <string name="bluetooth_status_bound">Paired device</string>
+    <string name="bluetooth_status_unbound">Available device</string>
+    <string name="bluetooth_scanning">Scanning</string>
+    <string name="bluetooth_no_found">No devices found</string>
+    <!-- Add by Zhanghu -->
+    <!-- Add by XieYunyang -->
+    <string name="device_number">device number</string>
+    <string name="discovery_new_version">discovery new version</string>
+    <string name="upgrade_info">upgrade info</string>
+    <string name="upgrade_notice">In the process of upgrading, the system will restart, please do not power off and pull out U disk.</string>
+    <string name="unable_connect_updateserver">Unable to connect to UpgradeServer!</string>
+    <string name="is_latest_version">already the latest version</string>
+    <string name ="locat_update_hint">Local upgrade: please put upgrade package in the root directory, and then insert the usb device manually upgrade</string>
+    <string name= "storage_device">storage device</string>
+    <string name="no_update_f">No upgrade package was detected!</string>
+    <string name="discover_no_usb">No usb device</string>
+    <!-- Add by Xieyunyang -->
+    
+    <string name="add_wireless_network">Add wireless network</string>
+    
+    <string name="speed_test_fail_tips">Unable to connect to the server, please try again later</string>
+    <string name="internet_test_speed">Net Speed Test</string>
+   
+    <!-- Add by Ouyangfei -->
+    <string name="used_space">Used:</string>
+    <string name="total_space">Total:</string>
+    <string name="space_system_usage" >System:</string>
+    <string name="space_pictrue_usage" >Photo:</string>
+    <string name="space_music_usage" >Music:</string>
+     <string name="space_apps_usage" >App:</string>
+     <string name="space_vedio_usage" >Vedio:</string>
+     <string name="space_other_usage" >Other:</string>
+     <string name="space_avail" >Avail:</string>
+     <string name="wait_please">Wait Please...</string>
+	<!-- Add by FangHeng -->
+     <string name="wifi_signal_level_netinfo">signal_level</string>
+     <string name="ok_key">\"OK\"</string>
+     
+</resources>
+

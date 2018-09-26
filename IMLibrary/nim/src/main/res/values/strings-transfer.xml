@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="p2p_transfer_push_content">给你转了一笔账</string>
+    <string name="team_transfer_push_content">转了一笔账</string>
+</resources>

@@ -1,0 +1,181 @@
+<resources>
+
+    <!--Android 4.4 以下版本，不实现状态栏半透明，跟随系统样式-->
+    <style name="MyTranslucentTheme" parent="AppTheme" />
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>    <!-- 标题栏的颜色 -->
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>    <!--状态栏颜色-->
+        <item name="colorAccent">@color/colorAccent</item> <!-- 按钮、progressbar、开关等颜色 -->
+        <item name="android:windowIsTranslucent">true</item>    <!-- 解决初次安装启动白屏时间过长问题 -->
+    </style>
+
+
+    <style name="AppTheme_Translucent" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+    </style>
+
+
+    <style name="OverflowMenuStyle" parent="@style/Widget.AppCompat.PopupMenu.Overflow">
+        <item name="overlapAnchor">false</item> <!-- 是否覆盖锚点，默认为true，即盖住Toolbar -->
+        <item name="android:popupBackground">@color/colorPrimary</item> <!-- 弹出层背景颜色 -->
+        <!-- 弹出层垂直方向上的偏移，即在竖直方向上距离Toolbar的距离，值为负则会盖住Toolbar -->
+        <item name="android:dropDownVerticalOffset">30dp</item>
+
+        <!--<item name="android:dropDownWidth">wrap_content</item>-->
+        <!--<item name="android:paddingRight">5dp</item>-->
+
+        <!-- 弹出层水平方向上的偏移，即距离屏幕左边的距离，负值会导致右边出现空隙 -->
+        <item name="android:dropDownHorizontalOffset">-20dp</item>
+        <item name="android:textColor">@android:color/holo_red_light</item>  <!--设置 弹出菜单字体颜色-->
+    </style>
+
+    <style name="ToolbarTheme" parent="@style/ThemeOverlay.AppCompat.ActionBar">
+        <item name="android:textColorPrimary">@android:color/white</item>
+        <!-- 设置toolBar 上 已经显示的文字颜色 -->
+        <item name="actionMenuTextColor">@android:color/white</item>
+        <!--<item name="android:popupTheme" tools:targetApi="lollipop">@style/OverflowMenuStyle</item>-->
+    </style>
+
+
+
+
+    <!-- ================================================================================================= -->
+    <!-- ************************************************************************************************* -->
+    <!-- ================================================================================================= -->
+
+
+
+
+
+    <style name="IPAddrEditText">
+        <item name="android:textSize">20.0sp</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:background">@null</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:maxLength">3</item>
+        <item name="android:layout_weight">1.0</item>
+    </style>
+
+    <style name="Transparent_Dialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+
+
+    <style name="dialog" parent="android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item><!--边框-->
+        <item name="android:windowNoTitle">true</item><!--标题-->
+        <item name="android:windowIsFloating">true</item><!--是否浮现在activity之上-->
+        <item name="android:windowIsTranslucent">true</item><!--半透明-->
+        <item name="android:windowBackground">@android:color/transparent</item><!--背景透明-->
+    </style>
+
+    <!-- 激活记录 下载的图片 点击 预览 对话框样式 -->
+    <style name="dialog_full_screen_view" parent="dialog">
+        <!--<item name="android:windowFrame">@null</item>-->
+        <!--<item name="android:windowNoTitle">true</item>-->
+        <!--<item name="android:windowIsFloating">true</item>-->
+        <!--<item name="android:windowBackground">@android:color/transparent</item>-->
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowIsTranslucent">false</item><!--背景是否半透明-->
+        <item name="android:windowContentOverlay">@null</item><!--对话框是否有遮盖 -->
+        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
+        <item name="android:backgroundDimEnabled">true</item><!--背景是否模糊-->
+    </style>
+
+    <style name="ImageScale" parent="android:Theme.Black.NoTitleBar">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowIsTranslucent">false</item>
+        <item name="android:windowBackground">@android:color/black</item>
+        <item name="android:backgroundDimEnabled">false</item>
+    </style>
+
+
+    <!-- Loading_dialog样式Start -->
+    <style name="Dialog_Loading">
+        <item name="android:windowBackground">@color/loading_dialog_bg</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
+    </style>
+
+
+    <!--进度条加载-->
+    <style name="Progress_Default_Load" parent="@android:style/Widget.ProgressBar.Large">
+        <item name="android:indeterminateOnly">true</item>
+        <item name="android:indeterminateDrawable">@drawable/progress_load</item>
+        <item name="android:indeterminateBehavior">repeat</item>
+        <item name="android:indeterminateDuration">3500</item>
+        <item name="android:minWidth">23dip</item>
+        <item name="android:maxWidth">23dip</item>
+        <item name="android:minHeight">23dip</item>
+        <item name="android:maxHeight">23dip</item>
+    </style>
+
+
+<!-- *****************************************Animation Style********************************************* -->
+
+    <!-- 全屏查看View 的dialog 进出动画 -->
+    <style name="Anim_Window_Scale" parent="@android:style/Animation">
+        <item name="android:windowEnterAnimation">@anim/scale_in</item>
+        <item name="android:windowExitAnimation">@anim/scale_out</item>
+    </style>
+
+
+    <style name="Anim_Window_Alpha" parent="@android:style/Theme.Dialog">
+        <item name="android:windowEnterAnimation">@anim/alpha_in</item>
+        <item name="android:windowExitAnimation">@anim/alpha_out</item>
+    </style>
+
+
+    <!-- 自定义Gallery+ListView页面用到的样式Start -->
+    <!-- View线的样式 -->
+    <style name="View_Line_Style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dip</item>
+        <item name="android:background">#f4ae00</item>
+    </style>
+
+    <!-- ListView 的基本布局 -->
+    <style name="ListView">
+        <item name="android:scrollbars">none</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <!-- listview拖动时，背景为白色 -->
+        <item name="android:cacheColorHint">#00000000</item>
+    </style>
+
+    <!-- 去除Activity的各种切换动画 -->
+    <style name="ActivityNoAnimation">
+        <item name="android:activityOpenEnterAnimation">@null</item>
+        <item name="android:activityOpenExitAnimation">@null</item>
+        <item name="android:activityCloseEnterAnimation">@null</item>
+        <item name="android:activityCloseExitAnimation">@null</item>
+        <item name="android:taskOpenEnterAnimation">@null</item>
+        <item name="android:taskOpenExitAnimation">@null</item>
+        <item name="android:taskCloseEnterAnimation">@null</item>
+        <item name="android:taskCloseExitAnimation">@null</item>
+        <item name="android:taskToFrontEnterAnimation">@null</item>
+        <item name="android:taskToFrontExitAnimation">@null</item>
+        <item name="android:taskToBackEnterAnimation">@null</item>
+        <item name="android:taskToBackExitAnimation">@null</item>
+    </style>
+
+    <style name="SwipeBackLayout">
+        <item name="edge_size">50dip</item>
+        <item name="shadow_left">@drawable/shadow_left</item>
+        <item name="shadow_right">@drawable/shadow_right</item>
+        <item name="shadow_bottom">@drawable/shadow_bottom</item>
+    </style>
+
+
+</resources>

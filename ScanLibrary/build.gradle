@@ -1,0 +1,20 @@
+apply plugin: 'com.android.library'
+
+android {
+
+    compileSdkVersion ANDROID_BUILD_SDK_VERSION as int
+    defaultConfig {
+        minSdkVersion ANDROID_BUILD_MIN_SDK_VERSION as int
+        targetSdkVersion ANDROID_BUILD_TARGET_SDK_VERSION as int
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    implementation rootProject.ext.support.appcompatV7
+    implementation 'com.google.zxing:core:3.3.1'
+    implementation 'com.github.lovetuzitong:MultiImageSelector:1.1'
+}

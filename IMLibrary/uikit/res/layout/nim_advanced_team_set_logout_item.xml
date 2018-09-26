@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_team_advanced_quit_item"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:focusableInTouchMode="true"
+    android:paddingLeft="@dimen/isetting_item_padding_left"
+    android:paddingRight="@dimen/isetting_item_padding_right"
+    android:layout_marginTop="@dimen/x20">
+
+    <TextView
+        android:id="@+id/quit_chat_team"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dip"
+        android:background="@drawable/icon_chat_bg_red"
+        android:minHeight="50dp"
+        android:gravity="center"
+        android:text=""
+        android:layout_marginTop="@dimen/x20"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_17"
+        android:visibility="visible" />
+
+</RelativeLayout>

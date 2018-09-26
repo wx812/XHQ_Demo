@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3b3a40</color>
+    <color name="colorPrimaryDark">#2a292d</color>
+    <color name="colorAccent">#FF8533</color>
+    //纯白色，卡片、导航栏、tab栏底色
+    <color name="tab_background">#FFFFFF</color>
+    //浅灰色，所有界面底色
+    <color name="interface_background">#F3F4F5</color>
+    //分割线颜色
+    <color name="divide_line">#FFEFEFEF</color>
+    //波纹颜色
+    <color name="ripple">#e0e0e0</color>
+
+    //辅助正文字体颜色
+    <color name="tv_all">#4c4c4c</color>
+    //列表栏目字体颜色
+    <color name="tv_title">#b4b4b4</color>
+    //水红色
+    <color name="tv_remind">#FE4C40</color>
+
+    // 橘黄色
+    <color name="bg_orange">#FFFF8533</color>
+</resources>

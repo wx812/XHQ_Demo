@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/y140"
+    android:maxHeight="@dimen/y140">
+
+    <FrameLayout
+        android:id="@+id/frameLayoutHead"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/y140"
+        android:layout_marginLeft="@dimen/x24">
+
+        <com.netease.nim.uikit.common.ui.imageview.HeadImageView
+            android:id="@+id/imageViewHeader"
+            android:layout_width="@dimen/x90"
+            android:layout_height="@dimen/x90"
+            android:layout_marginBottom="@dimen/x25"
+            android:layout_marginTop="@dimen/x25" />
+
+        <ImageView
+            android:id="@+id/imageViewOwner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/x25"
+            android:layout_gravity="bottom|right"
+            android:src="@drawable/nim_team_owner_icon"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/imageViewAdmin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:layout_marginBottom="@dimen/x25"
+            android:src="@drawable/nim_team_admin_icon"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/imageViewDeleteTag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|right"
+            android:contentDescription="@string/empty"
+            android:src="@drawable/nim_team_member_item_delete_icon"
+            android:visibility="gone" />
+
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/textViewName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="12dp"
+        android:layout_toRightOf="@id/frameLayoutHead"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:maxWidth="160dip"
+        android:singleLine="true"
+        android:textColor="#131313"
+        android:textSize="14sp"></TextView>
+
+
+    <ImageView
+        android:id="@+id/iv_face_team_member_operation"
+        android:layout_width="@dimen/x120"
+        android:layout_height="@dimen/x50"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="11dp"
+        android:layout_marginRight="@dimen/x24"
+        android:src="@drawable/nim_member_list_bton_red" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x1"
+        android:layout_alignParentBottom="true"
+        android:background="#dadada" />
+
+</RelativeLayout>

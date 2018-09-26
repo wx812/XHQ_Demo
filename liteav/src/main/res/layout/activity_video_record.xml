@@ -1,0 +1,518 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rl_play_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:onClick="onClick"
+    tools:ignore="contentDescription, HardcodedText, UselessParent, UseCompoundDrawables">
+
+    <ImageView
+        android:id="@+id/iv_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"/>
+
+    <com.tencent.rtmp.ui.TXCloudVideoView
+        android:id="@+id/video_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"/>
+
+    <FrameLayout
+        android:id="@+id/fl_mask"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/record_mask_top"/>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="@drawable/record_mask_bottom"/>
+    </FrameLayout>
+
+    <!--录制-->
+
+    <!--  android:background="#4D000000"  -->
+    <RelativeLayout
+        android:id="@+id/rl_record"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true">
+
+        <RadioGroup
+            android:id="@+id/rg_record_speed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/layout_record_btns"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/y40"
+            android:layout_marginEnd="@dimen/x54"
+            android:layout_marginStart="@dimen/x54"
+            android:background="@drawable/shape_rectangle_bg_gray"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/rb_slowest"
+                style="@style/RB_VideoRecord_Color_White"
+                android:text="极慢"/>
+
+            <RadioButton
+                android:id="@+id/rb_slow"
+                style="@style/RB_VideoRecord_Color_White"
+                android:text="慢"/>
+
+            <RadioButton
+                android:id="@+id/rb_normal"
+                style="@style/RB_VideoRecord_Color_White"
+                android:text="标准"/>
+
+            <RadioButton
+                android:id="@+id/rb_fast"
+                style="@style/RB_VideoRecord_Color_White"
+                android:text="快"/>
+
+            <RadioButton
+                android:id="@+id/rb_fastest"
+                style="@style/RB_VideoRecord_Color_White"
+                android:text="极快"/>
+
+        </RadioGroup>
+
+
+        <RelativeLayout
+            android:id="@+id/layout_record_btns"
+            android:layout_width="match_parent"
+            android:layout_height="78dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/distance_55dp">
+
+            <com.tencent.liteav.ugsv.videorecord.ComposeRecordBtn
+                android:id="@+id/compose_record_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:onClick="onClick"
+                android:visibility="gone"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView
+                    android:id="@+id/btn_torch"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="25dp"
+                    android:onClick="onClick"
+                    android:src="@drawable/selector_torch_close"/>
+
+                <ImageView
+                    android:id="@+id/btn_switch_camera"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="25dp"
+                    android:onClick="onClick"
+                    android:src="@drawable/selector_switch_camera"/>
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/iv_filter_effects"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="@dimen/x88"
+                android:layout_marginStart="@dimen/x88"
+                android:onClick="onClick"
+                android:src="@drawable/ic_filter_effects"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true">
+
+                <ImageView
+                    android:id="@+id/iv_confirm"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="25dp"
+                    android:onClick="onClick"
+                    android:src="@drawable/selector_record_confirm"
+                    android:visibility="gone"/>
+
+                <ImageView
+                    android:id="@+id/iv_delete_last_part"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="25dp"
+                    android:layout_toStartOf="@id/iv_confirm"
+                    android:onClick="onClick"
+                    android:src="@drawable/selector_delete_last_part"
+                    android:visibility="gone"/>
+
+                <ImageView
+                    android:id="@+id/iv_import_video"
+                    android:layout_width="@dimen/x102"
+                    android:layout_height="@dimen/x139"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/x88"
+                    android:layout_marginStart="@dimen/x88"
+                    android:src="@drawable/ic_import_video"/>
+
+            </RelativeLayout>
+        </RelativeLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/autoLocateView"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_above="@id/layout_record_btns"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="27dp"
+            android:visibility="gone"/>
+
+    </RelativeLayout>
+
+    <com.tencent.liteav.ugsv.common.widget.BeautySettingPanel
+        android:id="@+id/beauty_panel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:clickable="true"
+        android:focusable="true"
+        android:visibility="gone"/>
+
+
+    <com.tencent.liteav.ugsv.shortvideo.view.RecordProgressView
+        android:id="@+id/record_progress_view"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"/>
+
+
+    <TextView
+        android:id="@+id/tv_progress_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@id/record_progress_view"
+        android:layout_marginEnd="14dp"
+        android:text="00:00"
+        android:textColor="#fff"/>
+
+    <Button
+        android:id="@+id/btn_orientation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@id/tv_progress_time"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="30dp"
+        android:layout_toEndOf="@id/record"
+        android:background="@color/transparent"
+        android:onClick="onClick"
+        android:padding="5dp"
+        android:text="横竖屏"
+        android:textColor="#ffffff"
+        android:textSize="20sp"
+        android:visibility="gone"/>
+
+    <RelativeLayout
+        android:id="@+id/rl_back_next"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/x24"
+        android:layout_marginStart="@dimen/x24"
+        android:layout_marginTop="@dimen/y44"
+        android:gravity="center_vertical">
+
+        <ImageView
+            android:id="@+id/iv_btn_camera_back"
+            android:layout_width="@dimen/y44"
+            android:layout_height="@dimen/y44"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_camera_back"/>
+
+        <Button
+            android:id="@+id/btn_next"
+            android:layout_width="@dimen/x144"
+            android:layout_height="@dimen/y64"
+            android:layout_alignParentEnd="true"
+            android:background="@drawable/shape_btn_bg_blue"
+            android:text="@string/general_next_step"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/y32"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_scale_aspect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="14dp"
+        android:layout_marginTop="30dp"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/iv_scale"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:background="@drawable/record_round_bg"
+            android:onClick="onClick"
+            android:padding="6dp"
+            android:src="@drawable/selector_aspect169"
+            android:visibility="visible"/>
+
+        <ImageView
+            android:id="@+id/iv_scale_mask"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:background="@drawable/record_round_bg"
+            android:onClick="onClick"
+            android:visibility="gone"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/iv_scale"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="4dp"
+            android:text="屏比"
+            android:textColor="@color/white"
+            android:textSize="12sp"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_aspect_select"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_toStartOf="@id/rl_scale_aspect"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/iv_scale_first"
+            android:layout_width="@dimen/ugc_aspect_width"
+            android:layout_height="44dp"
+            android:layout_marginEnd="@dimen/ugc_aspect_divider"
+            android:background="@drawable/record_round_bg"
+            android:onClick="onClick"
+            android:padding="6dp"
+            android:src="@drawable/selector_aspect169"/>
+
+        <ImageView
+            android:id="@+id/iv_scale_second"
+            android:layout_width="@dimen/ugc_aspect_width"
+            android:layout_height="44dp"
+            android:layout_marginEnd="@dimen/ugc_aspect_divider"
+            android:layout_toEndOf="@id/iv_scale_first"
+            android:background="@drawable/record_round_bg"
+            android:onClick="onClick"
+            android:padding="6dp"
+            android:src="@drawable/selector_aspect169"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_camera_function"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@id/rl_back_next"
+        android:layout_marginEnd="@dimen/x35"
+        android:layout_marginTop="@dimen/y72">
+
+        <ImageView
+            android:id="@+id/iv_btn_camera_switch"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:background="@drawable/record_round_bg"
+            android:onClick="onClick"
+            android:padding="6dp"
+            android:src="@drawable/ic_camera_switch"/>
+
+
+        <ImageView
+            android:id="@+id/iv_btn_torch"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:layout_below="@id/iv_btn_camera_switch"
+            android:layout_marginTop="@dimen/y60"
+            android:background="@drawable/record_round_bg"
+            android:onClick="onClick"
+            android:padding="6dp"
+            android:src="@drawable/selector_camera_torch"/>
+
+
+        <LinearLayout
+            android:id="@+id/ll_camera_countdown"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/iv_btn_torch"
+            android:layout_marginTop="@dimen/y60"
+            android:orientation="vertical"
+            tools:ignore="UseCompoundDrawables">
+
+            <ImageView
+                android:id="@+id/iv_btn_countdown"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:background="@drawable/record_round_bg"
+                android:onClick="onClick"
+                android:padding="6dp"
+                android:src="@drawable/selector_camera_countdown"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="4dp"
+                android:text="美颜"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                android:visibility="gone"/>
+        </LinearLayout>
+
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ll_camera_countdown"
+            android:layout_marginTop="@dimen/y60"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/iv_music_panel"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:background="@drawable/record_round_bg"
+                android:onClick="onClick"
+                android:padding="6dp"
+                android:src="@drawable/ic_camera_music"/>
+
+            <ImageView
+                android:id="@+id/iv_music_mask"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:background="@drawable/record_round_bg"
+                android:onClick="onClick"
+                android:visibility="gone"/>
+
+            <TextView
+                android:id="@+id/tv_music"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/iv_music_panel"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="4dp"
+                android:text="音乐"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                android:visibility="gone"/>
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="@dimen/distance_40dp">
+
+        <com.tencent.liteav.ugsv.common.widget.VideoRecordButton
+            android:id="@+id/video_record_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|bottom"
+            android:visibility="visible"
+            app:btnText="按住拍"/>
+
+        <com.tencent.liteav.ugsv.common.widget.ClickToRecordView
+            android:id="@+id/click_to_record_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|bottom"
+            android:visibility="gone"/>
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_camera_type"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:orientation="vertical">
+
+        <com.tencent.liteav.ugsv.common.widget.AutoDragHorizontalView
+            android:id="@+id/rv_auto_drag_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/distance_30dp"
+            android:layout_marginTop="@dimen/y38"/>
+
+        <View
+            android:layout_width="@dimen/x12"
+            android:layout_height="@dimen/x12"
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/y10"
+            android:layout_marginTop="@dimen/y12"
+            android:background="@android:color/white"/>
+
+    </LinearLayout>
+
+
+    <com.tencent.liteav.ugsv.videorecord.TCAudioControl
+        android:id="@+id/layoutAudioControl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:clickable="true"
+        android:focusable="true"
+        android:visibility="gone"/>
+
+
+    <com.tencent.liteav.ugsv.common.widget.CountdownPanel
+        android:id="@+id/countdown_panel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:clickable="true"
+        android:focusable="true"
+        android:visibility="gone"/>
+
+    <ImageView
+        android:id="@+id/iv_countdown"
+        android:layout_width="@dimen/x200"
+        android:layout_height="@dimen/x250"
+        android:visibility="gone"
+        android:layout_centerInParent="true"/>
+
+
+    <Button
+        android:id="@+id/btn_snapshot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:text="截图"
+        android:visibility="gone"/>
+</RelativeLayout>

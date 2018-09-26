@@ -1,0 +1,33 @@
+if (isApp.toBoolean()) {
+    include("app")
+//    include ':CommonBase'
+//    include("DashBoardView")
+//    include('scanLibrary')
+
+}else {
+//    include ":FHSettings"
+//    include ':liteav'
+//    include("dashboardview")
+}
+
+
+//if(!isTxVideoApp.toBoolean()) {
+//    include ':common', ':im:uikit', ':im:nim', ':commonbussiness', ':commonbase', ':scan'
+//}
+//
+//if (isGameApp.toBoolean()) {
+//    include ':game','JinShanVideo'
+//
+//}else if (isVideoApp.toBoolean()){
+//
+//    include ':video', ':liteav','JinShanVideo'
+//}else if (isCircleApp.toBoolean()){
+//
+//    include ':circle'
+//}else if(isTxVideoApp.toBoolean()){
+//    include ':liteav'
+//}
+//else{
+//
+//    include ':app', ':circle', ':tfhour', ':money', ':video', ':game', 'JinShanVideo',':organization', ':yuebaservice', ':chat', ':liteav'
+//}

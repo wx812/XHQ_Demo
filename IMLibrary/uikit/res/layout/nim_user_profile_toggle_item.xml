@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/x100"
+    android:background="#fff">
+
+    <TextView
+        android:id="@+id/user_profile_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="15dp"
+        android:textColor="@color/color_black_ff333333"
+        android:textSize="16sp" />
+
+    <com.netease.nim.uikit.common.ui.widget.SwitchButton
+        android:id="@+id/user_profile_toggle"
+        android:layout_width="58dip"
+        android:layout_height="36.67dip"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="10dp" />
+
+    <View
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x1"
+        android:background="@color/color_split_line_d9d9d9"
+        android:layout_alignParentBottom="true" />
+
+</RelativeLayout>

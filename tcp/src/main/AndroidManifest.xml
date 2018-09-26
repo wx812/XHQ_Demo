@@ -1,0 +1,19 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.xhq.im">
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <application
+        android:name="com.xhq.common.application.HomeApp"
+        android:allowBackup="true"
+        android:label="@string/app_name"
+        android:persistent="true"
+        android:theme="@style/AppTheme"
+        android:supportsRtl="true">
+        <!-- Socket服务页 -->
+        <service
+            android:name="com.xhq.im.tcp.custom.TcpServiceSender"
+            android:enabled="true"
+            android:exported="false" />
+        <activity android:name="com.xhq.im.base.BaseArrowActivity"/>
+    </application>
+</manifest>

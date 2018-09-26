@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".MainActivity"
+    tools:showIn="@layout/app_bar_main">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hello World!"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.example.xhq.dashboardview.DashBoardView
+            android:id="@+id/dash_board_view"
+            android:layout_width="wrap_content"
+            android:layout_height="160dp"
+            android:layout_centerInParent="true"
+            android:paddingTop="5dp"
+            app:ScaleValueTextColor="#212121"
+            app:arcColor="@android:color/black"
+            app:arcRadius="120dp"
+            app:bgColor="@android:color/white"
+            app:centerCircleRadius="8dp"
+            app:currentScaleValue="0"
+            app:maxScaleValue="100"
+            app:minScaleCountInOnePiece="5"
+            app:minScaleValue="0"
+            app:pieceTotalCount="10"
+            app:pointerRadius="90dp"
+            app:ribbonMode="outer"
+            app:ribbonWidth="20dp"
+            app:scaleValueTextSize="14dp"
+            app:startAngle="180"
+            app:sweepAngle="180"/>
+    </RelativeLayout>
+
+
+
+</android.support.constraint.ConstraintLayout>

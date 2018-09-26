@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="@dimen/x608"
+        android:layout_height="@dimen/y788"
+        android:background="@mipmap/bg_open_red_packet">
+
+        <ImageView
+            android:id="@+id/iv_red_packet_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_margin="@dimen/x24"
+            android:src="@mipmap/chat_redpacket_close" />
+
+        <ImageView
+            android:id="@+id/iv_red_packet_user"
+            android:layout_width="@dimen/x100"
+            android:layout_height="@dimen/x100"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/x47"
+            android:src="@drawable/circle_failure_image" />
+
+        <TextView
+            android:id="@+id/tv_red_packet_send_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/iv_red_packet_user"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/x40"
+            android:drawableEnd="@mipmap/icon_fighting_red"
+            android:drawablePadding="@dimen/x12"
+            android:text="xxx"
+            android:textColor="#FFDFA9"
+            android:textSize="@dimen/x32" />
+
+        <TextView
+            android:id="@+id/tv_red_packet_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_red_packet_send_name"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="@dimen/x42"
+            android:layout_marginRight="@dimen/x42"
+            android:layout_marginTop="@dimen/x40"
+            android:ellipsize="end"
+            android:maxLength="25"
+            android:text=""
+            android:textColor="#FFDFA9"
+            android:textSize="@dimen/x40" />
+
+        <ImageView
+            android:id="@+id/iv_open_red_packet"
+            android:layout_width="@dimen/x180"
+            android:layout_height="@dimen/x180"
+            android:layout_below="@+id/tv_red_packet_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/x60"
+            android:src="@mipmap/icon_open_red_packet" />
+
+        <ImageView
+            android:id="@+id/iv_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/x32"
+            android:src="@mipmap/icon_red_packet_sold" />
+
+        <TextView
+            android:id="@+id/tv_examine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/x32"
+            android:drawablePadding="@dimen/x10"
+            android:drawableRight="@mipmap/chat_hongbao_jiantou"
+            android:text="查看他人手气"
+            android:textColor="#FFDFA9"
+            android:textSize="@dimen/x30"
+            android:visibility="gone" />
+
+    </RelativeLayout>
+
+</LinearLayout>

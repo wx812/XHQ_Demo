@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">scan</string>
+    <string name="comm_scan">扫一扫</string>
+</resources>

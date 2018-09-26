@@ -1,0 +1,244 @@
+// Created by XHQ on 2017/3/8
+
+import java.text.SimpleDateFormat
+
+android {
+
+//    // 解决多模块的资源命名冲突, 在各个模块中添加不同的前缀
+//    resourcePrefix "public_"
+
+//    buildToolsVersion rootProject.ext.android.buildToolsVersion
+//    compileSdkVersion ANDROID_COMPILE_SDK_VERSION as int
+    buildToolsVersion ANDROID_BUILD_TOOLS_VERSION
+
+    defaultConfig{
+
+//        minSdkVersion ANDROID_MIN_SDK_VERSION as int
+//        targetSdkVersion ANDROID_TARGET_SDK_VERSION as int
+//        versionCode VERSION_CODE as int
+//        versionName VERSION_NAME
+//        applicationId "com.xhq"
+
+//        multiDexEnabled true
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        // 3.0 之后的注解配置
+        javaCompileOptions {
+            annotationProcessorOptions {
+                includeCompileClasspath = true
+            }
+        }
+
+    }
+
+    repositories {
+        // 本地依赖的文件夹仓库, 必须有一个指定的目录仓库
+        flatDir {
+            dirs  'libs'
+//            dirs '../common/libs'; dirs 'libs'; dirs '../commonbase/libs'
+//            dirs project(':liteav').file('libs')
+//            dirs project(':im:uikit').file('libs')
+        }
+    }
+
+
+    // lint 工具 可选参数
+    lintOptions {
+
+        abortOnError false      // true--错误发生后停止gradle构建
+        quiet true              // true--关闭lint报告的分析进度
+        ignoreWarnings true     // true--只报告error
+
+//        checkAllWarnings true         // true--检查所有问题点，包含其他默认关闭项
+//        warningsAsErrors true         // true--所有warning当做error
+//        check 'NewApi', 'InlinedApi'  // 仅检查指定问题
+//        lintConfig file("default-lint.xml")   // 回退lint设置(默认规则)
+//        textReport true               // true--生成txt格式报告(默认false)
+//        xmlReport false               // true--生成XML格式报告
+//        //  true--所有正式版构建执行规则生成崩溃的lint检查，如果有崩溃问题将停止构建
+//        checkReleaseBuilds true
+
+        disable 'InvalidPackage'        //Some libraries have issues with this.
+        disable 'OldTargetApi'
+    }
+
+    dexOptions {
+//        multiDexEnabled true           // 移除64k限制, 分包打包
+        // 声明是否预先编译依赖库，从而加快构建速度，实质是通过延时清除已生成的依赖库的构建文件，从而提高构建速度
+        preDexLibraries false
+        jumboMode true                  // 忽略方法数限制的检查
+        // 设置DEX编译器的最大堆大小，堆或栈都是用于存放暂时不用的垃圾，
+        // 当内存不足时，垃圾回收机制会清除过时的缓存，堆大小决定垃圾清除的频率，影响着构建的速度
+        javaMaxHeapSize "4g"
+//        maxProcessCount 8               // 设置进程运行过程中可以使用的最大线程数。默认值为4。
+    }
+
+    // aapt是一个可以将资源文件编译成二进制文件的工具
+    aaptOptions {
+        // 检测png图片的合法性, 比如jpg 图片改后缀名为png, 检测出不合法的png, true检查。可能需要更多的内存和CPU
+        cruncherEnabled = false
+        //useNewCruncher has been deprecated. It will be removed in a future version of the gradle plugin.
+        // New cruncher is now always enabled.
+        useNewCruncher = false
+        /// 忽略Assets模块。
+        ignoreAssetsPattern "!.svn:!.git"
+
+//        --extra-packages是为资源文件设置别名：意思是通过该应用包名+R，com.android.test1.R和com.android.test2.R都可以访问到资源
+//        additionalParameters '--extra-packages', 'com.android.test1','--extra-packages','com.android.test2'
+    }
+
+    // 编译配置 java 版本
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    // packaging 可选参数
+    // 排除不想添加到apk中的文件
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INFTICE'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INFTICE.txt'
+
+        // 排除指定文件
+//        exclude 'assets/amap_start.png'
+    }
+
+    signingConfigs {
+        def appStoreFile = System.getenv("STORE_FILE")
+        def appStorePassword = System.getenv("STORE_PASSWORD")
+        def appKeyAlias = System.getenv("KEY_ALIAS")
+        def appKeyPassword = System.getenv("KEY_PASSWORD")
+        if (!appStoreFile || !appStorePassword || !appKeyAlias || !appKeyPassword) {
+            appStoreFile = "../XHQ_Demo.jks"
+//            appStoreFile = "../debug.keystore"
+            appStorePassword = "android"
+            appKeyAlias = "androiddebugkey"
+            appKeyPassword = "android"
+        }
+
+        // debug, release, config
+        relealse {
+            v1SigningEnabled true
+            v2SigningEnabled true
+            keyAlias appKeyAlias
+            keyPassword appKeyPassword
+            storeFile file(appStoreFile)
+            storePassword appStorePassword
+        }
+    }
+
+    buildTypes {
+
+        debug {
+            // 必须写在编译类型 配置之前, 顺序第一
+            ndk { abiFilters "armeabi" }
+
+            resValue "string", "video_process_name", VIDEO_PROCESS_NAME
+            buildConfigField "boolean", "LOG_DEBUG", "true"
+            versionNameSuffix "_debug"
+
+            minifyEnabled false         // 是否混淆, 配合proguardFiles 使用
+            zipAlignEnabled true        //Zipalign优化, zip 对其
+//            shrinkResources true        // 删除项目中没用到的资源文件, 要求minifyEnabled为true才生效
+            debuggable true             // 是否为debug编译类型
+            signingConfig signingConfigs.relealse       // 签名配置
+            // 混淆 规则文件(前面 为默认的规则, 后面为定制)
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+            def buildTypes = appBuildTypes as String
+            def release = "release" == buildTypes
+            def betaValue = "beta" == buildTypes
+            def appName = betaValue ? "智享城市aliyun" : "智享城市debug"
+
+            // 将值映射到 AndroidManifest清单文件的指定位置.可作为快速渠道打包替换渠道名的一种方式
+            manifestPlaceholders = [YX_APPKEY     : release ? YX_RELEASE_KEY : betaValue ? YX_BETA_KEY : YX_DEBUG_KEY,
+                                    BASE_URL      : release ? RELEASE_BASE_URL : betaValue ? BETA_BASE_URL : DEBUG_BASE_URL,
+                                    BASE_SHARE_URL: release ? RELEASE_SHARE_URL : betaValue ? BETA_SHARE_URL : DEBUG_SHARE_URL,
+                                    "CUR_ENV"     : buildTypes,
+                                    APP_LABLE     : appName]
+        }
+
+
+        release {
+            // 必须写在编译类型 配置之前, 顺序第一
+            ndk { abiFilters "armeabi" }
+
+            resValue "string", "video_process_name", VIDEO_PROCESS_NAME
+            buildConfigField "boolean", "LOG_DEBUG", "false"
+            versionNameSuffix "_release"
+
+            minifyEnabled false
+            zipAlignEnabled true
+//            shrinkResources true
+            debuggable false
+            signingConfig signingConfigs.relealse
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+            def buildTypes = appBuildTypes as String
+            def release = "release" == buildTypes
+            def betaValue = "beta" == buildTypes
+
+            manifestPlaceholders = [YX_APPKEY     : release ? YX_RELEASE_KEY : betaValue ? YX_BETA_KEY : YX_DEBUG_KEY,
+                                    BASE_URL      : release ? RELEASE_BASE_URL : betaValue ? BETA_BASE_URL : DEBUG_BASE_URL,
+                                    BASE_SHARE_URL: release ? RELEASE_SHARE_URL : betaValue ? BETA_SHARE_URL : DEBUG_SHARE_URL,
+                                    "CUR_ENV"     : buildTypes,
+                                    APP_LABLE     : "@string/smartcity_app_name"]
+        }
+    }
+
+
+    applicationVariants.all { variant ->
+        variant.outputs.all { output ->
+            String time = appBuildTime as String
+            if (null == time || time.isEmpty()) {
+                time = getTime()
+            }
+            // eg: jmzw_v1.0.0_release_2018-07-08-20-31.apk
+            outputFileName = "${(apkAbbrName as String)}_v${versionName}_${variant.buildType.name}_${time}.apk"
+        }
+    }
+
+}
+
+static def getTime() {
+    return new SimpleDateFormat("yyyy-MM-dd-HH-mm").format(new Date())
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+//    androidTestImplementation('com.android.support.test.espresso:espresso-core:3.0.2', {
+//        exclude group: 'com.android.support', module: 'support-annotations'
+//    })
+
+
+    // api 是会向外暴露你引用的依赖，这样会导致 gradle 编译时需要频繁遍历所有嵌套依赖是否有变更，影响编译速度。
+    // 更推荐的是使用 implementation 替代原先的 compile，implementation 和 api 的区别就是不会暴露引用的依赖。
+    // 比如 A implementation 引用了 B，如果 B implementation 引用了 C，那么 A 将无法间接引用 C，
+    // 除非 A 自己也声明引用 C。而如果 A implementation B，B api C，则 A 可以间接引用 C。
+    // 使用 implementation 是提升编译速度的关键。如果没有必要引用间接内容的话，应该尽量使用 implementation
+
+//    api "com.android.support:appcompat-v7:${ANDROID_SUPPORT_LIBRARY_VERSION}"
+//    api "com.android.support:design:${ANDROID_SUPPORT_LIBRARY_VERSION}"
+
+
+    implementation rootProject.ext.support.appcompatV7
+    implementation rootProject.ext.support.supportV4
+    implementation rootProject.ext.support.design
+    implementation rootProject.ext.support.cardviewV7
+    implementation rootProject.ext.support.recyclerviewV7
+    implementation rootProject.ext.support.constraintLayout
+    implementation rootProject.ext.support.multidex
+
+    // 由于 Android 7.1 引入了对框架 ExifInterface 的重大改进，因此只有通过支持库的ExifInterface 让所有 API 9 以上的设备都能利用这些改进才有意义。
+    //基本功能仍然相同：对嵌入图片文件的 Exif 标记进行读写的功能：
+    // 现已包含 140 个不同的属性（其中近 100 个是 Android 7.1/该支持库新增的！），
+    // 包括有关相机本身、相机设置、屏幕方向以及 GPS 坐标的信息。
+    implementation rootProject.ext.support.exifinterface
+
+    testImplementation rootProject.ext.support.junit
+    androidTestImplementation rootProject.ext.support.testRunner
+    androidTestImplementation rootProject.ext.support.testEspressoCore
+}

@@ -1,0 +1,13 @@
+*.iml
+.gradle
+.idea
+*/build
+/local.properties
+FHSettings
+#*.keystore
+#*.jks
+.DS_Store
+*.apk
+/captures
+.externalNativeBuild
+

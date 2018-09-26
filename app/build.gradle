@@ -1,0 +1,111 @@
+apply plugin: 'com.android.application'
+apply from: '../commonsetting.gradle'
+
+ext.CITY_ARTIFACTORY_USERNAME = "XHQ"
+ext.CITY_ARTIFACTORY_PASSWORD = "123456"
+ext.CITY_ARTIFACTORY_GROUPID = "face"
+ext.CITY_ARTIFACTORY_VERSION = "1.4.1-DEBUG-7"
+
+//apply from: '../publish_maven.gradle'
+
+android {
+    compileSdkVersion ANDROID_COMPILE_SDK_VERSION as int
+//    buildToolsVersion rootProject.ext.android.buildToolsVersion
+
+    defaultConfig {
+
+        minSdkVersion ANDROID_MIN_SDK_VERSION as int
+        targetSdkVersion ANDROID_TARGET_SDK_VERSION as int
+        versionCode VERSION_CODE as int
+        versionName VERSION_NAME        // 给用户看的版本号
+
+        applicationId "com.xhq"
+
+        multiDexEnabled true
+        flavorDimensions("XHQ_DEMO")    // 产品风格的维度 "Free" or "Paid"
+        ndk { abiFilters "armeabi" }
+    }
+
+    // 产品风格, 多渠道打包
+    productFlavors {
+        app {
+            // "Free", "Paid"
+            dimension "XHQ_DEMO"
+            // ".free", ".paid"
+            applicationIdSuffix ".beta"
+            manifestPlaceholders.put("app_name", "XHQ_DEMO")
+        }
+    }
+//    repositories {
+//        // 本地依赖的文件夹仓库
+//        flatDir {
+////            dirs '../common/libs'; dirs 'libs'; dirs '../commonbase/libs'
+////            dirs project(':liteav').file('libs')
+////            dirs project(':im:uikit').file('libs')
+//        }
+//    }
+
+    //指定编译打包目录
+//    sourceSets {
+//        main {
+//            //jni lib的位置
+//            jniLibs.srcDirs = jniLibs.srcDirs << 'src/jniLibs'
+//            //定义多个资源文件夹,这种情况下，两个资源文件夹具有相同优先级，即如果一个资源在两个文件夹都声明了，合并会报错。
+//            res.srcDirs = ['src/main/res', 'src/main/res2']
+//            //指定多个源文件目录
+//            java.srcDirs = ['src/main/java', 'src/main/aidl']
+//        }
+
+//        main {
+//            manifest.srcFile 'AndroidManifest.xml'
+//            manifest.srcFile 'src/main/AndroidManifest.xml'
+//            resources.srcDirs  = ['src']
+//            java.srcDirs = ['src']
+//            res.srcDirs = ['res']
+//            aidl.srcDirs = ['src']
+//            renderscript.srcDirs = ['src']
+//            jniLibs.srcDir("libs")
+//            assets.srcDirs = ['assets']
+//        }
+//    }
+
+
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+
+dependencies {
+
+    implementation rootProject.ext.dependencies.rxjava
+    implementation rootProject.ext.dependencies.rxandroid
+    implementation rootProject.ext.dependencies.rxpermissions
+    implementation rootProject.ext.dependencies.okrx2
+    implementation rootProject.ext.dependencies.okgo
+    implementation rootProject.ext.dependencies.gson
+    implementation rootProject.ext.dependencies.glide
+    implementation rootProject.ext.dependencies.logger
+    implementation rootProject.ext.dependencies.jodaTime
+    implementation rootProject.ext.dependencies.eventbus
+    implementation rootProject.ext.dependencies.greendao
+    implementation rootProject.ext.dependencies.retrofit
+
+    implementation 'cn.jzvd:jiaozivideoplayer:6.2.12'
+    implementation 'com.gyf.barlibrary:barlibrary:2.3.0'
+    implementation 'org.zackratos:ultimatebar:1.0.3'
+    implementation 'org.apache.directory.studio:org.apache.commons.lang:2.6'
+    implementation 'com.ashokvarma.android:bottom-navigation-bar:2.0.5'
+    implementation 'com.alibaba.android:ultraviewpager:1.0.4@aar'
+    implementation 'com.alibaba.android:vlayout:1.0.9@aar'
+    implementation 'com.readystatesoftware.systembartint:systembartint:1.0.3'
+
+    //    implementation project(path: ':im')
+    //    implementation project(path: ':common')
+}

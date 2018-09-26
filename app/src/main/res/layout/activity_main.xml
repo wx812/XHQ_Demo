@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.xhq.demo.activity.MainActivity">
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:orientation="vertical"
+        android:layout_height="wrap_content">
+
+        <com.xhq.demo.widget.PieChart
+            android:id="@+id/Pie"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="100"
+            android:background="@android:color/white"
+            android:padding="10dp"
+            app:autoCenterPointerInSlice="true"
+            app:highlightStrength="1.12"
+            app:labelColor="@android:color/black"
+            app:labelHeight="20dp"
+            app:labelPosition="left"
+            app:labelWidth="110dp"
+            app:labelY="85dp"
+            app:pieRotation="0"
+            app:pointerRadius="4dp"
+            app:showText="true"/>
+
+        <Button
+            android:id="@+id/Reset"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/reset_button"/>
+
+    </LinearLayout>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hello World!"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+</android.support.constraint.ConstraintLayout>

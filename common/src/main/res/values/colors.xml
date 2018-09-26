@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--<color name="colorPrimary">#3b3a40</color>-->
+    <!--<color name="colorPrimaryDark">#2a292d</color>-->
+    <!--<color name="colorAccent">#FF8533</color>-->
+    //button颜色
+    <color name="all_btn">#FF8533</color>
+    <color name="bg_color">#f3f4f5</color>
+
+    <!-- 报表统计 -->
+    <color name="tv_table_unit_category">#2A82E4</color>
+    <color name="tv_table_unit_value">#505050</color>
+
+</resources>

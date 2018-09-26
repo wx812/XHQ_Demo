@@ -1,0 +1,82 @@
+apply plugin: 'com.android.library'
+apply plugin: 'org.greenrobot.greendao'
+
+android {
+
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    buildToolsVersion rootProject.ext.android.buildToolsVersion
+
+    defaultConfig {
+
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+        multiDexEnabled true
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+
+    buildTypes {
+        release {
+//            buildConfigField "boolean", "LOG_DEBUG", "false"    // 不显示Log
+            minifyEnabled false
+            zipAlignEnabled true    //Zipalign优化, zip 对其
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+    }
+
+    compileOptions {
+        targetCompatibility 1.8
+        sourceCompatibility 1.8
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestImplementation('com.android.support.test.espresso:espresso-core:3.0.1', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+
+    testImplementation rootProject.ext.support.junit
+    implementation rootProject.ext.support.multidex
+    implementation rootProject.ext.support.design
+    implementation rootProject.ext.support.appcompatV7
+    implementation rootProject.ext.support.recyclerviewV7
+    implementation rootProject.ext.support.constraintLayout
+    implementation rootProject.ext.support.exifinterface
+
+    implementation rootProject.ext.dependencies.rxjava
+    implementation rootProject.ext.dependencies.rxandroid
+    implementation rootProject.ext.dependencies.rxpermissions
+    implementation rootProject.ext.dependencies.okrx2
+    implementation rootProject.ext.dependencies.okgo
+    implementation rootProject.ext.dependencies.gson
+    implementation rootProject.ext.dependencies.glide
+    implementation rootProject.ext.dependencies.logger
+    implementation rootProject.ext.dependencies.jodaTime
+    implementation rootProject.ext.dependencies.eventbus
+    implementation rootProject.ext.dependencies.greendao
+
+
+    implementation 'org.zackratos:ultimatebar:1.0.3'
+    implementation 'org.apache.directory.studio:org.apache.commons.lang:2.6'
+    implementation 'com.ashokvarma.android:bottom-navigation-bar:2.0.5'
+    implementation 'com.alibaba.android:ultraviewpager:1.0.4@aar'
+    implementation 'com.alibaba.android:vlayout:1.0.9@aar'
+}
+greendao {
+
+    schemaVersion 1//数据库版本号
+
+    targetGenDir 'src/main/java'//设置DaoMaster、DaoSession、Dao目录
+
+    daoPackage 'com.jjkj.common.dao.greendao.db'//设置DaoMaster、DaoSession、Dao包名
+
+    //targetGenDirTest：设置生成单元测试目录
+
+    //generateTests：设置自动生成单元测试用例
+
+}

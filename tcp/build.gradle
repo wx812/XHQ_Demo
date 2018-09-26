@@ -1,0 +1,41 @@
+apply plugin: 'com.android.library'
+
+android {
+
+    compileSdkVersion rootProject .ext.android.compileSdkVersion
+//    buildToolsVersion rootProject .ext.android.buildToolsVersion
+
+    defaultConfig {
+
+        minSdkVersion rootProject .ext.android.minSdkVersion
+        targetSdkVersion rootProject .ext.android.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+        multiDexEnabled true
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    testImplementation rootProject.ext.support.junit
+    implementation rootProject.ext.support.multidex
+    androidTestImplementation('com.android.support.test.espresso:espresso-core:3.0.1', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+//    implementation project(':common')
+}

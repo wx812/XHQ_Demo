@@ -1,0 +1,63 @@
+// Created by XHQ on 2017/3/8
+// 发布mavenCentral中央库的脚本
+// 发布到mavenCentral 的两个插件
+apply plugin: 'maven-publish'
+apply plugin: 'com.jfrog.artifactory'
+publishing {
+    publications {
+        mavenArr(MavenPublication) {
+            groupId = CITY_ARTIFACTORY_GROUPID
+            artifactId project.name
+            version = CITY_ARTIFACTORY_VERSION
+
+            //兼容debug和release包  优先release如果release没有则使用debug模式
+            def parentPath = "${project.buildDir}/outputs/aar/"
+            def aarReleaseFile = new File("${parentPath}${project.name}-release.aar")
+            def aarDebugFile = new File("${parentPath}${project.name}-debug.aar")
+            def path
+
+            if (aarReleaseFile.exists()&&aarDebugFile.exists()) {
+
+                if(aarReleaseFile.lastModified()>=aarDebugFile.lastModified()){
+                    path=aarReleaseFile.getPath()
+                }else{
+                    path=aarDebugFile.getPath()
+                }
+            }else if(aarReleaseFile.exists()){
+                path=aarReleaseFile.getPath()
+            }else{
+                path=aarDebugFile.getPath()
+            }
+
+            // //generate POM file
+            artifact path
+            pom.withXml {
+                def dependencies = asNode().appendNode('dependencies')
+                configurations.implementation.allDependencies.each {
+                    if (it.group != null && it.version != 'unspecified') {
+                        def dependency = dependencies.appendNode('dependency')
+                        dependency.appendNode('groupId', it.group)
+                        dependency.appendNode('artifactId', it.name)
+                        dependency.appendNode('version', it.version)
+                    }
+                }
+            }
+
+        }
+    }
+
+    // 将pom和aar包上传至maven仓库
+    artifactory {
+        contextUrl = "http://192.168.14.152:8081/artifactory"
+        publish {
+            repository {
+                repoKey = 'release_lib'
+                username = CITY_ARTIFACTORY_USERNAME
+                password = CITY_ARTIFACTORY_PASSWORD
+            }
+            defaults {
+                publications('mavenArr')
+            }
+        }
+    }
+}

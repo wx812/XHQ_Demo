@@ -1,0 +1,86 @@
+if (!isApp.toBoolean()) {
+    apply plugin: 'com.android.application'
+    apply from: '../commonsetting.gradle'
+} else {
+    apply plugin: 'com.android.library'
+}
+
+
+android {
+    compileSdkVersion ANDROID_BUILD_SDK_VERSION as int
+    defaultConfig {
+        minSdkVersion ANDROID_BUILD_MIN_SDK_VERSION as int
+        targetSdkVersion ANDROID_BUILD_TARGET_SDK_VERSION as int
+        if (isApp.toBoolean()) {
+//            applicationId "com.tencent.liteav.ugsv"
+            multiDexEnabled true
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    sourceSets {
+        main {
+            if (!isApp.toBoolean()) {
+                manifest.srcFile 'src/main/debug/AndroidManifest.xml'
+                assets.srcDirs 'src/main/assets'
+                java.srcDirs 'src/main/debug/java'
+            } else {
+                manifest.srcFile 'src/main/AndroidManifest.xml'
+                assets.srcDirs 'src/main/assets'
+                //release模式下排除debug文件夹中的所有Java文件
+                java {
+                    exclude 'src/main/debug/**'
+                }
+            }
+
+            jniLibs.srcDirs = ['libs']
+
+        }
+    }
+
+//
+    configurations{
+        all*.exclude module: 'okhttp'
+        all*.exclude module: 'okio'
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(dir: 'libs/upload', include: ['*.jar'])
+    implementation(name: 'LiteAVSDK_UGC', ext: 'aar')
+    implementation(name: 'commonprovider-1.0.6-RELEASE', ext: 'aar')
+    implementation(name: 'liteimsdk-release', ext: 'aar')
+
+    //noinspection GradleDependency
+    implementation "com.android.support:appcompat-v7:${ANDROID_SUPPORT_LIBRARY_VERSION}"
+    //noinspection GradleDependency
+    implementation "com.android.support:recyclerview-v7:${ANDROID_SUPPORT_LIBRARY_VERSION}"
+
+    implementation 'com.google.code.gson:gson:2.8.2'
+    implementation 'com.android.volley:volley:1.0.0'
+
+//    implementation 'com.facebook.fresco:fresco:0.7.0'
+    implementation 'com.github.bumptech.glide:glide:3.8.0'
+
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.8.1'
+    implementation 'com.github.ctiao:DanmakuFlameMaster:0.5.3'
+
+
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+
+    implementation 'com.android.support:multidex:1.0.3'
+
+//    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5.4'
+
+//    implementation 'com.android.support:design:25.+'
+//    implementation 'com.android.support:cardview-v7:25.+'
+//    implementation 'com.android.support:recyclerview-v7:25.+'
+
+//    implementation 'com.facebook.stetho:stetho:1.5.0'
+//    implementation 'com.facebook.stetho:stetho-okhttp3:1.5.0'
+}

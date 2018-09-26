@@ -1,0 +1,15 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.scan">
+
+    <uses-permission android:name="android.permission.VIBRATE" />
+
+    <application android:supportsRtl="true">
+        <!--二维码扫描-->
+        <activity
+            android:name=".activity.CaptureActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+    </application>
+
+</manifest>

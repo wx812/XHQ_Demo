@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - xhq- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+    <style name="Layout_WithHeight_WrapContent">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="Layout_WithHeight_MatchParent">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <style name="Layout_WithHeight_Match_Wrap">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+
+    <!-- xhq 报表统计 表格单元格TextView 类型-->
+    <style name="Tv_Table_Unit_Type" parent="Layout_WithHeight_WrapContent">
+        <item name="android:minWidth">@dimen/distance_50dp</item>
+        <item name="android:minHeight">@dimen/distance_50dp</item>
+        <item name="android:padding">@dimen/distance_3dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:typeface">sans</item>
+        <item name="android:textColor">@color/tv_table_unit_category</item>
+        <item name="android:textSize">@dimen/font_size_16sp</item>
+    </style>
+
+    <!--报表统计 表格单元格TextView类型 value -->
+    <style name="Tv_Table_Unit_value" parent="Layout_WithHeight_WrapContent">
+        <item name="android:minWidth">@dimen/distance_50dp</item>
+        <item name="android:minHeight">@dimen/distance_50dp</item>
+        <item name="android:padding">@dimen/distance_3dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/tv_table_unit_value</item>
+        <item name="android:textSize">@dimen/font_size_14sp</item>
+    </style>
+
+    <style name="dialog" parent="android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item><!--边框-->
+        <item name="android:windowNoTitle">true</item><!--标题-->
+        <item name="android:windowIsFloating">true</item><!--是否浮现在activity之上-->
+        <item name="android:windowIsTranslucent">true</item><!--半透明-->
+        <item name="android:windowBackground">@android:color/transparent</item><!--背景透明-->
+    </style>
+
+    <!-- 激活记录 下载的图片 点击 预览 对话框样式 -->
+    <style name="dialog_full_screen_view" parent="android:Theme.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item><!--是否浮在activity之上-->
+        <item name="android:windowIsTranslucent">true</item><!--背景是否半透明-->
+        <item name="android:windowContentOverlay">@null</item><!--对话框是否有遮盖 -->
+        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
+        <item name="android:backgroundDimEnabled">true</item><!--背景是否模糊-->
+    </style>
+
+    <style name="ImageScale" parent="android:Theme.Black.NoTitleBar">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/black</item>
+        <item name="android:backgroundDimEnabled">false</item>
+    </style>
+
+    <!-- 全屏查看View 的dialog 进出动画 -->
+    <style name="dialog_in_out_anim" parent="@android:style/Animation">
+        <item name="android:windowEnterAnimation">@anim/dialog_in</item>
+        <item name="android:windowExitAnimation">@anim/dialog_out</item>
+    </style>
+
+
+</resources>

@@ -1,0 +1,56 @@
+<resources>
+    <!-- by xhq. Default screen margins, per the Android Design guidelines. -->
+
+    <!-- 定义间距 -->
+    <dimen name="distance_50dp">50dip</dimen>
+    <dimen name="distance_40dp">40dip</dimen>
+    <dimen name="distance_35dp">35dip</dimen>
+    <dimen name="distance_30dp">30dip</dimen>
+    <dimen name="distance_20dp">20dip</dimen>
+    <dimen name="distance_15dp">15dip</dimen>
+    <dimen name="distance_11dp">11dip</dimen>
+    <dimen name="distance_10dp">10dip</dimen>
+    <dimen name="distance_8dp">8dip</dimen>
+    <dimen name="distance_6dp">6dip</dimen>
+    <dimen name="distance_5dp">5dip</dimen>
+    <dimen name="distance_3dp">3dip</dimen>
+    <dimen name="distance_2dp">2dip</dimen>
+
+    <!-- 字体大小 -->
+    <dimen name="Largest_font">24sp</dimen>
+    <dimen name="Larger_font">22sp</dimen>
+    <dimen name="Large_font">20sp</dimen>
+    <dimen name="Middle_font">18sp</dimen>
+    <dimen name="Small_font">16sp</dimen>
+    <dimen name="Smaller_font">14sp</dimen>
+    <dimen name="Smallest_font">12sp</dimen>
+    <dimen name="More_Smallest_font">12sp</dimen>
+
+    <dimen name="font_size_24sp">24sp</dimen>
+    <dimen name="font_size_22sp">22sp</dimen>
+    <dimen name="font_size_20sp">20sp</dimen>
+    <dimen name="font_size_18sp">18sp</dimen>
+    <dimen name="font_size_16sp">16sp</dimen>
+    <dimen name="font_size_14sp">14sp</dimen>
+    <dimen name="font_size_12sp">12sp</dimen>
+
+
+    <!-- 标题高度 -->
+    <dimen name="navigation_height">48dp</dimen>
+    <!-- 标签高度 -->
+    <dimen name="tab_height">48dp</dimen>
+
+    <dimen name="content_height">42dp</dimen>
+
+    <dimen name="group_height">45dp</dimen>
+
+    <!-- 按钮高度 -->
+    <dimen name="btn_height">40dp</dimen>
+    <dimen name="btn_height_45">45dp</dimen>
+
+    <!-- TABLE高度 -->
+    <dimen name="tr_tv_height">40dp</dimen>
+    <dimen name="tr_tv_width">70dp</dimen>
+
+</resources>
+

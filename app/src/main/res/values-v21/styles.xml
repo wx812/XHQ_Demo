@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- them after 5.0 -->
+    <style name="MyTranslucentTheme" parent="AppTheme">
+        <item name="android:windowTranslucentStatus">false</item>   <!--Translucent status bar-->
+        <!-- 需要判断 虚拟导航栏是否存在, 以解决 导航栏遮住底层布局 -->
+        <item name="android:windowTranslucentNavigation">true</item>    <!--Translucent Navigation bar-->
+        <item name="android:statusBarColor">@android:color/transparent</item>
+    </style>
+
+</resources>

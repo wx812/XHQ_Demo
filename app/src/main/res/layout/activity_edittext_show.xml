@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+    android:background="@android:color/transparent"
+    android:orientation="horizontal" >
+
+    <EditText
+        android:id="@+id/editip_part1_id"
+        style="@style/IPAddrEditText"
+        android:inputType="phone"
+        android:nextFocusForward="@+id/editip_part2_id"
+	    android:imeOptions="actionNext" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_vertical"
+        android:background="@drawable/ip_line" />
+
+    <EditText
+        android:id="@+id/editip_part2_id"
+        style="@style/IPAddrEditText"
+        android:inputType="phone"
+        android:nextFocusForward="@+id/editip_part3_id"
+	    android:imeOptions="actionNext" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:background="@drawable/ip_line" />
+
+    <EditText
+        android:id="@+id/editip_part3_id"
+        style="@style/IPAddrEditText"
+        android:inputType="phone"
+        android:nextFocusForward="@+id/editip_part4_id"
+	    android:imeOptions="actionNext" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:background="@drawable/ip_line" />
+
+    <EditText
+        android:id="@+id/editip_part4_id"
+        style="@style/IPAddrEditText"
+        android:inputType="phone"
+	    android:imeOptions="actionNext" />
+
+</LinearLayout>

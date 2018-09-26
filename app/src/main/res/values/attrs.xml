@@ -1,0 +1,263 @@
+<!-- Copyright (C) 2012 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<resources>
+
+    <!-- public property, Same attribute name, share-->
+    <attr name="pointerRadius" format="dimension"/>
+
+
+    <!--*************************************************************************************************-->
+
+    <declare-styleable name="DashBoardView">
+        <attr name="arcRadius" format="dimension"/>
+        <attr name="startAngle" format="integer"/>
+        <attr name="sweepAngle" format="integer"/>
+        <attr name="arcColor" format="color"/>
+        <attr name="ribbonWidth" format="dimension"/>
+        <attr name="ribbonMode">
+            <enum name="normal" value="0"/>
+            <enum name="inner" value="1"/>
+            <enum name="outer" value="2"/>
+        </attr>
+        <attr name="pieceTotalCount" format="integer"/>
+        <attr name="minScaleCountInOnePiece" format="integer"/>
+        <attr name="scaleValueTextSize" format="dimension"/>
+        <attr name="ScaleValueTextColor" format="color"/>
+        <attr name="minScaleValue" format="integer"/>
+        <attr name="maxScaleValue" format="integer"/>
+        <attr name="currentScaleValue" format="float"/>
+        <attr name="pointerRadius"/>
+        <attr name="centerCircleRadius" format="dimension"/>
+        <attr name="unitText" format="string"/>
+        <attr name="unitTextSize" format="string"/>
+        <attr name="unitTextRadius" format="dimension"/>
+        <attr name="bgColor" format="color"/>
+    </declare-styleable>
+
+
+    <declare-styleable name="VideoRecordButton">
+        <attr name="btnText" format="string|reference"/>
+        <attr name="btnTextColor" format="color|reference"/>
+        <attr name="btnBgColor" format="color|reference"/>
+        <attr name="ringWidth" format="dimension|reference"/>
+    </declare-styleable>
+
+
+    <!--*************************************************************************************************-->
+    <declare-styleable name="CircleLayout">
+        <attr name="circleBackground" format="integer" />
+        <attr name="firstChildPosition">
+            <enum name="East" value="0" />
+            <enum name="South" value="90" />
+            <enum name="West" value="180" />
+            <enum name="North" value="270" />
+        </attr>
+        <attr name="rotateToCenter" format="boolean" />
+        <attr name="isRotating" format="boolean" />
+    </declare-styleable>
+    <declare-styleable name="CircleImageView">
+        <attr name="name" format="string" />
+    </declare-styleable>
+    <!--*************************************************************************************************-->
+
+
+    <declare-styleable name="PieChart">
+        <attr name="autoCenterPointerInSlice" format="boolean"/>
+        <attr name="highlightStrength" format="float"/>
+        <attr name="labelColor" format="color"/>
+        <attr name="labelHeight" format="dimension"/>
+        <attr name="labelPosition" format="enum">
+            <enum name="left" value="0"/>
+            <enum name="right" value="1"/>
+        </attr>
+        <attr name="labelWidth" format="dimension"/>
+        <attr name="labelY" format="dimension"/>
+        <attr name="pieRotation" format="integer"/>
+        <attr name="pointerRadius"/>
+        <attr name="showText" format="boolean"/>
+    </declare-styleable>
+
+
+    <declare-styleable name="WifiEncryptionState">
+        <attr name="state_encrypted" format="boolean" />
+    </declare-styleable>
+    <declare-styleable name="IconPreferenceScreen">
+        <attr name="icon" format="reference" />
+    </declare-styleable>
+
+    <declare-styleable name="BatteryHistoryChart">
+        <!-- Base text color, typeface, size, and style. -->
+        <attr name="android:textAppearance" />
+        <!-- Text color. -->
+        <attr name="android:textColor" />
+        <!-- Size of the text. Recommended dimension type for text is "sp" for scaled-pixels (example: 15sp). -->
+        <attr name="android:textSize" />
+        <!-- Typeface (normal, sans, serif, monospace) for the text. -->
+        <attr name="android:typeface" />
+        <!-- Style (bold, italic, bolditalic) for the text. -->
+        <attr name="android:textStyle" />
+        <!-- Place a shadow of the specified color behind the text. -->
+        <attr name="android:shadowColor" />
+        <!-- Horizontal offset of the shadow. -->
+        <attr name="android:shadowDx" />
+        <!-- Vertical offset of the shadow. -->
+        <attr name="android:shadowDy" />
+        <!-- Radius of the shadow. -->
+        <attr name="android:shadowRadius" />
+    </declare-styleable>
+
+    <declare-styleable name="PercentageBarChart">
+        <!-- Background color -->
+        <attr name="emptyColor" format="color" />
+        <!-- Minimum tick width for each slice in the bar chart. -->
+        <attr name="minTickWidth" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="ChartView">
+        <!-- optimal width of the chart -->
+        <attr name="optimalWidth" format="dimension" />
+        <!-- how to weight extra space beyond optimal width -->
+        <attr name="optimalWidthWeight" format="float" />
+    </declare-styleable>
+
+    <declare-styleable name="ChartSweepView">
+        <attr name="sweepDrawable" format="reference" />
+        <attr name="followAxis">
+            <enum name="horizontal" value="0" />
+            <enum name="vertical" value="1" />
+        </attr>
+        <attr name="neighborMargin" format="dimension" />
+        <attr name="labelSize" format="dimension" />
+        <attr name="labelTemplate" format="reference" />
+        <attr name="labelColor_1" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="ChartGridView">
+        <attr name="primaryDrawable" format="reference" />
+        <attr name="secondaryDrawable" format="reference" />
+        <attr name="borderDrawable" format="reference" />
+        <attr name="labelColor_2" />
+    </declare-styleable>
+
+    <declare-styleable name="ChartNetworkSeriesView">
+        <attr name="strokeColor" format="color" />
+        <attr name="fillColor" format="color" />
+        <attr name="fillColorSecondary" format="color" />
+    </declare-styleable>
+
+    <attr name="apnPreferenceStyle" format="reference" />
+
+    <!-- add -->
+    <declare-styleable name="StaticTextView">
+        <attr name="textSize" format="dimension" />
+        <attr name="text" format="reference" />
+    </declare-styleable>
+
+    <declare-styleable name="PopupWindowAttr">
+        <attr name="entries" format="reference" />
+        <attr name="prompt" format="reference" />
+    </declare-styleable>
+
+    <declare-styleable name="DataItem">
+        <attr name="batteryLevel" format="string" />
+        <attr name="brightnessLevel" format="string" />
+        <attr name="brightnessChargingLevel" format="string" />
+    </declare-styleable>
+
+    <declare-styleable name="dashedline">
+        <attr name="lineColor" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="fhRadioButton">
+        <attr name="backgroundRadio" />
+        <attr name="backgroundRadioSelected" />
+        <attr name="radioButtonNum" />
+        <attr name="backgroundText" />
+        <attr name="order" />
+        <attr name="contentTextColor" />
+        <attr name="contentTextSize" />
+        <attr name="textMarginLeft" />
+        <attr name="textMarginRight" />
+        <attr name="textMarginTop" />
+        <attr name="textMarginBottom" />
+        <attr name="imageMarginLeft" />
+        <attr name="imageMarginRight" />
+        <attr name="imageMarginTop" />
+        <attr name="imageMarginBottom" />
+        <attr name="unitMarginLeft" />
+        <attr name="unitMarginRight" />
+        <attr name="unitMarginTop" />
+        <attr name="unitMarginBottom" />
+        <attr name="texts" />
+        <attr name="optionsOrientation">
+            <enum name="horizontal" value="0" />
+            <enum name="vertical" value="1" />
+        </attr>
+        <attr name="selectedIndex" />
+    </declare-styleable>
+
+    <attr name="backgroundRadioSelected" format="reference|color" />
+    <attr name="backgroundRadio" format="reference|color" />
+    <attr name="radioButtonNum" format="reference|integer" />
+    <attr name="backgroundText" format="reference|color" />
+    <attr name="contentTextColor" format="reference|color" />
+    <attr name="contentTextSize" format="reference|dimension" />
+    <attr name="texts" format="reference" />
+    <attr name="textMarginLeft" format="reference|dimension" />
+    <attr name="textMarginRight" format="reference|dimension" />
+    <attr name="textMarginTop" format="reference|dimension" />
+    <attr name="textMarginBottom" format="reference|dimension" />
+    <attr name="imageMarginLeft" format="reference|dimension" />
+    <attr name="imageMarginRight" format="reference|dimension" />
+    <attr name="imageMarginTop" format="reference|dimension" />
+    <attr name="imageMarginBottom" format="reference|dimension" />
+
+    <attr name="unitMarginLeft" format="reference|dimension" />
+    <attr name="unitMarginRight" format="reference|dimension" />
+    <attr name="unitMarginTop" format="reference|dimension" />
+    <attr name="unitMarginBottom" format="reference|dimension" />
+
+    <attr name="selectedIndex" format="reference|integer" />
+
+    <attr name="order">
+        <enum name="imageFirst" value="0" />
+        <enum name="textFirst" value="1" />
+    </attr>
+
+    <declare-styleable name="MagicProgressCircle">
+        <attr name="mpc_percent" format="float" />
+        <attr name="mpc_stroke_width" format="dimension" />
+        <attr name="mpc_start_color" format="color" />
+        <attr name="mpc_end_color" format="color" />
+        <attr name="mpc_default_color" format="color" />
+    </declare-styleable>
+
+
+    <declare-styleable name="SwipeBackLayout">
+        <attr name="edge_size" format="dimension" />
+        <attr name="edge_flag">
+            <enum name="left" value="0" />
+            <enum name="right" value="1" />
+            <enum name="bottom" value="2" />
+            <enum name="all" value="3" />
+        </attr>
+        <attr name="shadow_left" format="reference" />
+        <attr name="shadow_right" format="reference" />
+        <attr name="shadow_bottom" format="reference" />
+    </declare-styleable>
+
+    <attr name="SwipeBackLayoutStyle" format="reference" />
+</resources>

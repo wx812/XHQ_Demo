@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 4.4 to 5.0 themes -->
+    <style name="MyTranslucentTheme" parent="AppTheme">
+        <item name="android:windowTranslucentStatus">true</item>    <!--Translucent status bar-->
+        <item name="android:windowTranslucentNavigation">true</item>    <!--Translucent Navigation bar-->
+    </style>
+
+</resources>

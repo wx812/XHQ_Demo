@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/x20"
+    android:background="#ffffff"
+    android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/editContent"
+        style="?android:attr/textViewStyle"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x200"
+        android:background="@null"
+        android:gravity="top|left"
+        android:hint="恭喜发财，大吉大利"
+        android:inputType="text"
+        android:padding="@dimen/x10"
+        android:textColor="#333333"
+        android:textColorHint="#999999"
+        android:textSize="@dimen/x28" />
+
+</LinearLayout>
