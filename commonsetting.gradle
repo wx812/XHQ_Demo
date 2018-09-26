@@ -145,7 +145,14 @@ android {
 //            shrinkResources true        // 删除项目中没用到的资源文件, 要求minifyEnabled为true才生效
             debuggable true             // 是否为debug编译类型
             signingConfig signingConfigs.relealse       // 签名配置
-            // 混淆 规则文件(前面 为默认的规则, 后面为定制)
+
+
+            // 您也可以使用与 ProGuard 相同的配置文件来配置 Android 插件压缩器。
+            // 但是，Android 插件压缩器不会对您的代码进行混淆处理或优化，它只会删除未使用的代码。
+            // 因此，您应该仅将其用于调试构建，并为发布构建启用 ProGuard，以便对发布 APK 的代码进行混淆处理和优化。
+            // 要启用 Android 插件压缩器，只需在 "debug" 构建类型中将 useProguard 设置为 false（并保留 minifyEnabled 设置 true）：
+            useProguard false
+            // 混淆 规则文件(前面 为认的规则, 后面为定制)
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
 
             def buildTypes = appBuildTypes as String
@@ -170,9 +177,12 @@ android {
             buildConfigField "boolean", "LOG_DEBUG", "false"
             versionNameSuffix "_release"
 
-            minifyEnabled false
+            minifyEnabled true      //
+            // 资源压缩只与代码压缩协同工作。代码压缩器移除所有未使用的代码后，资源压缩器便可确定应用仍然使用的资源
+            // 如果您尚未使用代码压缩用途的 minifyEnabled 构建应用，请先尝试使用它，然后再启用 shrinkResources，
+            // 因为您可能需要编辑 proguard-rules.pro 文件以保留动态创建或调用的类或方法，然后再开始移除资源
+            shrinkResources true    // 资源压缩
             zipAlignEnabled true
-//            shrinkResources true
             debuggable false
             signingConfig signingConfigs.relealse
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
