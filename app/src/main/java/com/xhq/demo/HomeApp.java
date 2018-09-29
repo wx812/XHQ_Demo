@@ -137,9 +137,10 @@ public class HomeApp extends Application {
 
 
     public static HomeApp getInstance() {
-        if (mInstance == null) {
-            mInstance = new HomeApp();
-        }
+        // 自己new application 只能成为普通的对象
+//        if (mInstance == null) {
+//            mInstance = new HomeApp();
+//        }
         return mInstance;
     }
 

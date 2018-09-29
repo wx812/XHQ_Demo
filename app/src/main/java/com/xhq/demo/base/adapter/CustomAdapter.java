@@ -12,23 +12,23 @@ import java.util.List;
 public abstract class CustomAdapter<T> extends BaseAdapter{
 
     protected Context mContext;
-    protected List<T> mDatas;
+    protected List<T> mListData;
     private int layoutId = -1;
     private View layoutView;
 
 
-    public CustomAdapter(Context mContext, List<T> mDatas, @LayoutRes int layoutId){
+    public CustomAdapter(Context mContext, List<T> listData, @LayoutRes int layoutId){
         super();
         this.mContext = mContext;
-        this.mDatas = mDatas;
+        this.mListData = listData;
         this.layoutId = layoutId;
     }
 
 
-    public CustomAdapter(Context mContext, List<T> mDatas, View view){
+    public CustomAdapter(Context mContext, List<T> mListData, View view){
         super();
         this.mContext = mContext;
-        this.mDatas = mDatas;
+        this.mListData = mListData;
         this.layoutView = view;
     }
 
@@ -36,13 +36,13 @@ public abstract class CustomAdapter<T> extends BaseAdapter{
     @Override
     public int getCount(){
 
-        return mDatas.size();
+        return mListData.size();
     }
 
 
     @Override
     public T getItem(int position){
-        return mDatas.get(position);
+        return mListData.get(position);
     }
 
 
@@ -80,7 +80,7 @@ public abstract class CustomAdapter<T> extends BaseAdapter{
      * @param list
      */
     public void updateListView(List<T> list){
-        this.mDatas = list;
+        this.mListData = list;
         notifyDataSetChanged();
     }
 
