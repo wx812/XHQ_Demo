@@ -1,4 +1,4 @@
-package com.xhq.demo.tools;
+package com.xhq.demo.tools.mediaTools;
 
 import android.app.Activity;
 import android.content.Context;
@@ -15,6 +15,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.target.SimpleTarget;
+import com.xhq.demo.tools.StringUtils;
 
 import java.io.File;
 import java.math.RoundingMode;

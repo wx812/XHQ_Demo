@@ -17,6 +17,7 @@ import android.support.annotation.RequiresPermission;
 import com.xhq.demo.tools.ToastUtils;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Locale;
 
@@ -177,6 +178,40 @@ public class LocationUtils {
         Address address = getAddress(latitude, longitude);
         return address == null ? "unknown" : address.getLocality();
     }
+
+
+    /**
+     * 计算两点距离
+     */
+    public static final double EARTH_RADIUS = 6378137.0; // 取WGS84标准参考椭球中的地球长半径(单位:m)
+
+    public static double getDistance(double lat_a, double lng_a, double lat_b, double lng_b) {
+        double radLat1 = (lat_a * Math.PI / 180.0);
+        double radLat2 = (lat_b * Math.PI / 180.0);
+        double a = radLat1 - radLat2;
+        double b = (lng_a - lng_b) * Math.PI / 180.0;
+        double s = 2 * Math.asin(Math.sqrt(
+                Math.pow(Math.sin(a / 2), 2) + Math.cos(radLat1) * Math.cos(radLat2) * Math.pow(Math.sin(b / 2), 2)));
+        s = s * EARTH_RADIUS;
+        s = Math.round(s * 10000) / 10000;
+        return s;
+    }
+
+    /**
+     * 距离计算转换成KM 或M
+     *
+     * @param distance
+     * @return
+     */
+    public static String distance2Str(double distance) {
+        DecimalFormat df = new DecimalFormat("0.00");
+        if (distance >= 1000) {
+            return df.format(distance / 1000) + " Km";
+        }
+        return df.format(distance) + " m";
+    }
+
+
 
     /**
      * 根据经纬度获取所在街道

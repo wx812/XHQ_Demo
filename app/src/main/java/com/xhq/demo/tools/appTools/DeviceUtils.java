@@ -426,6 +426,9 @@ public class DeviceUtils{
     }
 
 
+    /**
+     * @return hardware network card address
+     */
     private static String getMacAddressByNetworkInterface() {
         try {
             List<NetworkInterface> nis = Collections.list(NetworkInterface.getNetworkInterfaces());

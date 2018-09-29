@@ -5,14 +5,21 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.support.annotation.NonNull;
 import android.support.annotation.RequiresPermission;
 import android.telephony.TelephonyManager;
+import android.webkit.URLUtil;
 
 import com.xhq.demo.tools.ShellUtils;
 import com.xhq.demo.tools.StringUtils;
 import com.xhq.demo.tools.appTools.AppUtils;
 
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.lang.reflect.Method;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -32,6 +39,29 @@ public class NetUtils{
     public static final int NET_TYPE_3G = 2;
     public static final int NET_TYPE_2G = 3;
     public static final int NET_TYPE_UNKNOWN = 4;
+
+
+    /**
+     * @param urlStr 网络地址
+     * @return 从网络地址 中读取到的输入流
+     */
+    public static InputStream getInputStreamFromUrl(@NonNull String urlStr){
+        if(URLUtil.isValidUrl(urlStr)){
+            InputStream inputStream;
+            try{
+                URL url = new URL(urlStr);
+                URLConnection connection = url.openConnection();
+                connection.connect();
+                inputStream = connection.getInputStream();
+            }catch(IOException e){
+                e.printStackTrace();
+                return null;
+            }
+            return new BufferedInputStream(inputStream);
+        }
+        return null;
+    }
+
 
 
     public static ConnectivityManager getConnMgr(){
@@ -181,17 +211,15 @@ public class NetUtils{
 
 
     /**
-     * 判断网址是否有效
+     * 判断网址是否有效<br>
+     * 查看 webkit 自带URLUtil工具类{@link android.webkit.URLUtil#isValidUrl(String)}
      */
     public static boolean isValidUrl(String link) {
         String regex = "^(http://|https://)?((?:[A-Za-z0-9]+-[A-Za-z0-9]+|[A-Za-z0-9]+)\\.)+([A-Za-z]+)" +
                 "[/\\?\\:]?.*$";
         Pattern pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(link);
-        if (matcher.matches()) {
-            return true;
-        }
-        return false;
+        return matcher.matches();
     }
 
 

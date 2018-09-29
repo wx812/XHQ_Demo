@@ -1,4 +1,4 @@
-package com.xhq.demo.tools.choppedTools;
+package com.xhq.demo.tools.imageTools;
 
 import android.content.Context;
 import android.content.res.AssetManager;

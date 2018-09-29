@@ -211,6 +211,7 @@ public class IPUtils{
 		return null;
 	}
 
+	@RequiresPermission(Manifest.permission.INTERNET)
 	public static String getLocalIPv6Address(){
 		InetAddress inetAddress = getIPAddress(false);
 		String ipAddr = null;

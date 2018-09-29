@@ -10,6 +10,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
 import android.os.SystemClock;
+import android.support.annotation.NonNull;
 import android.support.annotation.RequiresPermission;
 import android.telephony.SmsManager;
 import android.telephony.TelephonyManager;
@@ -18,6 +19,7 @@ import android.util.Log;
 import android.util.Xml;
 
 import com.xhq.demo.tools.IntentUtils;
+import com.xhq.demo.tools.StringUtils;
 import com.xhq.demo.tools.appTools.AppUtils;
 
 import org.xmlpull.v1.XmlSerializer;
@@ -91,9 +93,13 @@ public class PhoneUtils {
             e.printStackTrace();
         }
     }
-	
-	
-	
+
+
+    //隐藏手机号中间4位
+    public static String hideMobile(@NonNull String phone){
+        return phone.substring(0, phone.length() - (phone.substring(3)).length()) + "****" + phone.substring(7);
+    }
+
 	
 	
 	/**
@@ -106,8 +112,36 @@ public class PhoneUtils {
     电信：133、153、180、189、181、177 173（1349卫通）
     总结起来就是第一位必定为1，第二位必定为3或5或8，其他位置的可以为0-9
     */
-        String telRegex = "[1][3578]\\d{9}";//"[1]"代表第1位为数字1，"[3578]"代表第二位可以为3、5、7、8中的一个，"\\d{9}"代表后面是可以是0～9的数字，有9位。
+        //"[1]"代表第1位为数字1，"[3578]"代表第二位可以为3、5、7、8中的一个，"\\d{9}"代表后面是可以是0～9的数字，有9位。
+        String telRegex = "[1][3578]\\d{9}";
         return mobiles.matches(telRegex);
+    }
+
+
+    /**
+     * 手机号码格式检查
+     * @param phone
+     * @return
+     */
+    public static boolean isMobile(String phone) {
+        boolean flag = false;
+
+        try {
+            if (phone == null) {
+                return flag;
+            }
+
+            phone = phone.replaceAll(" ", "");
+            if ("".equals(phone)) {
+                return flag;
+            }
+
+            flag = StringUtils.matchIgnoreCase("^1[3|4|5|8]\\d{9}$", phone);
+
+        } catch (Exception e) {
+            return false;
+        }
+        return flag;
     }
 
 

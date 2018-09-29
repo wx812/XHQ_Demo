@@ -1,4 +1,4 @@
-package com.xhq.demo.tools.uiTools;
+package com.xhq.demo.tools.choppedTools;
 
 import android.app.DownloadManager;
 import android.app.DownloadManager.Request;
@@ -63,7 +63,7 @@ public class DownloadUtils{
      */
     public static long downLoad(@NonNull String url, @NonNull String savedFileName, String title){
             Uri uri = Uri.parse(encodeGB(url));
-            DownloadManager.Request request = new DownloadManager.Request(uri); //开始下载
+            Request request = new Request(uri); //开始下载
 
             request.setAllowedNetworkTypes(Request.NETWORK_WIFI | Request.NETWORK_MOBILE);
             request.setAllowedOverRoaming(false);

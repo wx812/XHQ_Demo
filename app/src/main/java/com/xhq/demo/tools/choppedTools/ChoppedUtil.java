@@ -10,6 +10,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteStatement;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -29,6 +30,9 @@ import android.text.style.ForegroundColorSpan;
 import com.xhq.demo.R;
 import com.xhq.demo.tools.appTools.AppUtils;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -443,6 +447,23 @@ public class ChoppedUtil{
             return partialName;
         } finally {
             structuredName.close();
+        }
+    }
+
+
+    public static String getStackTrace(Throwable aThrowable) {
+        final Writer result = new StringWriter();
+        final PrintWriter printWriter = new PrintWriter(result);
+        aThrowable.printStackTrace(printWriter);
+        return result.toString();
+    }
+
+
+    public static void bindString(SQLiteStatement stat, int position, String values) {
+        if (values == null) {
+            stat.bindNull(position);
+        } else {
+            stat.bindString(position, values);
         }
     }
 

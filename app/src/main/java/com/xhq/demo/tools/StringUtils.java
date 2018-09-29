@@ -105,6 +105,7 @@ public class StringUtils{
             return true;
         }
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2){
+            // SparseLongArray require api greater than or equal 15
             if(obj instanceof SparseLongArray && ((SparseLongArray)obj).size() == 0){
                 return true;
             }
@@ -470,6 +471,33 @@ public class StringUtils{
 
 
     /**
+     * according to the offset hidden string
+     *
+     * @param sourceStr source string
+     * @param startOffsetPos start offset
+     * @param endOffsetPos end offset
+     * @return hided string
+     */
+    public static String hideStr(@NonNull String sourceStr, int startOffsetPos, int endOffsetPos){
+        int length = sourceStr.length();
+        startOffsetPos = startOffsetPos < 0 ? 0 : startOffsetPos;
+        endOffsetPos = endOffsetPos > length ? length : endOffsetPos;
+        StringBuilder sb = new StringBuilder();
+        for(int i = 0; i < sourceStr.length(); i++){
+            char c = sourceStr.charAt(i);
+            if(i >= startOffsetPos && i <= length - endOffsetPos){
+                sb.append('*');
+            }else{
+                sb.append(c);
+            }
+        }
+        return sb.toString();
+    }
+
+
+
+
+    /**
      * 格式化  保留小数点两位
      */
     public static String decimalFormat(float f){
@@ -494,12 +522,12 @@ public class StringUtils{
      * 通配符算法。 可以匹配"*"和"?"
      * 如a*b?d可以匹配aAAAbcd
      *
-     * @param pattern 匹配表达式
+     * @param regex 正则表达式
      * @param str 匹配的字符串
      * @return
      */
-    public static boolean match(String pattern, String str){
-        if(pattern == null || str == null){return false;}
+    public static boolean matchByWildcard(String regex, String str){
+        if(regex == null || str == null){return false;}
 
         boolean result = false;
         char c; // 当前要匹配的字符串
@@ -508,7 +536,7 @@ public class StringUtils{
         int back_j = 0;
         int i, j;
         for(i = 0, j = 0; i < str.length(); ){
-            if(pattern.length() <= j){
+            if(regex.length() <= j){
                 if(back_i != 0){// 有通配符,但是匹配未成功,回溯
                     beforeStar = true;
                     i = back_i;
@@ -520,8 +548,8 @@ public class StringUtils{
                 break;
             }
 
-            if((c = pattern.charAt(j)) == '*'){
-                if(j == pattern.length() - 1){// 通配符已经在末尾,返回true
+            if((c = regex.charAt(j)) == '*'){
+                if(j == regex.length() - 1){// 通配符已经在末尾,返回true
                     result = true;
                     break;
                 }
@@ -555,9 +583,16 @@ public class StringUtils{
             i++;
         }
 
-        if(i == str.length() && j == pattern.length())// 全部遍历完毕
+        if(i == str.length() && j == regex.length())// 全部遍历完毕
             result = true;
         return result;
+    }
+
+
+    public static boolean matchIgnoreCase(String str, String regex){
+        Pattern p = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
+        Matcher m = p.matcher(str);
+        return m.matches();
     }
 
 
@@ -713,13 +748,6 @@ public class StringUtils{
         }else{
             return count + "";
         }
-    }
-
-
-    public static boolean regexMatcherCaseInsensitive(String str, String regex){
-        Pattern p = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
-        Matcher m = p.matcher(str);
-        return m.matches();
     }
 
 
@@ -999,6 +1027,39 @@ public class StringUtils{
     }
 
 
+
+    /**
+     * {@link String}转换为{@link Integer}类型。
+     * <p>转换不成功时返回defaultValue并记录info或者warn日志，不会抛出任何异常。
+     * <p>value等于null或者为空字符串，或者在转换过程中发生异常，均返回defaultValue，否则返回转换后的{@link Integer}值。
+     * @param value 要转换成{@link Integer}值的字符串。
+     * @param defaultValue 转换不成功时的默认值（可以为null，这种情况下转换不成功时将返回null值）。
+     * @return
+     */
+    public static Integer toInt(String value, Integer defaultValue) {
+        if (value == null || value.trim().length() <= 0)
+            return defaultValue;
+
+        // 字符串中包含小数点，Integer.valueOf会报异常，先转换为BigDecimal，返回其整数部分
+        if (value.indexOf('.') >= 0) {
+            try {
+                Double d = Double.valueOf(value);
+                return d.intValue();
+            } catch (Exception e) {
+                return defaultValue;
+            }
+        }
+
+        // 当做整数字符串处理
+        try {
+            return Integer.valueOf(value);
+        } catch (Exception e) {
+            return defaultValue;
+        }
+    }
+
+
+
     /**
      * 得到int 获取转换的int值，有错返回0
      *
@@ -1091,9 +1152,7 @@ public class StringUtils{
      * @return
      */
     public static String abbr(String str, int length){
-        if(str == null){
-            return "";
-        }
+        if(str == null) return "";
         try{
             StringBuilder sb = new StringBuilder();
             int currentLength = 0;
@@ -1122,9 +1181,7 @@ public class StringUtils{
      * @return
      */
     public static String abbr2(String param, int length){
-        if(param == null){
-            return "";
-        }
+        if(param == null) return "";
         StringBuffer result = new StringBuffer();
         int n = 0;
         char temp;

@@ -1,4 +1,4 @@
-package com.xhq.demo.tools;
+package com.xhq.demo.tools.mediaTools;
 
 import android.content.ContentResolver;
 import android.content.Context;
