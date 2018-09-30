@@ -138,7 +138,7 @@ android {
 
             resValue "string", "video_process_name", VIDEO_PROCESS_NAME
             buildConfigField "boolean", "LOG_DEBUG", "true"
-            versionNameSuffix "_debug"
+//            versionNameSuffix "_debug"
 
             minifyEnabled false         // 是否混淆, 配合proguardFiles 使用
             zipAlignEnabled true        //Zipalign优化, zip 对其
@@ -175,7 +175,7 @@ android {
 
             resValue "string", "video_process_name", VIDEO_PROCESS_NAME
             buildConfigField "boolean", "LOG_DEBUG", "false"
-            versionNameSuffix "_release"
+//            versionNameSuffix "_release"
 
             minifyEnabled true      //
             // 资源压缩只与代码压缩协同工作。代码压缩器移除所有未使用的代码后，资源压缩器便可确定应用仍然使用的资源
@@ -208,7 +208,10 @@ android {
             }
             // eg: jmzw_v1.0.0_release_2018-07-08-20-31.apk
             outputFileName = "${(apkAbbrName as String)}_v${versionName}_${variant.buildType.name}_${time}.apk"
+            def relativeRootDir = output.packageApplication.outputDirectory.toPath().relativize(rootDir.toPath()).toFile()
+            output.outputFileName = new File( "$relativeRootDir/release", outputFileName)
         }
+
     }
 
 }
