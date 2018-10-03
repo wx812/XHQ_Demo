@@ -11,6 +11,9 @@ import android.view.View;
 
 /**
  * recyclerView divider line
+ *
+ * This class is from the v7 samples of the Android SDK.
+ *
  * Created by ${XHQ} on 2017/8/18.
  */
 
@@ -56,9 +59,7 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration{
 
 
     public void drawVertical(Canvas c, RecyclerView parent){
-        //获取分割线的左边距，即RecyclerView的padding值
         final int left = parent.getPaddingLeft();
-        //分割线右边距
         final int right = parent.getWidth() - parent.getPaddingRight();
         final int childCount = parent.getChildCount();
         //遍历所有item view，为它们的下方绘制分割线
@@ -80,8 +81,7 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration{
         final int childCount = parent.getChildCount();
         for(int i = 0; i < childCount; i++){
             final View child = parent.getChildAt(i);
-            final RecyclerView.LayoutParams params = (RecyclerView.LayoutParams)child
-                    .getLayoutParams();
+            final RecyclerView.LayoutParams params = (RecyclerView.LayoutParams)child.getLayoutParams();
             final int left = child.getRight() + params.rightMargin;
             final int right = left + mDivider.getIntrinsicHeight();
             mDivider.setBounds(left, top, right, bottom);
