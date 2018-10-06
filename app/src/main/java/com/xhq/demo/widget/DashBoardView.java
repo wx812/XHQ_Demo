@@ -1,6 +1,5 @@
-package com.xhq.demo.widget.DashBoardView;
+package com.xhq.demo.widget;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
@@ -10,6 +9,7 @@ import android.graphics.Path;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.util.AttributeSet;
 import android.util.TypedValue;
@@ -91,6 +91,7 @@ public class DashBoardView extends View{
     private boolean mAnimEnable;                            // animation is available
     private long duration = 500;                            // animation duration
     private MyHandler mHandler;
+    private Context context;
 
 
     public DashBoardView(Context context){
@@ -105,6 +106,7 @@ public class DashBoardView extends View{
 
     public DashBoardView(Context context, AttributeSet attrs, int defStyleAttr){
         super(context, attrs, defStyleAttr);
+        this.context = context;
 
         if(attrs != null){
             TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.DashBoardView, defStyleAttr, 0);
@@ -194,7 +196,7 @@ public class DashBoardView extends View{
         // paint path
         path = new Path();
 
-        mHandler = new MyHandler();
+        mHandler = new MyHandler(context.getMainLooper());
     }
 
 
@@ -923,12 +925,17 @@ public class DashBoardView extends View{
     }
 
 
-    @SuppressLint("HandlerLeak")
+//    @SuppressLint("HandlerLeak")
     private class MyHandler extends Handler{
 
         float preValue;
         float endValue;
         float deltaValue;
+
+
+        MyHandler(Looper looper){
+            super(looper);
+        }
 
         @Override
         public void handleMessage(Message msg){
@@ -949,6 +956,57 @@ public class DashBoardView extends View{
                 mCurrentScaleValueAngle = getAngleFromResult(mCurrentScaleValue);
                 invalidate();
             }
+        }
+    }
+
+
+
+    /**
+     * <pre>
+     *     Auth  : ${XHQ}.
+     *     Time  : 2018/1/15.
+     *     Desc  : Highlight the effect's range and color object.
+     *     Updt  : Description.
+     * </pre>
+     */
+    public class HighlightCR{
+
+        private int mStartAngle;
+        private int mSweepAngle;
+        private int mColor;
+
+        public HighlightCR() {
+
+        }
+
+        public HighlightCR(int startAngle, int sweepAngle, int color) {
+            this.mStartAngle = startAngle;
+            this.mSweepAngle = sweepAngle;
+            this.mColor = color;
+        }
+
+        public int getStartAngle() {
+            return mStartAngle;
+        }
+
+        public void setStartAngle(int startAngle) {
+            mStartAngle = startAngle;
+        }
+
+        public int getSweepAngle() {
+            return mSweepAngle;
+        }
+
+        public void setSweepAngle(int sweepAngle) {
+            mSweepAngle = sweepAngle;
+        }
+
+        public int getColor() {
+            return mColor;
+        }
+
+        public void setColor(int color) {
+            this.mColor = color;
         }
     }
 }

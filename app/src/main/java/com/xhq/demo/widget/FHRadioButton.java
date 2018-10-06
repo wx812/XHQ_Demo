@@ -53,8 +53,8 @@ public class FHRadioButton extends LinearLayout implements OnClickListener {
 	private float mTextSize = DEFAULT_TEXT_VIEW_TEXT_SIZE_SP;
 	private int mTextsRes = DEFAULT_TEXTS_RES;
 	private String[] mTexts;
-	private ArrayList<ImageView> mImageViews = new ArrayList<ImageView>();
-	private ArrayList<TextView> mTextViews = new ArrayList<TextView>();
+	private ArrayList<ImageView> mImageViews = new ArrayList<>();
+	private ArrayList<TextView> mTextViews = new ArrayList<>();
 	private View mContentView = null;
 	private LinearLayout mContainer = null;
 	private Object mTagTextView = new Object();
@@ -63,12 +63,10 @@ public class FHRadioButton extends LinearLayout implements OnClickListener {
 	private int mSelectedIndex = DEFAULT_SELECTED_INDEX;
 
 	public FHRadioButton(Context context) {
-		// TODO Auto-generated constructor stub
 		this(context, null);
 	}
 
 	public FHRadioButton(Context context, AttributeSet attrs) {
-		// TODO Auto-generated constructor stub
 		this(context, attrs, 0);
 	}
 
@@ -76,81 +74,80 @@ public class FHRadioButton extends LinearLayout implements OnClickListener {
 		super(context, attrs, defStyle);
 		mContext = context;
 		mContentView = inflate(context, R.layout.view_fh_radio_button, this);
-		mContainer = (LinearLayout) mContentView.findViewById(R.id.container);
+		mContainer = mContentView.findViewById(R.id.container);
 
-		TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.fhRadioButton);
+		TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.FHRadioButton);
 
 		final int count = a.getIndexCount();
 		for (int i = 0; i < count; ++i) {
 			int attr = a.getIndex(i);
 			switch (attr) {
-			case R.styleable.fhRadioButton_backgroundRadioSelected:
+			case R.styleable.FHRadioButton_backgroundRadioSelected:
 				mDrawableBackgroundRadioSelected = a.getResourceId(attr, DEFAULT_IMAGE_RES);
 				break;
-			case R.styleable.fhRadioButton_backgroundRadio:
+			case R.styleable.FHRadioButton_backgroundRadio:
 				mDrawableBackgroundRadio = a.getResourceId(attr, DEFAULT_IMAGE_RES);
 				break;
-			case R.styleable.fhRadioButton_backgroundText:
+			case R.styleable.FHRadioButton_backgroundText:
 				mDrawableBackgroundText = a.getDrawable(attr);
 				break;
-			case R.styleable.fhRadioButton_textMarginLeft:
+			case R.styleable.FHRadioButton_textMarginLeft:
 				mTextMarginLeft = a.getDimension(attr, DEFAULT_MARGIN);
 				break;
-			case R.styleable.fhRadioButton_textMarginRight:
+			case R.styleable.FHRadioButton_textMarginRight:
 				mTextMarginRight = a.getDimension(attr, DEFAULT_MARGIN);
 				break;
-			case R.styleable.fhRadioButton_textMarginTop:
+			case R.styleable.FHRadioButton_textMarginTop:
 				mTextMarginTop = a.getDimension(attr, DEFAULT_MARGIN);
 				break;
-			case R.styleable.fhRadioButton_textMarginBottom:
+			case R.styleable.FHRadioButton_textMarginBottom:
 				mTextMarginBottom = a.getDimension(attr, DEFAULT_MARGIN);
 				break;
-			case R.styleable.fhRadioButton_imageMarginLeft:
+			case R.styleable.FHRadioButton_imageMarginLeft:
 				mImageMarginLeft = a.getDimension(attr, DEFAULT_MARGIN);
 				break;
-			case R.styleable.fhRadioButton_imageMarginRight:
+			case R.styleable.FHRadioButton_imageMarginRight:
 				mImageMarginRight = a.getDimension(attr, DEFAULT_MARGIN);
 				break;
-			case R.styleable.fhRadioButton_imageMarginTop:
+			case R.styleable.FHRadioButton_imageMarginTop:
 				mImageMarginTop = a.getDimension(attr, DEFAULT_MARGIN);
 				break;
-			case R.styleable.fhRadioButton_imageMarginBottom:
+			case R.styleable.FHRadioButton_imageMarginBottom:
 				mImageMarginBottom = a.getDimension(attr, DEFAULT_MARGIN);
 				break;
-			case R.styleable.fhRadioButton_unitMarginLeft:
+			case R.styleable.FHRadioButton_unitMarginLeft:
 				mUnitMarginLeft = a.getDimension(attr, DEFAULT_MARGIN);
 				break;
-			case R.styleable.fhRadioButton_unitMarginRight:
+			case R.styleable.FHRadioButton_unitMarginRight:
 				mUnitMarginRight = a.getDimension(attr, DEFAULT_MARGIN);
 				break;
-			case R.styleable.fhRadioButton_unitMarginTop:
+			case R.styleable.FHRadioButton_unitMarginTop:
 				mUnitMarginTop = a.getDimension(attr, DEFAULT_MARGIN);
 				break;
-			case R.styleable.fhRadioButton_unitMarginBottom:
+			case R.styleable.FHRadioButton_unitMarginBottom:
 				mUnitMarginBottom = a.getDimension(attr, DEFAULT_MARGIN);
 				break;
-			case R.styleable.fhRadioButton_order:
+			case R.styleable.FHRadioButton_order:
 				mOrder = a.getInt(attr, DEFAULT_ORDER);
 				break;
-			case R.styleable.fhRadioButton_radioButtonNum:
+			case R.styleable.FHRadioButton_radioButtonNum:
 				mNum = a.getInt(attr, DEFAULT_NUM);
 				break;
-			case R.styleable.fhRadioButton_contentTextColor:
+			case R.styleable.FHRadioButton_contentTextColor:
 				mTextColor = a.getColor(attr, DEFAULT_TEXT_COLOR);
 				break;
-			case R.styleable.fhRadioButton_contentTextSize:
+			case R.styleable.FHRadioButton_contentTextSize:
 				mTextSize = DensityUtils.px2sp(
-				        a.getDimensionPixelSize(attr,
-				                DensityUtils.sp2px(DEFAULT_TEXT_VIEW_TEXT_SIZE_SP)));
+				        a.getDimensionPixelSize(attr, DensityUtils.sp2px(DEFAULT_TEXT_VIEW_TEXT_SIZE_SP)));
 				break;
-			case R.styleable.fhRadioButton_optionsOrientation:
+			case R.styleable.FHRadioButton_optionsOrientation:
 				mOrientation = a.getInt(attr, DEFAULT_ORIENTATION);
 				break;
-			case R.styleable.fhRadioButton_texts:
+			case R.styleable.FHRadioButton_texts:
 				mTextsRes = a.getResourceId(attr, DEFAULT_TEXTS_RES);
 				mTexts = mContext.getResources().getStringArray(mTextsRes);
 				break;
-			case R.styleable.fhRadioButton_selectedIndex:
+			case R.styleable.FHRadioButton_selectedIndex:
 				mSelectedIndex = a.getInt(attr, DEFAULT_SELECTED_INDEX);
 				break;
 

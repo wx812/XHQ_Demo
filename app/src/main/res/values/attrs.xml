@@ -181,7 +181,7 @@
         <attr name="lineColor" format="color" />
     </declare-styleable>
 
-    <declare-styleable name="fhRadioButton">
+    <declare-styleable name="FHRadioButton">
         <attr name="backgroundRadio" />
         <attr name="backgroundRadioSelected" />
         <attr name="radioButtonNum" />
