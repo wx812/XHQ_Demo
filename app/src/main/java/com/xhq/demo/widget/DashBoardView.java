@@ -123,9 +123,8 @@ public class DashBoardView extends View{
             mPieceTotalCount = a.getInteger(R.styleable.DashBoardView_pieceTotalCount, 10);
             mMinScaleCountInOnePiece = a.getInteger(R.styleable.DashBoardView_minScaleCountInOnePiece, 5);
             // scale value
-            mScaleValueTextSize = a.getDimensionPixelSize(R.styleable.DashBoardView_scaleValueTextSize,
-                                                          spToPx(12));
-            mScaleValueTextColor = a.getColor(R.styleable.DashBoardView_ScaleValueTextColor, mArcColor);
+            mScaleValueTextSize = a.getDimensionPixelSize(R.styleable.DashBoardView_scaleValueTextSize, spToPx(12));
+            mScaleValueTextColor = a.getColor(R.styleable.DashBoardView_scaleValueTextColor, mArcColor);
             // min max scale value
             mMinScaleValue = a.getInteger(R.styleable.DashBoardView_minScaleValue, 0);
             mMaxScaleValue = a.getInteger(R.styleable.DashBoardView_maxScaleValue, 100);

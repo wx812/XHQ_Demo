@@ -169,15 +169,13 @@ public class FHRadioButton extends LinearLayout implements OnClickListener {
 		paramsUnit.topMargin = (int) mUnitMarginTop;
 		paramsUnit.bottomMargin = (int) mUnitMarginBottom;
 
-		LayoutParams paramsImageView = new LayoutParams(
-		        LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+		LayoutParams paramsImageView = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 		paramsImageView.leftMargin = (int) mImageMarginLeft;
 		paramsImageView.rightMargin = (int) mImageMarginRight;
 		paramsImageView.topMargin = (int) mImageMarginTop;
 		paramsImageView.bottomMargin = (int) mImageMarginBottom;
 
-		LayoutParams paramsTextView = new LayoutParams(
-		        LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+		LayoutParams paramsTextView = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 		paramsTextView.leftMargin = (int) mTextMarginLeft;
 		paramsTextView.rightMargin = (int) mTextMarginRight;
 		paramsTextView.topMargin = (int) mTextMarginTop;
@@ -196,9 +194,8 @@ public class FHRadioButton extends LinearLayout implements OnClickListener {
 
 			TextView text = new TextView(mContext);
 			text.setGravity(Gravity.CENTER);
-			if (n < mTexts.length) {
-				text.setText(mTexts[n]);
-			}
+
+			if (n < mTexts.length) text.setText(mTexts[n]);
 			text.setLayoutParams(paramsTextView);
 			text.setTag(mTagTextView);
 			text.setTextSize(mTextSize);
@@ -259,11 +256,11 @@ public class FHRadioButton extends LinearLayout implements OnClickListener {
 
 	private void refreshView(int selectedIndex) {
 		mSelectedIndex = selectedIndex;
-		LinearLayout clickedLL = null;
-		ImageView image = null;
+		LinearLayout clickedLL;
+		ImageView image;
 		for (int i = 0; i < mNum; i++) {
-			clickedLL = (LinearLayout) this.findViewWithTag(i);
-			image = (ImageView) clickedLL.findViewWithTag(mTagImageView);
+			clickedLL = this.findViewWithTag(i);
+			image = clickedLL.findViewWithTag(mTagImageView);
 			if (i == selectedIndex) {
 				image.setBackgroundResource(mDrawableBackgroundRadioSelected);
 			} else {

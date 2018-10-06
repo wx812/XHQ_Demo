@@ -35,7 +35,7 @@
         <attr name="pieceTotalCount" format="integer"/>
         <attr name="minScaleCountInOnePiece" format="integer"/>
         <attr name="scaleValueTextSize" format="dimension"/>
-        <attr name="ScaleValueTextColor" format="color"/>
+        <attr name="scaleValueTextColor" format="color"/>
         <attr name="minScaleValue" format="integer"/>
         <attr name="maxScaleValue" format="integer"/>
         <attr name="currentScaleValue" format="float"/>
