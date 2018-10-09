@@ -30,7 +30,7 @@ ext{
             logger                  : '2.1.1',
 
             gson                    : "2.8.1",
-            BRVAH                   : '2.9.28',
+            BRVAH                   : '2.9.40',
             jodaTime                : "2.9.9",
             dagger                  : '2.0',
             javax_annotation        : '10.0-b28',
