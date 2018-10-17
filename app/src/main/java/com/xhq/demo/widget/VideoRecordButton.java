@@ -72,15 +72,15 @@ public class VideoRecordButton extends View{
 
         initData();
 
-        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.VideoRecordButton, defStyleAttr, 0);
+        TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.VideoRecordButton, defStyleAttr, 0);
 
-        mBtnBgColor = a.getColor(R.styleable.VideoRecordButton_btnBgColor, mBtnBgColor);
-        mBtnTextColor = a.getColor(R.styleable.VideoRecordButton_btnTextColor, mBtnTextColor);
-        mBtnText = a.getString(R.styleable.VideoRecordButton_btnText);
+        mBtnBgColor = ta.getColor(R.styleable.VideoRecordButton_btnBgColor, mBtnBgColor);
+        mBtnTextColor = ta.getColor(R.styleable.VideoRecordButton_btnTextColor, mBtnTextColor);
+        mBtnText = ta.getString(R.styleable.VideoRecordButton_btnText);
         if(mBtnText == null) mBtnText = "";
-        mRingWidth = a.getDimension(R.styleable.VideoRecordButton_ringWidth, mRingWidth);
+        mRingWidth = ta.getDimension(R.styleable.VideoRecordButton_ringWidth, mRingWidth);
 
-        a.recycle();
+        ta.recycle();
 
         initObjects();
     }
@@ -138,8 +138,8 @@ public class VideoRecordButton extends View{
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec){
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 
-        int width = measureViewW(widthMeasureSpec, mViewDefW);
-        int height = measureViewH(heightMeasureSpec, mViewDefH);
+        int width = measureViewWH(widthMeasureSpec, mViewDefW);
+        int height = measureViewWH(heightMeasureSpec, mViewDefH);
 
         mRadius = Math.min(width, height) / 2;
         mRingRadius = mRadius + mRingWidth;
@@ -154,39 +154,27 @@ public class VideoRecordButton extends View{
     }
 
 
-    private int measureViewW(int widthMeasureSpec, int defVW){
-        int width = 0;
-        int widthSize = MeasureSpec.getSize(widthMeasureSpec);
-        int widthMode = MeasureSpec.getMode(widthMeasureSpec);
+    /**
+     * when customize view, call onMeasure(), measure the width and height of the view
+     * @param whMeasureSpec widthMeasureSpec or heightMeasureSpec
+     * @param defValue the default width or height of the view
+     * @return Width or height that has been measured
+     */
+    public int measureViewWH(int whMeasureSpec, int defValue){
+        int length = 0;
+        int whSize = View.MeasureSpec.getSize(whMeasureSpec);
+        int whMode = View.MeasureSpec.getMode(whMeasureSpec);
 
-        switch(widthMode){
-            case MeasureSpec.EXACTLY:
-                width = widthSize;
+        switch(whMode){
+            case View.MeasureSpec.EXACTLY:
+                length = whSize;
                 break;
-            case MeasureSpec.AT_MOST:
-            case MeasureSpec.UNSPECIFIED:
-                width = defVW;
-                break;
-        }
-        return width;
-    }
-
-
-    private int measureViewH(int heightMeasureSpec, int defVH){
-        int height = 0;
-        int heightSize = MeasureSpec.getSize(heightMeasureSpec);
-        int heightMode = MeasureSpec.getMode(heightMeasureSpec);
-
-        switch(heightMode){
-            case MeasureSpec.EXACTLY:
-                height = heightSize;
-                break;
-            case MeasureSpec.AT_MOST:
-            case MeasureSpec.UNSPECIFIED:
-                height = defVH;
+            case View.MeasureSpec.AT_MOST:
+            case View.MeasureSpec.UNSPECIFIED:
+                length = defValue;
                 break;
         }
-        return height;
+        return length;
     }
 
 
