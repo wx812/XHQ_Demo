@@ -143,7 +143,6 @@ public class FlowLayout extends ViewGroup{
 
         widthSize = Math.max(widthSize, parentUsedWidth);
         int heightSize = parentUsedHeight + currentHeight + getPaddingBottom();
-//        setMeasuredDimension(widthSize, heightMode == MeasureSpec.EXACTLY ? heightSize : heightSize);
 
         int resolveWidth = View.resolveSize(widthSize, widthMeasureSpec);
         int resolveHeight = View.resolveSize(heightSize, heightMeasureSpec);
@@ -262,9 +261,6 @@ public class FlowLayout extends ViewGroup{
 //        }
 //
 //        widthSize = Math.max(widthSize, currLineWidth);
-//
-////        setMeasuredDimension(widthSize,
-////           heightMode == MeasureSpec.EXACTLY ? heightSize : parentUsedHeight + currLineHeight + paddingBottom);
 //
 //        int resolveWidth = View.resolveSize(widthSize, widthMeasureSpec);
 //        int resolveHeight = View.resolveSize(currLineHeight + getPaddingBottom(), heightMeasureSpec);
