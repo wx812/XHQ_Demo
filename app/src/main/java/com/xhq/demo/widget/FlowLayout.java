@@ -76,12 +76,12 @@ public class FlowLayout extends ViewGroup{
     OnTagSelectListener mOnTagSelectListener;
 
     /**
-     * 标签流式布局选中模式，默认是不支持选中的
+     * label streaming layout selection mode, the default is not supported
      */
     private int mTagCheckMode = FLOW_TAG_CHECKED_NONE;
 
     /**
-     * 存储选中的tag
+     * store selected tags
      */
     private SparseBooleanArray mCheckedTagArray = new SparseBooleanArray();
 
