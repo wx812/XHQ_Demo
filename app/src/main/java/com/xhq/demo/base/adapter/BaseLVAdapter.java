@@ -9,7 +9,7 @@ import android.widget.ListView;
 
 import java.util.List;
 
-public abstract class CustomAdapter<T> extends BaseAdapter{
+public abstract class BaseLVAdapter<T> extends BaseAdapter{
 
     protected Context mContext;
     protected List<T> mListData;
@@ -17,7 +17,7 @@ public abstract class CustomAdapter<T> extends BaseAdapter{
     private View layoutView;
 
 
-    public CustomAdapter(Context mContext, List<T> listData, @LayoutRes int layoutId){
+    public BaseLVAdapter(Context mContext, List<T> listData, @LayoutRes int layoutId){
         super();
         this.mContext = mContext;
         this.mListData = listData;
@@ -25,17 +25,16 @@ public abstract class CustomAdapter<T> extends BaseAdapter{
     }
 
 
-    public CustomAdapter(Context mContext, List<T> mListData, View view){
+    public BaseLVAdapter(Context mContext, List<T> mListData, View codeLayoutView){
         super();
         this.mContext = mContext;
         this.mListData = mListData;
-        this.layoutView = view;
+        this.layoutView = codeLayoutView;
     }
 
 
     @Override
     public int getCount(){
-
         return mListData.size();
     }
 
@@ -54,11 +53,11 @@ public abstract class CustomAdapter<T> extends BaseAdapter{
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent){
-        ViewHolder holder;
+        BaseLVHolder holder;
         if(layoutId == -1){
-            holder = ViewHolder.getViewHolder(mContext, parent, convertView, layoutView, position);
+            holder = BaseLVHolder.getViewHolder(mContext, parent, convertView, layoutView, position);
         }else{
-            holder = ViewHolder.getViewHolder(mContext, parent, convertView, layoutId, position);
+            holder = BaseLVHolder.getViewHolder(mContext, parent, convertView, layoutId, position);
         }
         convert(holder, getItem(position), position);
         return holder.getConvertView();
@@ -71,7 +70,7 @@ public abstract class CustomAdapter<T> extends BaseAdapter{
      * @param holder
      * @param t
      */
-    public abstract void convert(ViewHolder holder, T t, int position);
+    public abstract void convert(BaseLVHolder holder, T t, int position);
 
 
     /**
@@ -102,8 +101,5 @@ public abstract class CustomAdapter<T> extends BaseAdapter{
             View view = listView.getChildAt(position - firstVisiblePosition);
             getView(position, view, listView);
         }
-
     }
-
-
 }

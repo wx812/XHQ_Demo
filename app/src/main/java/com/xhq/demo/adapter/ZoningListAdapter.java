@@ -1,6 +1,7 @@
 package com.xhq.demo.adapter;
 
 import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -53,7 +54,7 @@ public class ZoningListAdapter<T> extends BaseAdapter{
 
         ViewHolder holder;
         if(view == null){
-//            view = LayoutInflater.from(mContext).inflate(R.layout.item_list_textview, viewGroup, false);
+            view = LayoutInflater.from(mContext).inflate(R.layout.item_horiitem_gallery_lv_allvideo, viewGroup, false);
             holder = new ViewHolder(view);
             view.setTag(holder);
         }else{
@@ -69,7 +70,6 @@ public class ZoningListAdapter<T> extends BaseAdapter{
     static class ViewHolder{
         private TextView tv_area;
         private View line1;
-
 
         ViewHolder(View view){
 //            tv_area = view.findViewById(R.id.tv_area);

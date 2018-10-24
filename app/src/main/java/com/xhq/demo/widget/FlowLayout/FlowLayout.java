@@ -1,4 +1,4 @@
-package com.xhq.demo.widget;
+package com.xhq.demo.widget.FlowLayout;
 
 import android.content.Context;
 import android.content.res.TypedArray;

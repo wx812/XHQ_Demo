@@ -22,12 +22,12 @@ import java.lang.reflect.Field;
  * 在一些特殊情况下，只能在setData里设置监听。
  * @param <M>
  */
-abstract public class BaseViewHolder<M> extends RecyclerView.ViewHolder {
-    public BaseViewHolder(View itemView) {
+abstract public class BaseRVHolder<M> extends RecyclerView.ViewHolder {
+    public BaseRVHolder(View itemView) {
         super(itemView);
     }
 
-    public BaseViewHolder(ViewGroup parent, @LayoutRes int res) {
+    public BaseRVHolder(ViewGroup parent, @LayoutRes int res) {
         super(LayoutInflater.from(parent.getContext()).inflate(res, parent, false));
     }
 
