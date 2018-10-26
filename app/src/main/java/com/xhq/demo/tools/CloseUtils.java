@@ -8,7 +8,8 @@ import java.io.IOException;
  * Closeable（1.5才有的）接口继承了AutoCloseable接口</p>
  * 当try代码快结束时，资源（在此时流）会被自动关闭, 无须显示调用资源释放, 只用在try的()中声明的资源的close方法才会被调用
  * <li></li>
- *     Desc  : Close utils
+ *     Desc  : Close utils <br>
+ *     updt  : 2018/5/16 by xhq
  */
 public class CloseUtils {
 

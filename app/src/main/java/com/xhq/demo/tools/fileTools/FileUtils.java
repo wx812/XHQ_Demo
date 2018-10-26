@@ -121,10 +121,10 @@ public class FileUtils{
         if(file.exists()) return file.isFile();
         try{
             return file.createNewFile();
-        }catch(IOException e){
+        }catch(IOException | SecurityException e){
             e.printStackTrace();
-            return false;
         }
+        return false;
     }
 
 
@@ -458,8 +458,8 @@ public class FileUtils{
      * @return return false if content is empty, true otherwise
      * @throws RuntimeException if an error occurs while operator FileWriter
      */
-    public static boolean write2File(String srcText, File destFile, boolean append){
-        if(destFile == null || srcText == null) return false;
+    public static boolean write2File(@NonNull String srcText, @NonNull File destFile, boolean append){
+//        if(destFile == null || TextUtils.isEmpty(srcText)) return false;
         if(!createFile(destFile)) return false;
         BufferedWriter bw = null;
         try{
