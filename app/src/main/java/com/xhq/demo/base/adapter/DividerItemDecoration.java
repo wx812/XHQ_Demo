@@ -10,13 +10,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 /**
- * recyclerView divider line
- *
- * This class is from the v7 samples of the Android SDK.
- *
- * Created by ${XHQ} on 2017/8/18.
+ * <pre>
+ *     Auth  : ${XHQ}.
+ *     Time  : 2017/8/18.
+ *     Desc  : recyclerView divider line, this class is from the v7 samples of the Android SDK.
+ *     Updt  : Description.
+ * </pre>
  */
-
 public class DividerItemDecoration extends RecyclerView.ItemDecoration{
 
 
