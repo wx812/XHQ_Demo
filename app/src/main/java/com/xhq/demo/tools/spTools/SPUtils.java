@@ -248,7 +248,8 @@ public final class SPUtils{
                     sApplyMethod.invoke(editor);
                     return;
                 }
-            }catch(IllegalArgumentException | IllegalAccessException | InvocationTargetException ignored){
+            }catch(IllegalArgumentException | IllegalAccessException | InvocationTargetException e){
+                e.printStackTrace();
             }
             editor.commit();
         }
