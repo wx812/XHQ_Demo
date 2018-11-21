@@ -7,7 +7,7 @@ import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 
-import com.xhq.demo.HomeApp;
+import com.xhq.demo.tools.appTools.AppUtils;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -32,7 +32,7 @@ public final class SPUtils{
     }
 
     /**
-     * the Context of the Application --> HomeApp.getAppContext()
+     * the Context of the Application --> AppUtils.getAppContext()
      * <p>
      * get the sharedPreferences of the spFileName
      *
@@ -43,7 +43,7 @@ public final class SPUtils{
      * @return SharedPreferences
      */
     private static SharedPreferences getSharedPreferences(String spFileName){
-        Context ctx = HomeApp.getAppContext();
+        Context ctx = AppUtils.getAppContext();
         return ctx.getSharedPreferences(spliceFileName(spFileName), Context.MODE_PRIVATE);
     }
 
@@ -57,7 +57,7 @@ public final class SPUtils{
      * @return the name(packageName + "_preferences") used for storing default shared preferences.
      */
     public static SharedPreferences getDefaultSP(){
-        Context ctx = HomeApp.getAppContext();
+        Context ctx = AppUtils.getAppContext();
         return PreferenceManager.getDefaultSharedPreferences(ctx);
     }
 
@@ -235,7 +235,8 @@ public final class SPUtils{
             try{
                 Class clz = Editor.class;
                 return clz.getMethod("apply");
-            }catch(NoSuchMethodException ignored){
+            }catch(NoSuchMethodException e){
+                e.printStackTrace();
             }
 
             return null;
