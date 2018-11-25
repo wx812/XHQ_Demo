@@ -68,6 +68,10 @@ public class DensityUtils{
 		return convertUnit(TypedValue.COMPLEX_UNIT_DIP, dpValue);
 	}
 
+
+    /**
+     * use {@link #dp2Px(float)} instead
+     */
 	@Deprecated
 	public static int dpTopx(float dpValue) {
 		final float scale = AppUtils.getResources().getDisplayMetrics().density;
