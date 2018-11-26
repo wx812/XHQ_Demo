@@ -31,7 +31,7 @@ ext{
 
             gson                    : "2.8.1",
             BRVAH                   : '2.9.40',
-            jodaTime                : "2.9.9",
+            jodaTime                : "2.10",
             dagger                  : '2.0',
             javax_annotation        : '10.0-b28',
             butterknife             : '7.0.1',

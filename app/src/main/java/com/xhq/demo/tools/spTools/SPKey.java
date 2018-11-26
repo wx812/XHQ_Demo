@@ -3,7 +3,7 @@ package com.xhq.demo.tools.spTools;
 /**
  * <pre>
  *     Auth  : ${XHQ}.
- *     Time  : 2017/8/12.
+ *     Time  : 2016/8/10.
  *     Desc  : SharePreferences Constant Key.
  *     Updt  : Description
  * </pre>

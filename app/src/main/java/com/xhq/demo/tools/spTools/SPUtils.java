@@ -20,15 +20,17 @@ import java.util.Map;
  *     Desc  : SharedPreferences utils
  *     Updt  : 2017/7/3 update.
  * </pre>
+ *
+ * @author unknow
  */
 public final class SPUtils{
 
 
     /**
-     * @return if spFileName null, see {@link #getDefaultSP()}
+     * @return if spFileName null, see {@link #getDefSP()}
      */
     public static SharedPreferences getSP(@Nullable String spFileName){
-        return TextUtils.isEmpty(spFileName) ? getDefaultSP() : getSharedPreferences(spFileName);
+        return TextUtils.isEmpty(spFileName) ? getDefSP() : getSharedPreferences(spFileName);
     }
 
     /**
@@ -44,7 +46,7 @@ public final class SPUtils{
      */
     private static SharedPreferences getSharedPreferences(String spFileName){
         Context ctx = AppUtils.getAppContext();
-        return ctx.getSharedPreferences(spliceFileName(spFileName), Context.MODE_PRIVATE);
+        return ctx.getSharedPreferences(spFileName, Context.MODE_PRIVATE);
     }
 
 
@@ -56,7 +58,7 @@ public final class SPUtils{
     /**
      * @return the name(packageName + "_preferences") used for storing default shared preferences.
      */
-    public static SharedPreferences getDefaultSP(){
+    public static SharedPreferences getDefSP(){
         Context ctx = AppUtils.getAppContext();
         return PreferenceManager.getDefaultSharedPreferences(ctx);
     }
@@ -66,8 +68,8 @@ public final class SPUtils{
      * @param defValue If the key does not have a value it returns the default value
      * @return get data from the default shared preferences - auth xhq
      */
-    public static Object getDefaultSP_KV(String key, Object defValue) {
-        SharedPreferences sp = getDefaultSP();
+    public static Object getDefSP_KV(String key, Object defValue) {
+        SharedPreferences sp = getDefSP();
         if (defValue instanceof String) {
             return sp.getString(key, (String) defValue);
         } else if (defValue instanceof Integer) {
@@ -87,7 +89,7 @@ public final class SPUtils{
     /**
      * save data to the default shared preferences
      */
-    public static void putDefaultSP_KV(String key, Object value){
+    public static void putDefSP_KV(String key, Object value){
         put("", key, value);
     }
 
