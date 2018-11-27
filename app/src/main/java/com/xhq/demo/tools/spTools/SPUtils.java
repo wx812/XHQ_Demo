@@ -58,7 +58,7 @@ public final class SPUtils{
     /**
      * @return the name(packageName + "_preferences") used for storing default shared preferences.
      */
-    public static SharedPreferences getDefSP(){
+    private static SharedPreferences getDefSP(){
         Context ctx = AppUtils.getAppContext();
         return PreferenceManager.getDefaultSharedPreferences(ctx);
     }
