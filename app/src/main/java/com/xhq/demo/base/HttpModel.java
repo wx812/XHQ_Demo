@@ -1,5 +1,6 @@
 package com.xhq.demo.base;
 
+import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.text.TextUtils;
 
@@ -45,6 +46,7 @@ public abstract class HttpModel {
         }
     }
 
+    @SuppressLint("CheckResult")
     protected void downloadBitmap(String url, Map<String, String> params, final String requestType) {
         OkGo.<Bitmap>get(url)
                 .params(params)
@@ -60,6 +62,7 @@ public abstract class HttpModel {
     }
 
 
+    @SuppressLint("CheckResult")
     protected void downloadFile(String url, Map<String, String> params, final String requestType) {
 
         String jmzw_download = StorageUtils.getAppCacheDir("JMZW_DOWNLOAD").getAbsolutePath();
@@ -102,6 +105,7 @@ public abstract class HttpModel {
     }
 
 
+    @SuppressLint("CheckResult")
     private void commonHandle(String requestType, Observable<Response<String>> observable, Map<String, String>
             params) {
         observable.observeOn(Schedulers.computation())
@@ -151,6 +155,7 @@ public abstract class HttpModel {
     }
 
 
+    @SuppressLint("CheckResult")
     public void httpGetData(String url, Map<String, String> params, final String requestType) {
         OkGo.<String>get(url)
                 .params(params)
