@@ -93,6 +93,20 @@ public class IPUtils{
 	}
 
 
+	public static boolean isValidPort(String port) {
+		boolean result = false;
+		try {
+			int portNum = Integer.valueOf(port);
+			if (portNum > 0 && portNum < 65536) {
+				result = true;
+			}
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+
 	public static boolean checkAddr(String ip, String gateWay, String subnetMask){
 
 		final String reg = "\\.";

@@ -241,11 +241,12 @@ public class NetUtils{
      *
      * @return operator name
      */
+    @SuppressLint({"HardwareIds", "MissingPermission"})
     @RequiresPermission(Manifest.permission.READ_PHONE_STATE)
     public static String getOperatorByIMSI() {
         String providersName = null;
         TelephonyManager tm = getTelMgr();
-        @SuppressLint("HardwareIds") String IMSI = tm.getSubscriberId();
+        String IMSI = tm.getSubscriberId();
         if (StringUtils.isNullOrEmpty(IMSI)) return "未知";
         if (IMSI.startsWith("46000") || IMSI.startsWith("46002")) {
             providersName = "中国移动";
@@ -325,6 +326,4 @@ public class NetUtils{
         }
         return netType;
     }
-
-
 }
