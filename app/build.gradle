@@ -19,19 +19,19 @@ android {
         versionCode VERSION_CODE as int
         versionName VERSION_NAME        // 给用户看的版本号
 
-        applicationId "com.xhq"
+        applicationId "com.xhq.demo"
 
         multiDexEnabled true
         flavorDimensions("XHQ_DEMO")    // 产品风格的维度 "Free" or "Paid"
-        ndk { abiFilters "armeabi" }
-//        splits {
-//            abi {
-//                enable true
-//                reset()
-//                include 'x86', 'armeabi-v7a', 'x86_64'
-//                universalApk true
-//            }
-//        }
+        ndk { abiFilters "armeabi", 'x86' }
+        splits {
+            abi {
+                enable true
+                reset()
+                include 'x86', 'armeabi-v7a', 'x86_64'
+                universalApk true
+            }
+        }
     }
 
     // 产品风格, 多渠道打包
