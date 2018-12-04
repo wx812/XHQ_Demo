@@ -30,11 +30,15 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
 /**
- * Created by huangshikun Administrator on 2017/8/29.
- * 说明：作为共用的HttpModel
- * 首先m层不应该有v的东西不能用toast dialog activity,请求道的数据需要显示的请回掉p层，p层来告诉具体的view去显示，view来确定具体的显示方式
+ * <pre>
+ *     Auth  : ${XHQ}.
+ *     Time  : 2016/8/10.
+ *     Desc  : http protocol frame
+ *     Updt  : 2017/7/3 update.
+ * </pre>
+ *
+ * @author https://github.com/jeasonlzy/okhttp-OkGo
  */
-
 public abstract class HttpModel {
 
     public GsonBuilder mGsonBuilder;
