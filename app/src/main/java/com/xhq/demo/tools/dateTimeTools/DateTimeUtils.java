@@ -228,7 +228,7 @@ public class DateTimeUtils{
     }
 
 
-    public static long formatDateTime2Long(Date date){
+    public static long format2Long(Date date){
         return getDateTime(date).getMillis();
     }
 
@@ -237,10 +237,10 @@ public class DateTimeUtils{
      * according to formatPattern format date object
      *
      * @param date date object
-     * @param formatPattern {@link #formatDateTime2String(long, String)}
+     * @param formatPattern {@link #format2String(long, String)}
      * @return string
      */
-    public static String formatDateTime2String(Date date, String formatPattern){
+    public static String format2String(Date date, String formatPattern){
         if(date == null) return null;
 //        DateTime dateTime = new DateTime(date).minusMonths(1);
         return getDateTime(date).toString(formatPattern);
@@ -254,7 +254,7 @@ public class DateTimeUtils{
      * @param formatPattern format pattern of date time. eg: "y/m/d", "ymd", "y-m-d" etc.
      * @return string
      */
-    public static String formatDateTime2String(long millis, String formatPattern){
+    public static String format2String(long millis, String formatPattern){
         DateTime dateTime = getDateTime(millis).minusMonths(1);
         return dateTime.toString(formatPattern);
     }
@@ -266,13 +266,13 @@ public class DateTimeUtils{
      * @param millis millisecond value
      * @return date object
      */
-    public static Date formatDateTime2Date(long millis){
+    public static Date format2Date(long millis){
         return getDateTime(millis).toDate();
     }
 
 
     /**
-     * see {@link #formatDateTime2String(long, String)}
+     * see {@link #format2String(long, String)}
      */
     @Deprecated
     public static String millis2String(long millis, String formatPattern){
@@ -286,7 +286,7 @@ public class DateTimeUtils{
      * @param dateStr date string
      * @return Date object
      */
-    public static Date formatDateTime2Date(String dateStr){
+    public static Date format2Date(String dateStr){
         return getDateTime(dateStr).toDate();
     }
 
@@ -304,7 +304,7 @@ public class DateTimeUtils{
      * @param formatPattern format pattern of date time. eg: "y/m/d", "ymd", "y-m-d" etc.
      * @return
      */
-    public static Date parseStr2DateObj(@NonNull String dateStr, @NonNull String formatPattern){
+    public static Date parse2DateObj(@NonNull String dateStr, @NonNull String formatPattern){
         if(TextUtils.isEmpty(dateStr)) return null;
         DateTimeFormatter formatter = DateTimeFormat.forPattern(formatPattern);
         DateTime dateTime = DateTime.parse(dateStr, formatter);
@@ -318,7 +318,7 @@ public class DateTimeUtils{
      * @param dateStr date string
      * @return time millisecond value
      */
-    public static long formatDateTime2Long(String dateStr){
+    public static long format2Long(String dateStr){
         return getDateTime(dateStr).getMillis();
     }
 
@@ -338,21 +338,21 @@ public class DateTimeUtils{
      * according to "yMd" mode format date object
      *
      * @param date date object
-     * @return {@link #formatDateTime_yMd}
+     * @return {@link #format2yMd}
      */
-    public static String formatDateTime_yMd(Date date){
-        return formatDateTime2String(date, pattern_yMd);
+    public static String format2yMd(Date date){
+        return format2String(date, pattern_yMd);
     }
 
 
     /**
      * according to "yMd" mode format timeMillis value
      *
-     * @param millis @see {@link #formatDateTime2String(long, String)}
+     * @param millis @see {@link #format2String(long, String)}
      * @return the format eg: 2016-1-16
      */
-    public static String formatDateTime_yMd(long millis){
-        return formatDateTime2String(millis, pattern_yMd);
+    public static String format2yMd(long millis){
+        return format2String(millis, pattern_yMd);
     }
 
 
@@ -360,21 +360,21 @@ public class DateTimeUtils{
      * according to "yMdHms" mode format date object
      *
      * @param date date object
-     * @return {@link #formatDateTime_yMdHms(long)}
+     * @return {@link #format2yMdHms(long)}
      */
-    public static String formatDateTime_yMdHms(Date date){
-        return formatDateTime2String(date, pattern_yMdHms);
+    public static String format2yMdHms(Date date){
+        return format2String(date, pattern_yMdHms);
     }
 
 
     /**
      * according to "yMdHms" mode format timeMillis value
      *
-     * @param millis @see {@link #formatDateTime2String(long, String)}
+     * @param millis @see {@link #format2String(long, String)}
      * @return the format eg: 2016-1-16 13:04:11
      */
-    public static String formatDateTime_yMdHms(long millis){
-        return formatDateTime2String(millis, pattern_yMdHms);
+    public static String format2yMdHms(long millis){
+        return format2String(millis, pattern_yMdHms);
     }
 
 
