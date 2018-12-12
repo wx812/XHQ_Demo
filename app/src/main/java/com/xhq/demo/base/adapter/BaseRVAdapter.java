@@ -19,13 +19,11 @@ import java.util.List;
 public abstract class BaseRVAdapter<T, VH extends RecyclerView.ViewHolder> extends RecyclerView.Adapter<VH>
         implements View.OnClickListener{
 
-    protected Context mContext;
     protected List<T> mListData;
     protected OnItemClickListener<T> mOnItemClickListener = null;
 
 
     public BaseRVAdapter(Context context, List<T> listData){
-        mContext = context;
         mListData = listData;
     }
 
@@ -78,9 +76,9 @@ public abstract class BaseRVAdapter<T, VH extends RecyclerView.ViewHolder> exten
     }
 
 
-    public void refresh(T file) {
+    public void refresh(T data) {
         mListData.clear();
-        mListData.add(file);
+        mListData.add(data);
         notifyDataSetChanged();
     }
 

@@ -1,6 +1,5 @@
 package com.xhq.demo.base.adapter;
 
-import android.content.Context;
 import android.support.annotation.LayoutRes;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,23 +10,20 @@ import java.util.List;
 
 public abstract class BaseLVAdapter<T> extends BaseAdapter{
 
-    protected Context mContext;
     protected List<T> mListData;
     private int layoutId = -1;
     private View layoutView;
 
 
-    public BaseLVAdapter(Context mContext, List<T> listData, @LayoutRes int layoutId){
+    public BaseLVAdapter(List<T> listData, @LayoutRes int layoutId){
         super();
-        this.mContext = mContext;
         this.mListData = listData;
         this.layoutId = layoutId;
     }
 
 
-    public BaseLVAdapter(Context mContext, List<T> mListData, View codeLayoutView){
+    public BaseLVAdapter(List<T> mListData, View codeLayoutView){
         super();
-        this.mContext = mContext;
         this.mListData = mListData;
         this.layoutView = codeLayoutView;
     }
@@ -55,9 +51,9 @@ public abstract class BaseLVAdapter<T> extends BaseAdapter{
     public View getView(int position, View convertView, ViewGroup parent){
         BaseLVHolder holder;
         if(layoutId == -1){
-            holder = BaseLVHolder.getViewHolder(mContext, parent, convertView, layoutView, position);
+            holder = BaseLVHolder.getViewHolder(parent, convertView, layoutView, position);
         }else{
-            holder = BaseLVHolder.getViewHolder(mContext, parent, convertView, layoutId, position);
+            holder = BaseLVHolder.getViewHolder(parent, convertView, layoutId, position);
         }
         convert(holder, getItem(position), position);
         return holder.getConvertView();

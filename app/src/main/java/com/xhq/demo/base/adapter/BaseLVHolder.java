@@ -1,7 +1,6 @@
 package com.xhq.demo.base.adapter;
 
 
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.support.annotation.IdRes;
 import android.support.annotation.LayoutRes;
@@ -26,15 +25,15 @@ public class BaseLVHolder{
 //	private static LoadImage mImageLoader  = new LoadImage();
 
 
-    public BaseLVHolder(Context ctx, ViewGroup parent, @LayoutRes int layoutId, int position){
+    public BaseLVHolder(ViewGroup parent, @LayoutRes int layoutId, int position){
         this.mPosition = position;
         mViewList = new SparseArray<>();
-        mRootView = LayoutInflater.from(ctx).inflate(layoutId, parent, false);
+        mRootView = LayoutInflater.from(parent.getContext()).inflate(layoutId, parent, false);
         mRootView.setTag(this);
     }
 
 
-    public BaseLVHolder(Context ctx, ViewGroup parent, View view, int position){
+    public BaseLVHolder(ViewGroup parent, View view, int position){
         this.mPosition = position;
         mViewList = new SparseArray<>();
         mRootView = view;
@@ -42,9 +41,9 @@ public class BaseLVHolder{
     }
 
 
-    public static BaseLVHolder getViewHolder(Context ctx, ViewGroup parent, View convertView, int layoutId, int position){
+    public static BaseLVHolder getViewHolder(ViewGroup parent, View convertView, int layoutId, int position){
         if(convertView == null){
-            return new BaseLVHolder(ctx, parent, layoutId, position);
+            return new BaseLVHolder(parent, layoutId, position);
         }else{
             BaseLVHolder holder = (BaseLVHolder)convertView.getTag();
             holder.mPosition = position;
@@ -53,9 +52,9 @@ public class BaseLVHolder{
     }
 
 
-    public static BaseLVHolder getViewHolder(Context ctx, ViewGroup parent, View convertView, View codeLayoutView, int position){
+    public static BaseLVHolder getViewHolder(ViewGroup parent, View convertView, View codeLayoutView, int position){
         if(convertView == null){
-            return new BaseLVHolder(ctx, parent, codeLayoutView, position);
+            return new BaseLVHolder(parent, codeLayoutView, position);
         }else{
             BaseLVHolder holder = (BaseLVHolder)convertView.getTag();
             holder.mPosition = position;

@@ -1,4 +1,4 @@
-package com.xhq.demo.widget;
+package com.xhq.demo.widget.CountDownTimer;
 
 import android.content.Context;
 import android.os.CountDownTimer;

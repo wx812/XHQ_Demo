@@ -13,7 +13,7 @@ import java.lang.reflect.Field;
 
 /**
  * M为这个itemView对应的model。
- * 使用RecyclerArrayAdapter就一定要用这个ViewHolder。
+ * 使用RecyclerViewAdapter就一定要用这个ViewHolder。
  * 这个ViewHolder将ItemView与Adapter解耦。
  * 推荐子类继承第二个构造函数。并将子类的构造函数设为一个ViewGroup parent。
  * 然后这个ViewHolder就完全独立。adapter在new的时候只需将parentView传进来。View的生成与管理由ViewHolder执行。
