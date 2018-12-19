@@ -13,8 +13,7 @@
 //import java.util.List;
 //
 ///**
-// * Created by hskun on 2017/10/25.
-// * 说明：
+// * 2017/10/25.
 // */
 //
 //public class SelectCivilCardAdapter extends BaseQuickAdapter<ActivateInfoBean, BaseViewHolder>{
