@@ -2,7 +2,7 @@ package com.xhq.demo.tools.fileTools.zip;
 
 import android.text.TextUtils;
 
-import com.xhq.demo.tools.CloseUtils;
+import com.xhq.demo.tools.fileTools.IOUtil;
 import com.xhq.demo.tools.StringUtils;
 import com.xhq.demo.tools.fileTools.FileUtils;
 
@@ -142,7 +142,7 @@ public class ZipUtilsByJDK{
         } finally {
             if (zos != null) {
                 zos.finish();
-                CloseUtils.closeIO(zos);
+                IOUtil.closeIO(zos);
             }
         }
     }
@@ -205,7 +205,7 @@ public class ZipUtilsByJDK{
             return zipFile(resFile, "", zos, comment);
         } finally {
             if (zos != null) {
-                CloseUtils.closeIO(zos);
+                IOUtil.closeIO(zos);
             }
         }
     }
@@ -251,7 +251,7 @@ public class ZipUtilsByJDK{
                 }
                 zos.closeEntry();
             } finally {
-                CloseUtils.closeIO(is);
+                IOUtil.closeIO(is);
             }
         }
         return true;
@@ -366,7 +366,7 @@ public class ZipUtilsByJDK{
                             out.write(buffer, 0, len);
                         }
                     } finally {
-                        CloseUtils.closeIO(in, out);
+                        IOUtil.closeIO(in, out);
                     }
                 }
             }

@@ -1,6 +1,6 @@
 package com.xhq.demo.tools.encodeTools;
 
-import com.xhq.demo.tools.CloseUtils;
+import com.xhq.demo.tools.fileTools.IOUtil;
 import com.xhq.demo.tools.StringUtils;
 
 import java.io.File;
@@ -113,7 +113,7 @@ public class EncryptUtils {
             e.printStackTrace();
             return null;
         } finally {
-            CloseUtils.closeIO(fis);
+            IOUtil.closeIO(fis);
         }
     }
 

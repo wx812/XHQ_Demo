@@ -42,7 +42,7 @@ import android.util.Base64;
 import android.view.View;
 
 import com.xhq.demo.R;
-import com.xhq.demo.tools.CloseUtils;
+import com.xhq.demo.tools.fileTools.IOUtil;
 import com.xhq.demo.tools.StringUtils;
 import com.xhq.demo.tools.appTools.AppUtils;
 import com.xhq.demo.tools.fileTools.StorageUtils;
@@ -370,7 +370,7 @@ public class ImageUtils{
             e.printStackTrace();
             return null;
         }finally{
-            CloseUtils.closeIO(is);
+            IOUtil.closeIO(is);
         }
     }
 
@@ -424,7 +424,7 @@ public class ImageUtils{
             e.printStackTrace();
             return null;
         }finally{
-            CloseUtils.closeIO(is);
+            IOUtil.closeIO(is);
         }
     }
 
@@ -594,7 +594,7 @@ public class ImageUtils{
             }
             return BitmapFactory.decodeStream(bais);
         }finally{
-            CloseUtils.closeIO(bais, baos);
+            IOUtil.closeIO(bais, baos);
         }
     }
 
@@ -636,7 +636,7 @@ public class ImageUtils{
         }catch(Exception e){
             e.printStackTrace();
         }finally{
-            CloseUtils.closeIO(fos,baos);
+            IOUtil.closeIO(fos, baos);
         }
     }
 
@@ -939,7 +939,7 @@ public class ImageUtils{
             e.printStackTrace();
             return null;
         }finally{
-            CloseUtils.closeIO(is);
+            IOUtil.closeIO(is);
         }
     }
 

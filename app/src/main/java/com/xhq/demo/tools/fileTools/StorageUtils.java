@@ -9,7 +9,6 @@ import android.text.TextUtils;
 import android.text.format.Formatter;
 import android.util.Log;
 
-import com.xhq.demo.tools.CloseUtils;
 import com.xhq.demo.tools.appTools.AppUtils;
 import com.xhq.demo.tools.dateTimeTools.DateTimeUtils;
 
@@ -183,7 +182,7 @@ public class StorageUtils{
         }catch(Exception e){
             e.printStackTrace();
         }finally{
-            CloseUtils.closeIO(br);
+            IOUtil.closeIO(br);
         }
         return sdPath;
     }

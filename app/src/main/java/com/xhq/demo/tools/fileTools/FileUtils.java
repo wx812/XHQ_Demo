@@ -8,7 +8,6 @@ import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.widget.Toast;
 
-import com.xhq.demo.tools.CloseUtils;
 import com.xhq.demo.tools.StringUtils;
 import com.xhq.demo.tools.appTools.AppUtils;
 
@@ -333,7 +332,7 @@ public class FileUtils{
         }catch(IOException e){
             throw new RuntimeException("IOException occurred. ", e);
         }finally{
-            CloseUtils.closeIO(br,isr);
+            IOUtil.closeIO(br, isr);
         }
     }
 
@@ -358,7 +357,7 @@ public class FileUtils{
         }catch(IOException e){
             throw new RuntimeException("IOException occurred. ", e);
         }finally{
-            CloseUtils.closeIO(br, isr);
+            IOUtil.closeIO(br, isr);
         }
     }
 
@@ -391,7 +390,7 @@ public class FileUtils{
             e.printStackTrace();
             return null;
         }finally{
-            CloseUtils.closeIO(br);
+            IOUtil.closeIO(br);
         }
     }
 
@@ -442,7 +441,7 @@ public class FileUtils{
         }catch(IOException e){
             e.printStackTrace();
         }finally{
-            CloseUtils.closeIO(bos, fis);
+            IOUtil.closeIO(bos, fis);
         }
         return buffer;
     }
@@ -470,7 +469,7 @@ public class FileUtils{
         }catch(IOException e){
             throw new RuntimeException("IOException occurred. ", e);
         }finally{
-            CloseUtils.closeIO(bw);
+            IOUtil.closeIO(bw);
         }
     }
 
@@ -495,7 +494,7 @@ public class FileUtils{
         }catch(IOException e){
             throw new RuntimeException("IOException occurred. ", e);
         }finally{
-            CloseUtils.closeIO(bw);
+            IOUtil.closeIO(bw);
         }
     }
 
@@ -536,7 +535,7 @@ public class FileUtils{
         }catch(IOException e){
             throw new RuntimeException("IOException occurred. ", e);
         }finally{
-            CloseUtils.closeIO(os);
+            IOUtil.closeIO(os);
         }
     }
 
@@ -853,7 +852,7 @@ public class FileUtils{
                               }catch(IOException e){
                                   e.printStackTrace();
                               }finally{
-                                  CloseUtils.closeIO(fos);
+                                  IOUtil.closeIO(fos);
                               }
                           }
                           return "1";
@@ -886,7 +885,7 @@ public class FileUtils{
                           }catch(IOException | ClassNotFoundException e){
                               e.printStackTrace();
                           }finally{
-                              CloseUtils.closeIO(ois, fis);
+                              IOUtil.closeIO(ois, fis);
                           }
                           return objList;
                       })

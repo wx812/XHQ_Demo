@@ -1,7 +1,5 @@
 package com.xhq.demo.tools.fileTools;
 
-import com.xhq.demo.tools.CloseUtils;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -178,7 +176,7 @@ public class FileSizeUtils{
             }catch(IOException e){
                 e.printStackTrace();
             }finally{
-                CloseUtils.closeIO(fis);
+                IOUtil.closeIO(fis);
             }
         }
         return size;

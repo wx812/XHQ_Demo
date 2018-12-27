@@ -1,5 +1,7 @@
 package com.xhq.demo.tools;
 
+import com.xhq.demo.tools.fileTools.IOUtil;
+
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.InputStreamReader;
@@ -123,7 +125,7 @@ public class ShellUtils {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            CloseUtils.closeIO(os, successResult, errorResult);
+            IOUtil.closeIO(os, successResult, errorResult);
             if (process != null) {
                 process.destroy();
             }

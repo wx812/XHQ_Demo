@@ -23,7 +23,6 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
-import com.xhq.demo.tools.CloseUtils;
 import com.xhq.demo.tools.StringUtils;
 import com.xhq.demo.tools.appTools.AppUtils;
 import com.xhq.demo.tools.fileTools.zip.apache.zip.ZipEntry;
@@ -109,7 +108,7 @@ public class FileOperateUtils{
             e.printStackTrace();
             return false;
         }finally{
-            CloseUtils.closeIO(bos, bis);
+            IOUtil.closeIO(bos, bis);
         }
     }
 
@@ -216,7 +215,7 @@ public class FileOperateUtils{
             e.printStackTrace();
             return false;
         }finally{
-            CloseUtils.closeIO(fis);
+            IOUtil.closeIO(fis);
         }
     }
 
@@ -237,7 +236,7 @@ public class FileOperateUtils{
             e.printStackTrace();
             return null;
         }finally{
-            CloseUtils.closeIO(is);
+            IOUtil.closeIO(is);
         }
         switch(p){
             case 0xefbb:
@@ -270,7 +269,7 @@ public class FileOperateUtils{
         }catch(IOException e){
             e.printStackTrace();
         }finally{
-            CloseUtils.closeIO(is);
+            IOUtil.closeIO(is);
         }
         return fileLines;
     }
@@ -298,7 +297,7 @@ public class FileOperateUtils{
         }catch(NoSuchAlgorithmException | IOException e){
             e.printStackTrace();
         }finally{
-            CloseUtils.closeIO(dis);
+            IOUtil.closeIO(dis);
         }
         return null;
     }
@@ -488,7 +487,7 @@ public class FileOperateUtils{
         }catch(Exception e){
             e.printStackTrace();
         }finally{
-            CloseUtils.closeIO(zipOS);
+            IOUtil.closeIO(zipOS);
         }
     }
 
@@ -536,7 +535,7 @@ public class FileOperateUtils{
             e.printStackTrace();
             return false;
         }finally{
-            CloseUtils.closeIO(is, os, zipFile);
+            IOUtil.closeIO(is, os, zipFile);
         }
     }
 
@@ -588,14 +587,14 @@ public class FileOperateUtils{
                                 dest.flush();
                             }catch(IOException var41){
                             }finally{
-                                CloseUtils.closeIO(dest, fos);
+                                IOUtil.closeIO(dest, fos);
                             }
                         }
                     }
                 }
             }catch(IOException var43){
             }finally{
-                CloseUtils.closeIO(zis, fis);
+                IOUtil.closeIO(zis, fis);
             }
             return dataDir;
         }
@@ -673,7 +672,7 @@ public class FileOperateUtils{
             }catch(Exception e){
                 e.printStackTrace();
             }finally{
-                CloseUtils.closeIO(fis);
+                IOUtil.closeIO(fis);
             }
         }
     }
@@ -714,7 +713,7 @@ public class FileOperateUtils{
         }catch(IOException e){
             e.printStackTrace();
         }finally{
-            CloseUtils.closeIO(br);
+            IOUtil.closeIO(br);
         }
         return sb.toString();
     }
@@ -800,7 +799,7 @@ public class FileOperateUtils{
             e.printStackTrace();
             return null;
         }finally{
-            CloseUtils.closeIO(bos);
+            IOUtil.closeIO(bos);
         }
     }
 
@@ -829,7 +828,7 @@ public class FileOperateUtils{
             e.printStackTrace();
             return null;
         }finally{
-            CloseUtils.closeIO(os);
+            IOUtil.closeIO(os);
         }
     }
 

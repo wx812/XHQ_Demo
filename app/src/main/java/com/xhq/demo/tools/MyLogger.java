@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.xhq.demo.tools.appTools.AppUtils;
 import com.xhq.demo.tools.fileTools.FileUtils;
+import com.xhq.demo.tools.fileTools.IOUtil;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -288,7 +289,7 @@ public class MyLogger{
             } catch (IOException e) {
                 e.printStackTrace();
             } finally {
-                CloseUtils.closeIO(bw);
+                IOUtil.closeIO(bw);
             }
         }).start();
     }

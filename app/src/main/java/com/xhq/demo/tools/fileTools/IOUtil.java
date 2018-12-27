@@ -1,4 +1,4 @@
-package com.xhq.demo.tools;
+package com.xhq.demo.tools.fileTools;
 
 import java.io.Closeable;
 import java.io.IOException;
@@ -11,9 +11,9 @@ import java.io.IOException;
  *     Desc  : Close utils <br>
  *     updt  : 2018/5/16 by xhq
  */
-public class CloseUtils {
+public class IOUtil{
 
-    private CloseUtils() {
+    private IOUtil() {
         throw new UnsupportedOperationException("u can't instantiate me...");
     }
 

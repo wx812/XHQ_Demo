@@ -19,7 +19,7 @@ import android.support.annotation.RequiresPermission;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 
-import com.xhq.demo.tools.CloseUtils;
+import com.xhq.demo.tools.fileTools.IOUtil;
 import com.xhq.demo.tools.ShellUtils;
 import com.xhq.demo.tools.netTools.NetUtils;
 import com.xhq.demo.tools.netTools.WiFiUtils;
@@ -271,7 +271,7 @@ public class DeviceUtils{
             e.printStackTrace();
             return false;
         }finally{
-            CloseUtils.closeIO(os);
+            IOUtil.closeIO(os);
             if(process != null) process.destroy();
         }
     }
