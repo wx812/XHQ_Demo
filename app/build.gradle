@@ -23,12 +23,15 @@ android {
 
         multiDexEnabled true
         flavorDimensions("XHQ_DEMO")    // 产品风格的维度 "Free" or "Paid"
-        ndk { abiFilters "armeabi", 'x86' }
+        ndk { abiFilters "armeabi", "armeabi-v7a", "x86", "x86_64" } // 设置支持的 CPU 的类型
         splits {
+            // 切割Apk, 按 Cpu类型来分割APK
             abi {
                 enable true
                 reset()
-                include 'x86', 'armeabi-v7a', 'x86_64'
+                include 'x86'
+                include 'armeabi-v7a'
+                include 'x86_64'
                 universalApk true
             }
         }

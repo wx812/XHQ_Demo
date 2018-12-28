@@ -1,6 +1,7 @@
 package com.xhq.demo;
 
 
+import com.xhq.demo.tools.netTools.IPUtils;
 import com.xhq.demo.tools.netTools.NetUtils;
 
 import org.junit.Test;
@@ -23,6 +24,12 @@ public class ExampleUnitTest {
     public void isValidateIp(){
 //        boolean bool = IPUtils.isIPAddress("101.132.106.7");
         boolean bool = NetUtils.isValidUrl("www.baidu.com");
+        System.out.printf("%b", bool);
+    }
+
+    @Test
+    public void testIP(){
+        boolean bool = IPUtils.ipCheck("47.110.200.202");
         System.out.printf("%b", bool);
     }
 }

@@ -42,51 +42,48 @@ public class IPUtils{
 
 	public static boolean ipCheck(String ipString) {
 		if(TextUtils.isEmpty(ipString)) return false;
+		// split的工作原理是利用正则表达式,而在正则表达式中, "."有特殊意思,所以匹配"."时要用转义字符"\",
+		// 所以在正则表达式中匹配"."的表达式是"\.", 而在Java中,\又是特殊字符, 所以还要进行转义, 所以最终变成"\\."
 		String[] arrText = ipString.split("\\.");
-		int i = arrText.length;
-		int N = ipString.length();
-		if (N == 0) {
-			return true;
-		} else {
-			if (ipString.substring(N - 1, N).equals(".")) {
-				return false;
-			} else if (i != 4) {
-				return false;
-			} else {
-				try {
-					String V0 = arrText[0];
-					String V1 = arrText[1];
-					String V2 = arrText[2];
-					String V3 = arrText[3];
-					int var0 = Integer.parseInt(V0);
-					int var1 = Integer.parseInt(V1);
-					int var2 = Integer.parseInt(V2);
-					int var3 = Integer.parseInt(V3);
-					boolean Zero;
-					if (V0.substring(0, 1).equals("0") && V0.length() != 1) {
-						Zero = false;
-					} else if (V1.substring(0, 1).equals("0") && V1.length() != 1) {
-						Zero = false;
-					} else if (V2.substring(0, 1).equals("0") && V2.length() != 1) {
-						Zero = false;
-					} else if (V3.substring(0, 1).equals("0") && V3.length() != 1) {
-						Zero = false;
-					} else {
-						Zero = true;
-					}
+		final int i = arrText.length;
+		final int N = ipString.length();
+//		if (N == 0) {
+//			return false;
+//		} else
+		if(ipString.substring(N - 1, N).equals(".") || i != 4){
+			return false;
+		}else{
+			try{
+				String V0 = arrText[0];
+				String V1 = arrText[1];
+				String V2 = arrText[2];
+				String V3 = arrText[3];
+				int var0 = Integer.parseInt(V0);
+				int var1 = Integer.parseInt(V1);
+				int var2 = Integer.parseInt(V2);
+				int var3 = Integer.parseInt(V3);
+				boolean Zero;
+				// 运算符优先级 (与 > 或), 单双都是
+				Zero = (!V0.substring(0, 1).equals("0") || V0.length() == 1)
+						&& (!V1.substring(0, 1).equals("0") || V1.length() == 1)
+						&& (!V2.substring(0, 1).equals("0") || V2.length() == 1)
+						&& (!V3.substring(0, 1).equals("0") || V3.length() == 1);
 
-					boolean V = (0 <= var0 && var0 <= 255 && 0 <= var1 && var1 <= 255 && 0 <= var2
-					        && var2 <= 255 && 0 <= var3 && var3 <= 255);
-					return Zero && V;
-				} catch (NumberFormatException e) {
-					return false;
-				}
+				boolean V = (0 <= var0 && var0 <= 255
+						&& 0 <= var1 && var1 <= 255
+						&& 0 <= var2 && var2 <= 255
+						&& 0 <= var3 && var3 <= 255);
+				return Zero && V;
+			}catch(NumberFormatException e){
+				return false;
 			}
 		}
 	}
 
 	public static boolean isIPAddress(String ip) {
-		String regex = "([0-9]|[0-9]\\d|1\\d{2}|2[0-1]\\d|25[0-5])(\\.(\\d|[0-9]\\d|1\\d{2}|2[0-4]\\d|25[0-5])){3}";
+		// 测试过, 有效的正则
+		String regex = "((25[0-5]|2[0-4]\\d|((1\\d{2})|([1-9]?\\d)))\\.){3}(25[0-5]|2[0-4]\\d|((1\\d{2})|([1-9]?\\d)))";
+//		String regex = "([0-9]|[0-9]\\d|1\\d{2}|2[0-1]\\d|25[0-5])(\\.(\\d|[0-9]\\d|1\\d{2}|2[0-4]\\d|25[0-5])){3}";
 		Pattern p = Pattern.compile(regex);
 		Matcher m = p.matcher(ip);
 		return m.matches();

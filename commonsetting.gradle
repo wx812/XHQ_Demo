@@ -106,6 +106,7 @@ android {
 //        exclude 'assets/amap_start.png'
     }
 
+    // signingConfigs闭包必须在buildTypes闭包前
     signingConfigs {
         def appStoreFile = System.getenv("STORE_FILE")
         def appStorePassword = System.getenv("STORE_PASSWORD")
