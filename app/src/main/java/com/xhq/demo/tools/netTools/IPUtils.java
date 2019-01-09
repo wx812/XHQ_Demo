@@ -5,7 +5,8 @@
  * @Company: Fiberhome
  * @author: Administrator
  * @date: Dec 18, 2015-2:57:01 PM
- * @version: v1.0 */
+ * @version: v1.0
+ */
 package com.xhq.demo.tools.netTools;
 
 import android.Manifest;
@@ -86,6 +87,10 @@ public class IPUtils{
 //		String regex = "([0-9]|[0-9]\\d|1\\d{2}|2[0-1]\\d|25[0-5])(\\.(\\d|[0-9]\\d|1\\d{2}|2[0-4]\\d|25[0-5])){3}";
 		Pattern p = Pattern.compile(regex);
 		Matcher m = p.matcher(ip);
+
+		// find()方法在部分匹配时和完全匹配时返回true,匹配不上返回false;
+		// matches()方法只有在完全匹配时返回true,匹配不上和部分匹配都返回false。
+//		return m.find();
 		return m.matches();
 	}
 
@@ -106,7 +111,9 @@ public class IPUtils{
 
 	public static boolean checkAddr(String ip, String gateWay, String subnetMask){
 
-		final String reg = "\\.";
+		// split的工作原理是利用正则表达式,而在正则表达式中, "."有特殊意思,所以匹配"."时要用转义字符"\",
+		// 所以在正则表达式中匹配"."的表达式是"\.", 而在Java中,\又是特殊字符, 所以还要进行转义, 所以最终变成"\\."
+		final String reg = "\\.";	// "."
 		String[] array_IP = ip.split(reg);
 		String[] array_gateway = gateWay.split(reg);
 		String[] array_subnetMask = subnetMask.split(reg);
@@ -129,6 +136,22 @@ public class IPUtils{
 			return false;
 		}
 		return true;
+	}
+
+
+	/**
+	 * 判断字符串是否为一个合法的IPv4地址
+	 * @param ipAddress ip address
+	 * @return {@code true:}是<br>{@code false:}不是
+	 */
+	public static boolean isValidIPv4Address(String ipAddress) {
+		final String regex = "(2[5][0-5]|2[0-4]\\d|1\\d{2}|\\d{1,2})"
+				+ "\\.(25[0-5]|2[0-4]\\d|1\\d{2}|\\d{1,2})"
+				+ "\\.(25[0-5]|2[0-4]\\d|1\\d{2}|\\d{1,2})"
+				+ "\\.(25[0-5]|2[0-4]\\d|1\\d{2}|\\d{1,2})";
+		Pattern p = Pattern.compile(regex);
+		Matcher m = p.matcher(ipAddress);
+		return m.matches();
 	}
 
 
@@ -159,18 +182,20 @@ public class IPUtils{
 
 
 	/**
-	 * 判断字符串是否为一个合法的IPv4地址
-	 * @param ipAddress ip address
-	 * @return {@code true:}是<br>{@code false:}不是
+	 * Check if it's "local address" or "link local address" or
+	 * "loop back address"
+	 *
+	 * @param inetAddr inetAddress object
+	 * @return result
 	 */
-	public static boolean isValidIPv4Address(String ipAddress) {
-		final String regex = "(2[5][0-5]|2[0-4]\\d|1\\d{2}|\\d{1,2})"
-				+ "\\.(25[0-5]|2[0-4]\\d|1\\d{2}|\\d{1,2})"
-				+ "\\.(25[0-5]|2[0-4]\\d|1\\d{2}|\\d{1,2})"
-				+ "\\.(25[0-5]|2[0-4]\\d|1\\d{2}|\\d{1,2})";
-		Pattern p = Pattern.compile(regex);
-		Matcher m = p.matcher(ipAddress);
-		return m.matches();
+	private static boolean isReservedAddr(InetAddress inetAddr) {
+		return inetAddr.isAnyLocalAddress() || inetAddr.isLinkLocalAddress() || inetAddr.isLoopbackAddress();
+	}
+
+
+	public static String getIpAddress(boolean isUseIPv4){
+		InetAddress inetAddress = getIPAddress(isUseIPv4);
+		return inetAddress != null ? inetAddress.getHostAddress() : "";
 	}
 
 
@@ -223,7 +248,7 @@ public class IPUtils{
 	}
 
 	@RequiresPermission(Manifest.permission.INTERNET)
-	public static String getLocalIPv6Address(){
+	public static String getIPv6Address(){
 		InetAddress inetAddress = getIPAddress(false);
 		String ipAddr = null;
 		if(inetAddress != null){
@@ -236,27 +261,6 @@ public class IPUtils{
 			}
 		}
 		return ipAddr;
-	}
-
-
-	/**
-	 * Check if it's "local address" or "link local address" or
-	 * "loop back address"
-	 *
-	 * @param inetAddr inetAddress object
-	 * @return result
-	 */
-	private static boolean isReservedAddr(InetAddress inetAddr) {
-		return inetAddr.isAnyLocalAddress() || inetAddr.isLinkLocalAddress() || inetAddr.isLoopbackAddress();
-	}
-
-
-	public static String getIpAddressString(boolean isUseIPv4){
-		InetAddress inetAddress = getIPAddress(isUseIPv4);
-		if(inetAddress != null){
-			return inetAddress.getHostAddress();
-		}
-		return "";
 	}
 
 

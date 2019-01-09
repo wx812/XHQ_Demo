@@ -44,19 +44,16 @@ public final class UseIni{
 				strLine = strLine.split("[;]")[0];
 				Pattern p;
 				Matcher m;
-				p = Pattern.compile("\\[\\s*.*\\s*\\]");
+                // \\] --> ]
+				p = Pattern.compile("\\[\\s*.*\\s*]");
 				m = p.matcher((strLine));
 				if (m.matches()) {
-					p = Pattern.compile("\\[\\s*" + section + "\\s*\\]");
+					p = Pattern.compile("\\[\\s*" + section + "\\s*]");
 					m = p.matcher(strLine);
-					if (m.matches()) {
-						isInSection = true;
-					} else {
-						isInSection = false;
-					}
+                    isInSection = m.matches();
 				}
 
-				if (isInSection == true) {
+				if (isInSection) {
 					variablec = section + "." + variable;
 					strLine = strLine.trim();
 					String[] strArray = strLine.split("=");
@@ -90,12 +87,16 @@ public final class UseIni{
 
 	public static boolean setProfileString(String file, String section, String variable,
 	        String value) throws IOException {
-		String fileContent, allLine, strLine, newLine, remarkStr;
+		StringBuilder fileContent;
+		String allLine;
+		String strLine;
+		String newLine;
+		String remarkStr;
 		String getValue;
 		String variablec;
 		BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
 		boolean isInSection = false;
-		fileContent = "";
+		fileContent = new StringBuilder();
 		try {
 			while ((allLine = bufferedReader.readLine()) != null) {
 				allLine = allLine.trim();
@@ -107,20 +108,15 @@ public final class UseIni{
 				strLine = allLine.split(";")[0];
 				Pattern p;
 				Matcher m;
-				p = Pattern.compile("\\[\\s*.*\\s*\\]");
+                // \\] --> ]
+				p = Pattern.compile("\\[\\s*.*\\s*]");
 				m = p.matcher((strLine));
 				if (m.matches()) {
-					p = Pattern.compile("\\[\\s*" + section + "\\s*\\]");
+					p = Pattern.compile("\\[\\s*" + section + "\\s*]");
 					m = p.matcher(strLine);
-					if (m.matches()) {
-						isInSection = true;
-
-					} else {
-						isInSection = false;
-
-					}
+                    isInSection = m.matches();
 				}
-				if (isInSection == true) {
+				if (isInSection) {
 					strLine = strLine.trim();
 					String[] strArray = strLine.split("=");
 					getValue = strArray[0].trim();
@@ -129,17 +125,16 @@ public final class UseIni{
 					if (getValue.equalsIgnoreCase(variablec)) {
 
 						newLine = getValue + "=" + value + remarkStr;
-						fileContent += newLine + "\n";
+						fileContent.append(newLine).append("\n");
 						while ((allLine = bufferedReader.readLine()) != null) {
-							fileContent += allLine + "\n";
+							fileContent.append(allLine).append("\n");
 						}
 						// bufferedReader.close();
 
 						File entryFile = new File(file);
 						FileOutputStream fos = new FileOutputStream(entryFile);
-						BufferedOutputStream dest = new BufferedOutputStream(fos,
-						        fileContent.length());
-						byte[] byteContent = fileContent.getBytes();
+						BufferedOutputStream dest = new BufferedOutputStream(fos, fileContent.length());
+						byte[] byteContent = fileContent.toString().getBytes();
 						dest.write(byteContent, 0, fileContent.length());
 						dest.flush();
 						FileDescriptor fd = fos.getFD();
@@ -154,7 +149,7 @@ public final class UseIni{
 						return true;
 					}
 				}
-				fileContent += allLine + "\n";
+				fileContent.append(allLine).append("\n");
 			}
 		} catch (IOException ex) {
 			throw ex;
@@ -167,14 +162,18 @@ public final class UseIni{
 
 	public static boolean addProfileString(String file, String section, String variable,
 	        String value) throws IOException {
-		String fileContent, allLine, strLine, newLine, remarkStr;
+		StringBuilder fileContent;
+		String allLine;
+		String strLine;
+		String newLine;
+		String remarkStr;
 		String getValue;
 		String variablec;
 		variablec = section + "." + variable;
 		BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
 		boolean isInSection = false;
 		boolean isSecExist = false;
-		fileContent = "";
+		fileContent = new StringBuilder();
 		try {
 			while ((allLine = bufferedReader.readLine()) != null) {
 				allLine = allLine.trim();
@@ -187,19 +186,15 @@ public final class UseIni{
 
 				Pattern p;
 				Matcher m;
-				p = Pattern.compile("\\[\\s*.*\\s*\\]");
+                // \\] --> ]
+				p = Pattern.compile("\\[\\s*.*\\s*]");
 				m = p.matcher((strLine));
 				if (m.matches()) {
-					p = Pattern.compile("\\[\\s*" + section + "\\s*\\]");
+					p = Pattern.compile("\\[\\s*" + section + "\\s*]");
 					m = p.matcher(strLine);
-					if (m.matches()) {
-						isInSection = true;
-					} else {
-						isInSection = false;
-
-					}
+                    isInSection = m.matches();
 				}
-				if (isInSection == true) {
+				if (isInSection) {
 
 					strLine = strLine.trim();
 					String[] strArray = strLine.split("=");
@@ -209,32 +204,32 @@ public final class UseIni{
 						return false; // already exist
 
 				}
-				fileContent += allLine + "\n";
+				fileContent.append(allLine).append("\n");
 			}
 
-			if (isSecExist == true) {
+			if (isSecExist) {
 
 				newLine = variablec + "=" + value;
 				// fileContent += allLine + "\n";
-				fileContent += newLine + "\n";
+				fileContent.append(newLine).append("\n");
 
 				while ((allLine = bufferedReader.readLine()) != null) {
-					fileContent += allLine + "\n";
+					fileContent.append(allLine).append("\n");
 				}
 				// bufferedReader.close();
 				BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file, false));
-				bufferedWriter.write(fileContent);
+				bufferedWriter.write(fileContent.toString());
 				bufferedWriter.flush();
 				bufferedWriter.close();
 				return true;
 			} else {
 				// no such section add it to end
-				fileContent += "[" + section + "]" + "\n";
+				fileContent.append("[").append(section).append("]").append("\n");
 				newLine = variablec + "=" + value;
-				fileContent += newLine + "\n";
+				fileContent.append(newLine).append("\n");
 
 				BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file, false));
-				bufferedWriter.write(fileContent);
+				bufferedWriter.write(fileContent.toString());
 				bufferedWriter.flush();
 				bufferedWriter.close();
 			}
@@ -249,7 +244,10 @@ public final class UseIni{
 
 	public static boolean
 	        delProfileString(String file, String section, String variable) throws IOException {
-		String fileContent, allLine, strLine, remarkStr;
+		StringBuilder fileContent;
+		String allLine;
+		String strLine;
+		String remarkStr;
 		String getValue;
 		String variablec;
 		int variableCount = 0;
@@ -257,7 +255,7 @@ public final class UseIni{
 		BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
 		boolean isInSection = false;
 		boolean isVarFound = false;
-		fileContent = "";
+		fileContent = new StringBuilder();
 		try {
 
 			while ((allLine = bufferedReader.readLine()) != null) {
@@ -272,20 +270,15 @@ public final class UseIni{
 				strLine = allLine.split(";")[0];
 				Pattern p;
 				Matcher m;
-				p = Pattern.compile("\\[\\s*.*\\s*\\]");
+                // \\] --> ]
+				p = Pattern.compile("\\[\\s*.*\\s*]");
 				m = p.matcher((strLine));
 				if (m.matches()) {
-					p = Pattern.compile("\\[\\s*" + section + "\\s*\\]");
+					p = Pattern.compile("\\[\\s*" + section + "\\s*]");
 					m = p.matcher(strLine);
-					if (m.matches()) {
-						isInSection = true;
-
-					} else {
-						isInSection = false;
-
-					}
+                    isInSection = m.matches();
 				}
-				if (isInSection == true) {
+				if (isInSection) {
 					variableCount++;
 					strLine = strLine.trim();
 					String[] strArray = strLine.split("=");
@@ -295,19 +288,18 @@ public final class UseIni{
 					if (getValue.equalsIgnoreCase(variablec)) {
 
 						while ((allLine = bufferedReader.readLine()) != null) {
-							fileContent += allLine + "\n";
+							fileContent.append(allLine).append("\n");
 						}
 						// bufferedReader.close();
-						BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file,
-						        false));
-						bufferedWriter.write(fileContent);
+						BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file, false));
+						bufferedWriter.write(fileContent.toString());
 						bufferedWriter.flush();
 						bufferedWriter.close();
 						isVarFound = true;
 						return true;
 					}
 				}
-				fileContent += allLine + "\n";
+				fileContent.append(allLine).append("\n");
 			}
 
 			/*
@@ -350,19 +342,16 @@ public final class UseIni{
 				strLine = strLine.split("[;]")[0];
 				Pattern p;
 				Matcher m;
-				p = Pattern.compile("\\[\\s*.*\\s*\\]");
+				// \\] --> ]
+				p = Pattern.compile("\\[\\s*.*\\s*]");
 				m = p.matcher((strLine));
 				if (m.matches()) {
-					p = Pattern.compile("\\[\\s*" + section + "\\s*\\]");
+					p = Pattern.compile("\\[\\s*" + section + "\\s*]");
 					m = p.matcher(strLine);
-					if (m.matches()) {
-						isInSection = true;
-					} else {
-						isInSection = false;
-					}
+                    isInSection = m.matches();
 				}
 
-				if (isInSection == true) {
+				if (isInSection) {
 					strLine = strLine.trim();
 					String[] strArray = strLine.split("=");
 					if (strArray.length == 1) {
@@ -399,7 +388,7 @@ public final class UseIni{
 
 	public static String getVersion() {
 		BufferedReader reader = null;
-		String tempString = null;
+		String tempString;
 		try {
 			File version = new File(VERSION_FILE);
 			reader = new BufferedReader(new FileReader(version));
@@ -407,11 +396,9 @@ public final class UseIni{
 				if (tempString.startsWith("ver="))
 					return tempString.trim().substring(4);
 			}
-		} catch (IOException ioe) {
+		} catch (IOException | NumberFormatException ioe) {
 //			LogDebug.e(TAG, ioe.getMessage());
-		} catch (NumberFormatException nfe) {
-//			LogDebug.e(TAG, nfe.getMessage());
-		} finally {
+		}finally {
 			try {
 				if (reader != null) {
 					reader.close();
@@ -425,7 +412,7 @@ public final class UseIni{
 
 	public static String getHardwareVersion() {
 		BufferedReader reader = null;
-		String tempString = null;
+		String tempString;
 		try {
 			File version = new File(VERSION_FILE);
 			reader = new BufferedReader(new FileReader(version));
@@ -433,13 +420,11 @@ public final class UseIni{
 				if (tempString.startsWith("hardware="))
 					return tempString.trim().substring(9);
 			}
-		} catch (IOException ioe) {
+		} catch (IOException | NumberFormatException ioe) {
 			// Fail quietly, as the file may not exist on some devices.
+            // Fail quietly, returning empty string should be sufficient
 //			LogDebug.e(TAG, ioe.getMessage());
-		} catch (NumberFormatException nfe) {
-			// Fail quietly, returning empty string should be sufficient
-//			LogDebug.e(TAG, nfe.getMessage());
-		} finally {
+        }finally {
 			try {
 				if (reader != null) {
 					reader.close();
@@ -453,7 +438,7 @@ public final class UseIni{
 
 	public static String getOperator() {
 		BufferedReader reader = null;
-		String tempString = null;
+		String tempString;
 		try {
 			File version = new File(VERSION_FILE);
 			reader = new BufferedReader(new FileReader(version));
@@ -461,13 +446,11 @@ public final class UseIni{
 				if (tempString.startsWith("passwordtype="))
 					return tempString.trim().substring(13);
 			}
-		} catch (IOException ioe) {
+		} catch (IOException | NumberFormatException ioe) {
 			// Fail quietly, as the file may not exist on some devices.
+            // Fail quietly, returning empty string should be sufficient
 //			LogDebug.e(TAG, ioe.getMessage());
-		} catch (NumberFormatException nfe) {
-			// Fail quietly, returning empty string should be sufficient
-//			LogDebug.e(TAG, nfe.getMessage());
-		} finally {
+        }finally {
 			try {
 				if (reader != null) {
 					reader.close();

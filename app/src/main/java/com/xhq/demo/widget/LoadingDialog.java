@@ -45,8 +45,8 @@ public class LoadingDialog extends Dialog {
 					num = 0;
 				}
 			}
-		};
-	};
+		}
+    };
 
 
 

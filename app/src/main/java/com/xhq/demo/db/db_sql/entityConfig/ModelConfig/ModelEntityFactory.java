@@ -17,7 +17,7 @@ import java.util.Map;
  * Created by zyj on 2017/4/10.
  */
 public class ModelEntityFactory {
-    private static ModelEntityFactory INSTANCE = null;
+    private static ModelEntityFactory INSTANCE;
     private Map<String, ModelEntity> entitydefs = new HashMap<>();  //实体定义集合；(key=ENTITY_NAME(大写))
 
 
@@ -146,7 +146,7 @@ public class ModelEntityFactory {
         //获取所有表和它们的版本号
         Map<String, Object> map = DBHelper.query(sql, new IDBCallback() {
             @Override
-            public Map<String, Integer> extractData(UtilCursor uc) throws Exception{
+            public Map<String, Integer> extractData(UtilCursor uc){
                 Map<String, Integer> resultMap = new HashMap<>();
                 while (uc.next()) {
                     resultMap.put(uc.getStringIgnoreNull("table_name"), uc.getIntNotException("version"));
@@ -191,8 +191,8 @@ public class ModelEntityFactory {
         final List<ModelField> modelFields = modelEntity.getFields();
         List<ModelField> listModelField = DBHelper.query(sql, new IDBCallback() {
             @Override
-            public List<ModelField> extractData(UtilCursor uc) throws Exception{
-                List<ModelField> modelFieldList = new ArrayList<ModelField>();
+            public List<ModelField> extractData(UtilCursor uc){
+                List<ModelField> modelFieldList = new ArrayList<>();
                 for (int i = 0; i < modelFields.size(); i++) {
                     String fieldName = modelFields.get(i).name;
                     //已有不管
@@ -223,11 +223,6 @@ public class ModelEntityFactory {
 
     /**
      * 增加表
-     *
-     * @param name
-     * @param title
-     * @param version
-     * @return
      */
     public ModelEntity addEntity(String name, String title, int version) {
         ModelEntity entity = new ModelEntity(name, title, version);

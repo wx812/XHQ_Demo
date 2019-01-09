@@ -42,9 +42,9 @@ import android.util.Base64;
 import android.view.View;
 
 import com.xhq.demo.R;
-import com.xhq.demo.tools.fileTools.IOUtil;
 import com.xhq.demo.tools.StringUtils;
 import com.xhq.demo.tools.appTools.AppUtils;
+import com.xhq.demo.tools.fileTools.IOUtil;
 import com.xhq.demo.tools.fileTools.StorageUtils;
 
 import java.io.BufferedInputStream;
@@ -72,7 +72,7 @@ import java.util.regex.Pattern;
  *     Updt  : Description.
  * </pre>
  */
-public class ImageUtils{
+public class ImageUtil{
 
     public static final String DCIM_DIR = StorageUtils.getExStoragePubDir(Environment.DIRECTORY_DCIM).getPath();
 
@@ -133,7 +133,7 @@ public class ImageUtils{
             return ((BitmapDrawable)drawable).getBitmap();
         }else if(drawable instanceof NinePatchDrawable){
 
-            final int width = drawable.getIntrinsicWidth();
+            final int width = drawable.getIntrinsicWidth(); // drawable 的固有宽
             final int height = drawable.getIntrinsicHeight();
             Bitmap.Config config =
                     drawable.getOpacity() != PixelFormat.OPAQUE ? Bitmap.Config.ARGB_8888 : Bitmap.Config.RGB_565;
@@ -155,6 +155,10 @@ public class ImageUtils{
         return bitmap2Drawable(getBitmapFromBytes(bytes, reqWPixels, reqHPixels));
     }
 
+
+    /**
+     * use {@link #getDrawableFromBytes(byte[], int, int)}
+     */
     @Deprecated
     public static Drawable getDrawableFromBytes(byte[] bytes) {
         return bitmap2Drawable(getBitmapFromBytes(bytes));
@@ -1104,8 +1108,7 @@ public class ImageUtils{
                 return cursor.getString(index);
             }
         }finally{
-            if(cursor != null)
-                cursor.close();
+            if(cursor != null) cursor.close();
         }
         return null;
     }
@@ -1203,7 +1206,7 @@ public class ImageUtils{
 
     @SuppressWarnings("deprecation")
     public static ArrayList<String> getGalleryPhotos(Activity act) {
-        ArrayList<String> galleryList = new ArrayList<String>();
+        ArrayList<String> galleryList = new ArrayList<>();
         try {
             final String[] columns = { MediaStore.Images.Media.DATA, MediaStore.Images.Media._ID };
             final String orderBy = MediaStore.Images.Media._ID;
@@ -1275,11 +1278,6 @@ public class ImageUtils{
 
     /**
      * 替换文本为图片
-     *
-     * @param cs
-     * @param regPattern
-     * @param drawable
-     * @return
      */
     public static SpannableString replaceImageSpan(CharSequence cs, String regPattern, Drawable drawable) {
         SpannableString ss = cs instanceof SpannableString ? (SpannableString) cs : new SpannableString(cs);

@@ -9,6 +9,7 @@ import com.xhq.demo.cmd.impl.LoginCmd;
 import com.xhq.demo.constant.apiconfig.ApiEnum;
 import com.xhq.demo.constant.apiconfig.ApiKey;
 import com.xhq.demo.http.SocketClient;
+import com.xhq.demo.tools.NumberUtil;
 import com.xhq.demo.tools.StringUtils;
 import com.xhq.demo.tools.appTools.DeviceUtils;
 import com.xhq.demo.tools.dateTimeTools.DateTimeUtils;
@@ -37,7 +38,7 @@ import java.util.TimerTask;
 public class SocketManager {
     public final static int INT_DEF = -1; // int初始
 
-    private static SocketManager instance = null;
+    private static SocketManager instance;
 
     static {
         instance = new SocketManager();
@@ -258,8 +259,6 @@ public class SocketManager {
 
     /**
      * 发送指令
-     *
-     * @param cmd
      */
     public boolean sendCmd(BaseCmd cmd) {
 //        if (socketClient.isConnected()) {
@@ -286,12 +285,12 @@ public class SocketManager {
             @Override
             public void run() {
                 Iterator<String> set = mapCmdQueue.keySet().iterator();
-                long curTime = StringUtils.toLong(DateTimeUtils.getCurrDateTime_yMdHms());
+                long curTime = NumberUtil.toLong(DateTimeUtils.getCurrDateTime_yMdHms());
                 for (; set.hasNext(); ) {
                     String id = set.next();
                     BaseCmd cmd = mapCmdQueue.get(id);
                     if (cmd == null) continue;
-                    if (curTime - StringUtils.toLong(cmd.getTime()) >= 5L) {
+                    if (curTime - NumberUtil.toLong(cmd.getTime()) >= 5L) {
                         set.remove();//使用iterator的remove避免出现ConcurrentModificationException异常
 //                        mapCmdQueue.remove(id);
                         BaseAnswerCmd bac = new BaseAnswerCmd(cmd);
@@ -317,8 +316,6 @@ public class SocketManager {
 
     /**
      * socket是否连接
-     *
-     * @return
      */
     public boolean isConnected() {
 //        return socketClient != null && socketClient.isConnected();
@@ -327,10 +324,8 @@ public class SocketManager {
 
     /**
      * 网络情况变化
-     *
-     * @param netMobile
      */
-    public void setNetChange(int netMobile) {
-        this.netMobile = netMobile;
+    public void setNetChange(int mobileNet) {
+        this.netMobile = mobileNet;
     }
 }

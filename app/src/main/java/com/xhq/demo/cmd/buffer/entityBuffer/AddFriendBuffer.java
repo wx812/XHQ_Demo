@@ -88,7 +88,7 @@ public class AddFriendBuffer extends AbsEntityBuffer<AddFriendEntity> {
         final AddFriendDao dao = getEntityDao();
         dao.findAll(getSqlAddtion(), new IBeanWorker<AddFriendEntity>() {
             @Override
-            public void doWork(AddFriendEntity entity) throws Exception{
+            public void doWork(AddFriendEntity entity){
                 try {
                     add(entity);
                     if(ApiEnum.ReadTypeEnum.UNREAD.value == entity.getIsRead()){

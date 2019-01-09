@@ -14,6 +14,14 @@ public interface ConstantValue {
     long READ_SECONDS = 60;
     long WRITE_SECONDS = 60;
     long CONNECT_SECONDS = 60;
+
+
+    String SUCCESS_CODE = "0";      // 服务器返回数据成功代号
+    String FAIL_CODE = "-1";      // 服务器返回数据失败代号
+
+    String CHARSET_UTF8 = "utf-8";
+
+
     /**
      * mugshot verify Callback interface of server
      */

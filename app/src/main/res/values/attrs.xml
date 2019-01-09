@@ -56,12 +56,6 @@
     </declare-styleable>
 
 
-    <declare-styleable name="FlowLayout">
-        <attr name="rowSpacing" format="dimension" />
-        <attr name="columnSpacing" format="dimension" />
-        <!--<attr name="maxLine" format="integer" />-->
-    </declare-styleable>
-
 
     <!--*************************************************************************************************-->
     <declare-styleable name="CircleLayout">

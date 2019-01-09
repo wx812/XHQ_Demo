@@ -82,7 +82,7 @@ public class PinyinUtils {
         int len = ccs.length();
         StringBuilder sb = new StringBuilder(len);
         for (int i = 0; i < len; i++) {
-            sb.append(ccs2Pinyin(String.valueOf(ccs.charAt(i))).substring(0, 1)).append(split);
+            sb.append(ccs2Pinyin(String.valueOf(ccs.charAt(i))), 0, 1).append(split);
         }
         return sb.toString();
     }

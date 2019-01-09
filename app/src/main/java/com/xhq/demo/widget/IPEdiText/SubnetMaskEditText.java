@@ -38,29 +38,25 @@ public class SubnetMaskEditText extends IPAddrEditText {
 	public boolean isValidMask(String ipValue) {
 		String[] ips = ipValue.split("\\.");
 
-		String binaryVal = "";
-		if (ips.length != 4) {
-			return false;
-		}
+		StringBuilder binaryVal = new StringBuilder();
+		if (ips.length != 4) return false;
 
-		for (int i = 0; i < ips.length; i++) {
-			String binaryStr = Integer.toBinaryString(Integer.parseInt(ips[i]));
+        for(String ip : ips){
+            StringBuilder binaryStr = new StringBuilder(Integer.toBinaryString(Integer.parseInt(ip)));
 
-			int times = 8 - binaryStr.length();
+            int times = 8 - binaryStr.length();
 
-			for (int j = 0; j < times; j++) {
-				binaryStr = "0" + binaryStr;
-			}
-			binaryVal += binaryStr;
-		}
+            for(int j = 0; j < times; j++){
+                binaryStr.insert(0, "0");
+            }
+            binaryVal.append(binaryStr);
+        }
 
 //		LogDebug.i(TAG,
 //		        "binaryVal: " + binaryVal + " binaryVal.indexOf(0):" + binaryVal.indexOf("0")
 //		                + " binaryVal.lastIndexOf(1):" + binaryVal.lastIndexOf("1"));
-		if (binaryVal.indexOf("0") < binaryVal.lastIndexOf("1"))
-			return false;
-		return true;
+        return binaryVal.indexOf("0") >= binaryVal.lastIndexOf("1");
 
-	}
+    }
 
 }

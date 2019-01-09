@@ -1,4 +1,4 @@
-package com.xhq.demo.tools;
+package com.xhq.demo.tools.uiTools;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;

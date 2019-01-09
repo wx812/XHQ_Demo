@@ -4,7 +4,6 @@ import android.database.Cursor;
 
 import com.xhq.demo.tools.StringUtils;
 
-import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
@@ -12,7 +11,7 @@ import java.util.Locale;
 
 public class UtilCursor {
     public Cursor rs;
-    private final static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss", Locale.getDefault());
+    private final static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss", Locale.CHINA);
 
 
     public static String cutStringRight(String src, String cut) {
@@ -97,7 +96,7 @@ public class UtilCursor {
 //        this.rs = rs;
     }
 
-    public boolean next() throws Exception{
+    public boolean next(){
         return rs.moveToNext();
     }
 
@@ -120,9 +119,8 @@ public class UtilCursor {
      *
      * @param fieldName 字段名称
      * @return 返回值, null会返回""
-     * @throws SQLException 异常
      */
-    public String getStringRemoveSubSign(String fieldName) throws SQLException{
+    public String getStringRemoveSubSign(String fieldName){
         String str = rs.getString(rs.getColumnIndex(fieldName));
         if (str == null)
             return "";
@@ -136,27 +134,26 @@ public class UtilCursor {
      *
      * @param fieldName 字段名称
      * @return 返回值
-     * @throws SQLException 从ResultSet获取值时可能抛出的异常
      */
-    public String getStringIgnoreNull(String fieldName) throws SQLException{
+    public String getStringIgnoreNull(String fieldName){
         String str = rs.getString(rs.getColumnIndex(fieldName));
         if (str == null)
             return "";
         return str;
     }
 
-    public String getStringIgnoreNull(String fieldName, String defaultvalue) throws SQLException{
+    public String getStringIgnoreNull(String fieldName, String defaultvalue){
         String str = rs.getString(rs.getColumnIndex(fieldName));
         if (str == null)
             return defaultvalue;
         return str;
     }
 
-    public double getDouble(String fieldName) throws SQLException{
+    public double getDouble(String fieldName){
         return rs.getDouble(rs.getColumnIndex(fieldName));
     }
 
-    public double getDouble(int index) throws SQLException{
+    public double getDouble(int index){
         return rs.getDouble(index);
     }
 
@@ -165,11 +162,11 @@ public class UtilCursor {
     }
 
 
-    public int getInt(String fieldName) throws SQLException{
+    public int getInt(String fieldName){
         return rs.getInt(rs.getColumnIndex(fieldName));
     }
 
-    public int getInt(int index) throws SQLException{
+    public int getInt(int index){
         return rs.getInt(index);
     }
 
@@ -184,7 +181,7 @@ public class UtilCursor {
         return rs.getInt(rs.getColumnIndex(fieldName));
     }
 
-    public long getLong(String fieldName) throws SQLException{
+    public long getLong(String fieldName){
         return rs.getLong(rs.getColumnIndex(fieldName));
     }
 
@@ -198,7 +195,7 @@ public class UtilCursor {
         return rs.getLong(rs.getColumnIndex(fieldName));
     }
 
-    public int getColumnCount() throws SQLException{
+    public int getColumnCount(){
         return rs.getColumnCount();
     }
 

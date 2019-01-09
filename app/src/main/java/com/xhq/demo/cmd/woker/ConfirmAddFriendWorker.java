@@ -13,7 +13,7 @@ import com.xhq.demo.tools.StringUtils;
 public class ConfirmAddFriendWorker extends BaseCmdWorker<ConFirAddCmd> {
 
     @Override
-    protected void localDealCmd(final ConFirAddCmd cmd) throws Exception{
+    protected void localDealCmd(final ConFirAddCmd cmd){
         if (StringUtils.isEmpty(cmd.getGroupId())) {
             confirmAddFriend(cmd);
         }else {

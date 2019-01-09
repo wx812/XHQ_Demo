@@ -18,7 +18,7 @@ public class UpdateSelfNotifyWorker extends BaseCmdWorker<UpdateSelfNotifyFricmd
     }
 
     @Override
-    protected void localDealCmd(UpdateSelfNotifyFricmd cmd) throws Exception{
+    protected void localDealCmd(UpdateSelfNotifyFricmd cmd){
 //        //更新数据库
 //        String uid = cmd.getUserId();
 //        String pl = cmd.getSignature();

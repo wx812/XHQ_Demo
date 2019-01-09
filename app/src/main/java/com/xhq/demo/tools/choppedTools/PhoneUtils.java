@@ -29,6 +29,7 @@ import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
@@ -49,10 +50,6 @@ public class PhoneUtils {
 
 	/**
      * 短信发送
-     *
-     * @param context
-     * @param phones
-     * @param content
      */
     public static void sendSMS(Context context, String phones, String content){
         Intent intent = new Intent(Intent.ACTION_VIEW);
@@ -74,9 +71,6 @@ public class PhoneUtils {
 
     /**
      * 打电话
-     *
-     * @param context
-     * @param phone
      */
     public static void makePhone(Context context, String phone){
         try{
@@ -95,17 +89,10 @@ public class PhoneUtils {
     }
 
 
-    //隐藏手机号中间4位
-    public static String hideMobile(@NonNull String phone){
-        return phone.substring(0, phone.length() - (phone.substring(3)).length()) + "****" + phone.substring(7);
-    }
-
-	
-	
 	/**
      * 验证手机格式
      */
-    public static boolean isMobileNum(String mobiles){
+    public static boolean isMobileNum(String phoneNum){
     /*
     移动：134、135、136、137、138、139、150、151、157(TD)、158、159、178、187、188（147）
     联通：130、131、132、152、155、156、185、186
@@ -114,44 +101,42 @@ public class PhoneUtils {
     */
         //"[1]"代表第1位为数字1，"[3578]"代表第二位可以为3、5、7、8中的一个，"\\d{9}"代表后面是可以是0～9的数字，有9位。
         String telRegex = "[1][3578]\\d{9}";
-        return mobiles.matches(telRegex);
+        return phoneNum.matches(telRegex);
     }
 
 
     /**
      * 手机号码格式检查
-     * @param phone
-     * @return
      */
-    public static boolean isMobile(String phone) {
-        boolean flag = false;
-
+    public static boolean isMobile(String phoneNum) {
+        boolean flag;
         try {
-            if (phone == null) {
-                return flag;
-            }
-
-            phone = phone.replaceAll(" ", "");
-            if ("".equals(phone)) {
-                return flag;
-            }
-
-            flag = StringUtils.matchIgnoreCase("^1[3|4|5|8]\\d{9}$", phone);
-
+            if (phoneNum == null) return false;
+            phoneNum = phoneNum.replaceAll(" ", "");
+            if ("".equals(phoneNum)) return false;
+            flag = StringUtils.matchIgnoreCase("^1[3|4|5|8]\\d{9}$", phoneNum);
         } catch (Exception e) {
             return false;
         }
         return flag;
     }
 
+    /**
+     * 手机号验证
+     */
+    public static boolean isMobileNO(String str) {
+        // 验证手机号
+        Pattern p = Pattern.compile("^[1][3,4,5,7,8][0-9]{9}$");
+        Matcher m = p.matcher(str);
+        return m.matches();
+    }
 
     //隐藏手机号中间4位
-    public static String hideMobileNum(String phone){
+    public static String hideMobile(@NonNull String phone){
         return phone.substring(0, phone.length() - (phone.substring(3)).length()) + "****" + phone.substring(7);
     }
-	
-	
-	
+
+
 	public static String getPhoneModel(){
         if(TextUtils.isEmpty(Build.PRODUCT)){
             return Build.PRODUCT;
@@ -160,15 +145,15 @@ public class PhoneUtils {
         }
 
     }
-	
+
 	public static String getPhoneVersion(){
         return Build.VERSION.RELEASE;
     }
-	
-	
-	
-	
-	
+
+
+
+
+
     /**
      * 判断设备是否是手机
      *
@@ -184,7 +169,7 @@ public class PhoneUtils {
      *
      * @return IMEI码
      */
-    @SuppressLint("HardwareIds")
+    @SuppressLint({"HardwareIds", "MissingPermission"})
     @RequiresPermission(Manifest.permission.READ_PHONE_STATE)
     public static String getIMEI() {
         TelephonyManager tm = getTelMgr();
@@ -196,7 +181,7 @@ public class PhoneUtils {
      *
      * @return IMSI码
      */
-    @SuppressLint("HardwareIds")
+    @SuppressLint({"HardwareIds", "MissingPermission"})
     @RequiresPermission(Manifest.permission.READ_PHONE_STATE)
     public static String getIMSI() {
         TelephonyManager tm = getTelMgr();
@@ -283,6 +268,7 @@ public class PhoneUtils {
      * SubscriberId(IMSI) = 460030419724900<br>
      * VoiceMailNumber = *86<br>
      */
+    @SuppressLint("MissingPermission")
     @RequiresPermission(Manifest.permission.READ_PHONE_STATE)
     public static String getPhoneStatus() {
         TelephonyManager tm = getTelMgr();
@@ -364,7 +350,7 @@ public class PhoneUtils {
      */
     public static List<HashMap<String, String>> getAllContactInfo() {
         SystemClock.sleep(3000);
-        ArrayList<HashMap<String, String>> list = new ArrayList<HashMap<String, String>>();
+        ArrayList<HashMap<String, String>> list = new ArrayList<>();
         // 1.获取内容解析者
         ContentResolver resolver = AppUtils.getAppContext().getContentResolver();
         // 2.获取内容提供者的地址:com.android.contacts
@@ -393,7 +379,7 @@ public class PhoneUtils {
                     Cursor c = resolver.query(date_uri, new String[]{"data1",
                                     "mimetype"}, "raw_contact_id=?",
                             new String[]{contact_id}, null);
-                    HashMap<String, String> map = new HashMap<String, String>();
+                    HashMap<String, String> map = new HashMap<>();
                     // 8.解析c
                     while (c.moveToNext()) {
                         // 9.获取数据
@@ -480,7 +466,8 @@ public class PhoneUtils {
             // 2.2设置xml文件保存的路径
             // os : 保存的位置
             // encoding : 编码格式
-            xmlSerializer.setOutput(new FileOutputStream(new File("/mnt/sdcard/backupsms.xml")), "utf-8");
+            final String pathName = "/mnt/sdcard/backupsms.xml";
+            xmlSerializer.setOutput(new FileOutputStream(new File(pathName)), "utf-8");
             // 2.3设置头信息
             // standalone : 是否独立保存
             xmlSerializer.startDocument("utf-8", true);
@@ -518,6 +505,8 @@ public class PhoneUtils {
             xmlSerializer.flush();
         } catch (Exception e) {
             e.printStackTrace();
+        }finally{
+            cursor.close();
         }
     }
 }

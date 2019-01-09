@@ -18,7 +18,7 @@ public class MyScrollView extends HorizontalScrollView{
 	}
 	@Override
 	protected void onScrollChanged(int l, int t, int oldl, int oldt) {
-	        View view = (View) getChildAt(getChildCount()-1);
+	        View view = getChildAt(getChildCount()-1);
 	        // 如果为0，证明滑动到最左边
 	        if(view.getLeft()-getScrollX()==0){
 	        	onScrollListener.onLeft();

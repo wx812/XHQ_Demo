@@ -14,7 +14,7 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.RequiresPermission;
 
-import com.xhq.demo.tools.ToastUtils;
+import com.xhq.demo.tools.uiTools.ToastUtils;
 
 import java.io.IOException;
 import java.text.DecimalFormat;
@@ -180,11 +180,12 @@ public class LocationUtils {
     }
 
 
+
+    private static final double EARTH_RADIUS = 6378137.0; // 取WGS84标准参考椭球中的地球长半径(单位:m)
+
     /**
      * 计算两点距离
      */
-    public static final double EARTH_RADIUS = 6378137.0; // 取WGS84标准参考椭球中的地球长半径(单位:m)
-
     public static double getDistance(double lat_a, double lng_a, double lat_b, double lng_b) {
         double radLat1 = (lat_a * Math.PI / 180.0);
         double radLat2 = (lat_b * Math.PI / 180.0);
@@ -199,9 +200,6 @@ public class LocationUtils {
 
     /**
      * 距离计算转换成KM 或M
-     *
-     * @param distance
-     * @return
      */
     public static String distance2Str(double distance) {
         DecimalFormat df = new DecimalFormat("0.00");
@@ -210,7 +208,6 @@ public class LocationUtils {
         }
         return df.format(distance) + " m";
     }
-
 
 
     /**

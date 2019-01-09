@@ -6,6 +6,7 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.location.LocationManager;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
@@ -18,9 +19,10 @@ import android.support.annotation.RequiresApi;
 import android.support.annotation.RequiresPermission;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
+import android.util.DisplayMetrics;
 
-import com.xhq.demo.tools.fileTools.IOUtil;
 import com.xhq.demo.tools.ShellUtils;
+import com.xhq.demo.tools.fileTools.IOUtil;
 import com.xhq.demo.tools.netTools.NetUtils;
 import com.xhq.demo.tools.netTools.WiFiUtils;
 import com.xhq.demo.tools.uiTools.screen.ScreenUtils;
@@ -35,7 +37,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-import static com.xhq.demo.tools.appTools.AppUtils.getAppContext;
 
 /**
  * <pre>
@@ -55,15 +56,17 @@ public class DeviceUtils{
     }
 
     /**
+     *
+     * recommend Use (@link getImei} which returns IMEI for GSM or (@link getMeid} which returns MEID for CDMA.
      * @return get device id
      */
-    @SuppressLint("HardwareIds")
+    @SuppressLint({"HardwareIds", "MissingPermission"})
     @RequiresPermission(Manifest.permission.READ_PHONE_STATE)
     public static String getDeviceId(){
         Context ctx = AppUtils.getAppContext();
         String deviceId = null;
-        TelephonyManager tm = getTeleMgr();
-        if(tm != null) deviceId = tm.getDeviceId();
+        TelephonyManager teleMgr = getTeleMgr();
+        if(teleMgr != null) deviceId = teleMgr.getDeviceId();
         if(deviceId != null) return deviceId;
         deviceId = Secure.getString(ctx.getContentResolver(), Secure.ANDROID_ID);
         if(deviceId != null) return deviceId;
@@ -150,19 +153,27 @@ public class DeviceUtils{
     }
 
 
+    /**
+     * @return eg: zh
+     */
     public static String getLanguageDef(){
         Locale locale = Locale.getDefault();
         return locale.getLanguage();
     }
 
 
-    // 系统语言
+    /**
+     * @return 系统语言 eg: 中文 (中国)
+     */
     public static String getLocalName(){
         Locale locale = Locale.getDefault();
         return locale.getDisplayName();
     }
 
 
+    /**
+     * @return eg: CN
+     */
     public static String getLocaleCountry(){
         Locale locale = Locale.getDefault();
         return locale.getCountry();
@@ -170,9 +181,39 @@ public class DeviceUtils{
 
 
     /**
+     * 检测设备是不是平板
+     */
+    public static boolean isTabletDevice(){
+        // Verifies if the Generalized Size of the device is XLARGE to be
+        // considered a Tablet
+        TelephonyManager manager = getTeleMgr();
+        if(manager.getPhoneType() == TelephonyManager.PHONE_TYPE_NONE){ // it has no phone
+            return true;
+        }
+        boolean xlarge =
+                ((AppUtils.getResources().getConfiguration().screenLayout &
+                        Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_XLARGE);
+
+        // If XLarge, checks if the Generalized Density is at least MDPI
+        // (160dpi)
+        if(xlarge){
+            DisplayMetrics metrics = ScreenUtils.getDisplayMetrics();
+
+            // MDPI=160, DEFAULT=160, DENSITY_HIGH=240, DENSITY_MEDIUM=160,
+            // DENSITY_TV=213, DENSITY_XHIGH=320
+            return metrics.densityDpi == DisplayMetrics.DENSITY_DEFAULT || metrics.densityDpi == DisplayMetrics
+                    .DENSITY_HIGH || metrics.densityDpi == DisplayMetrics.DENSITY_TV || metrics.densityDpi ==
+                    DisplayMetrics.DENSITY_XHIGH;
+        }
+        // No, this is not a tablet!
+        return false;
+    }
+
+
+
+    /**
      * 判断GPS是否开启，GPS或者AGPS开启一个就认为是开启的
      *
-     * @param ctx
      * @return true 表示开启
      */
     public static boolean isGpsOPen(final Context ctx) {
@@ -184,7 +225,6 @@ public class DeviceUtils{
     /**
      * 判断GPS是否开启，GPS或者AGPS开启一个就认为是开启的
      *
-     * @param ctx
      * @return true 表示开启
      */
     public static boolean isEnableLocale(final Context ctx) {
@@ -245,7 +285,7 @@ public class DeviceUtils{
     }
 
 
-    @SuppressLint("HardwareIds")
+    @SuppressLint({"HardwareIds", "MissingPermission"})
     @RequiresPermission(Manifest.permission.READ_PHONE_STATE)
     public static String getIMSI(){
         TelephonyManager tm = NetUtils.getTelMgr();
@@ -284,7 +324,7 @@ public class DeviceUtils{
     @RequiresApi(api = Build.VERSION_CODES.O)
     @RequiresPermission(Manifest.permission.VIBRATE)
     public static void vibrate(long milliseconds) {
-         Context ctx = getAppContext();
+         Context ctx = AppUtils.getAppContext();
          Vibrator vibrator = (Vibrator) ctx.getSystemService(Context.VIBRATOR_SERVICE);
          VibrationEffect ve;
          ve = VibrationEffect.createOneShot(milliseconds, VibrationEffect.DEFAULT_AMPLITUDE);
@@ -300,13 +340,13 @@ public class DeviceUtils{
      */
     @RequiresPermission(Manifest.permission.VIBRATE)
     public static void vibrate(long[] pattern, int repeat) {
-        Vibrator vibrator = (Vibrator) getAppContext().getSystemService(Context.VIBRATOR_SERVICE);
+        Vibrator vibrator = (Vibrator) AppUtils.getAppContext().getSystemService(Context.VIBRATOR_SERVICE);
         if(null != vibrator) vibrator.vibrate(pattern, repeat);
     }
 
     @RequiresPermission(Manifest.permission.VIBRATE)
     public static void cancelVibrate() {
-        ((Vibrator) getAppContext().getSystemService(Context.VIBRATOR_SERVICE)).cancel();
+        ((Vibrator) AppUtils.getAppContext().getSystemService(Context.VIBRATOR_SERVICE)).cancel();
     }
 
 
@@ -335,7 +375,7 @@ public class DeviceUtils{
         Intent intent = new Intent("android.intent.action.ACTION_REQUEST_SHUTDOWN");
         intent.putExtra("android.intent.extra.KEY_CONFIRM", false);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        getAppContext().startActivity(intent);
+        AppUtils.getAppContext().startActivity(intent);
     }
 
 
@@ -349,7 +389,7 @@ public class DeviceUtils{
         intent.putExtra("nowait", 1);
         intent.putExtra("interval", 1);
         intent.putExtra("window", 0);
-        getAppContext().sendBroadcast(intent);
+        AppUtils.getAppContext().sendBroadcast(intent);
     }
 
     /**
@@ -357,7 +397,7 @@ public class DeviceUtils{
      * @param reason  传递给内核来请求特殊的引导模式，如"recovery"
      */
     public static void reboot(String reason) {
-        PowerManager pm = (PowerManager) getAppContext().getSystemService(Context.POWER_SERVICE);
+        PowerManager pm = (PowerManager) AppUtils.getAppContext().getSystemService(Context.POWER_SERVICE);
         try {
             if(null != pm) pm.reboot(reason);
         } catch (Exception e) {

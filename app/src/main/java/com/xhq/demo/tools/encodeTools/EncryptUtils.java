@@ -1,7 +1,7 @@
 package com.xhq.demo.tools.encodeTools;
 
-import com.xhq.demo.tools.fileTools.IOUtil;
 import com.xhq.demo.tools.StringUtils;
+import com.xhq.demo.tools.fileTools.IOUtil;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -379,7 +379,7 @@ public class EncryptUtils {
         if (bytes == null) return null;
         int len = bytes.length;
         if (len <= 0) return null;
-        StringBuffer buf = new StringBuffer(len << 1);
+        StringBuilder buf = new StringBuilder(len << 1);
         final char hexChar[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
         for (byte aByte : bytes) {
             buf.append(hexChar[(aByte & 0xf0) >>> 4]);
@@ -432,16 +432,16 @@ public class EncryptUtils {
     //解密(进制变更)
     public static String decrypt(String txt) {
         StringBuilder src = new StringBuilder(64);
-        int l1, n = 1, srclen = 0;
+        int l1, n = 1, srcLen = 0;
         String s;
         for (int i = 0, l = txt.length(); i < l; ) {
             l1 = Integer.parseInt(txt.substring(i, i + 1), 21) - 10;
             s = txt.substring(++i, i + l1);
             if (i > 1) {
-                src.append((char) (Integer.parseInt(s, 36) - n * 10 - srclen));
+                src.append((char) (Integer.parseInt(s, 36) - n * 10 - srcLen));
                 n++;
             } else {
-                srclen = Integer.parseInt(s, 36) - 10;
+                srcLen = Integer.parseInt(s, 36) - 10;
             }
             i += l1;
         }

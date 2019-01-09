@@ -99,7 +99,7 @@ public class DBHelper extends SQLiteOpenHelper{
     }
 
     //更新
-    public static void update(SQLParam sqlParam) throws Exception{
+    public static void update(SQLParam sqlParam){
         if (!sqlParam.hasLob)
             writedb.beginTransaction();
         try {
@@ -111,7 +111,7 @@ public class DBHelper extends SQLiteOpenHelper{
         }
     }
 
-    public static void update(String sql, Object... paras) throws Exception{
+    public static void update(String sql, Object... paras){
         writedb.beginTransaction();
         try {
             writedb.execSQL(sql, paras);
@@ -128,9 +128,8 @@ public class DBHelper extends SQLiteOpenHelper{
      * @param s     待执行sql
      * @param paras 参数组
      *              //     * @param types 参数类别
-     * @throws Exception
      */
-    public static void updateBatchSameSql(String s, Object[] paras) throws Exception{
+    public static void updateBatchSameSql(String s, Object[] paras){
         writedb.beginTransaction();
         try {
             for (Object para : paras) {
@@ -151,7 +150,7 @@ public class DBHelper extends SQLiteOpenHelper{
      */
     public static boolean recordIsExists(String sql, Object... o) throws Exception{
         IDBCallback<Boolean> rse = new IDBCallback<Boolean>() {
-            public Boolean extractData(UtilCursor rs) throws Exception{
+            public Boolean extractData(UtilCursor rs){
                 return (rs.next());
             }
         };
@@ -162,7 +161,7 @@ public class DBHelper extends SQLiteOpenHelper{
     public static int queryCount(String sql, Object... params) throws Exception{
         String sqlCount = "SELECT COUNT(0) count FROM(" + sql + ") AAA";
         IDBCallback<Integer> rse = new IDBCallback<Integer>() {
-            public Integer extractData(UtilCursor rs) throws Exception{
+            public Integer extractData(UtilCursor rs){
                 rs.next();
                 return rs.getIntNotException("count");
             }

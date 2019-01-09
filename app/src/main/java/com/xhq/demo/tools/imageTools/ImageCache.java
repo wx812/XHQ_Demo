@@ -12,6 +12,6 @@ import android.graphics.Bitmap;
  */
 public interface ImageCache{
 
-    public Bitmap getBitmapFromFile(String url);
-    public void putBitmap(String url, Bitmap bitmap);
+    Bitmap getBitmapFromFile(String url);
+    void putBitmap(String url, Bitmap bitmap);
 }

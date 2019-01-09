@@ -20,6 +20,7 @@ import java.io.InputStream;
 import java.lang.reflect.Method;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -101,6 +102,15 @@ public class NetUtils{
         return info != null && info.isAvailable() && info.getType() == ConnectivityManager.TYPE_MOBILE;
     }
 
+    /*
+     * 判断网络是否可用̬
+     */
+    public static boolean isEnableNetwork() {
+        ConnectivityManager connMgr = getConnMgr();
+        return Objects.requireNonNull(connMgr).getActiveNetworkInfo() != null
+                && connMgr.getActiveNetworkInfo().isAvailable();
+    }
+
 
     /**
      * 判断网络是否是4G
@@ -119,6 +129,7 @@ public class NetUtils{
     public static boolean isDataEnabled(){
         try{
             TelephonyManager tm = getTelMgr();
+            @SuppressLint("PrivateApi")
             Method dataEnabled = tm.getClass().getDeclaredMethod("getDataEnabled");
             if(null != dataEnabled){
                 return (boolean)dataEnabled.invoke(tm);
@@ -215,8 +226,7 @@ public class NetUtils{
      * 查看 webkit 自带URLUtil工具类{@link android.webkit.URLUtil#isValidUrl(String)}
      */
     public static boolean isValidUrl(String link) {
-        String regex = "^(http://|https://)?((?:[A-Za-z0-9]+-[A-Za-z0-9]+|[A-Za-z0-9]+)\\.)+([A-Za-z]+)" +
-                "[/\\?\\:]?.*$";
+        String regex = "^(http://|https://)?((?:[A-Za-z0-9]+-[A-Za-z0-9]+|[A-Za-z0-9]+)\\.)+([A-Za-z]+)[/?:]?.*$";
         Pattern pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(link);
         return matcher.matches();
@@ -249,11 +259,11 @@ public class NetUtils{
         String IMSI = tm.getSubscriberId();
         if (StringUtils.isNullOrEmpty(IMSI)) return "未知";
         if (IMSI.startsWith("46000") || IMSI.startsWith("46002")) {
-            providersName = "中国移动";
+            providersName = "中国移动"; // China Mobile
         } else if (IMSI.startsWith("46001")) {
-            providersName = "中国联通";
+            providersName = "中国联通"; // China Unicom
         } else if (IMSI.startsWith("46003")) {
-            providersName = "中国电信";
+            providersName = "中国电信"; // China Telecom
         }
         return providersName;
     }

@@ -13,7 +13,7 @@ import com.xhq.demo.constant.apiconfig.ApiEnum;
 
 public class NewGroupMemberWorker extends BaseCmdWorker<NewGroMemCmd>{
     @Override
-    protected void localDealCmd(final NewGroMemCmd cmd) throws Exception{
+    protected void localDealCmd(final NewGroMemCmd cmd){
 //        GroupMemberDao groupMemberDao = new GroupMemberDao();
 //        GroupMemberEntity groupMemberEntity = new GroupMemberEntity();
 //		String gid = cmd.getGroupId();

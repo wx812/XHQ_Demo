@@ -1,14 +1,15 @@
 package com.xhq.demo.tools.appTools;
 
+import android.content.Context;
 import android.os.Build;
 import android.os.Looper;
 import android.util.ArrayMap;
 
 import com.xhq.demo.HomeApp;
-import com.xhq.demo.tools.ToastUtils;
 import com.xhq.demo.tools.fileTools.StorageUtils;
 import com.xhq.demo.tools.spTools.SPKey;
 import com.xhq.demo.tools.spTools.SPUtils;
+import com.xhq.demo.tools.uiTools.ToastUtils;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -16,10 +17,12 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.io.Writer;
+import java.net.UnknownHostException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * <pre>
@@ -34,9 +37,14 @@ public class AppCrashUtil implements Thread.UncaughtExceptionHandler {
     // Storage device information and exception information
     private Map<String, String> mExceptionMap;
     private static AppCrashUtil INSTANCE;
-    //    private Context mContext;
+    private Context mContext;
     // system default UncaughtException
     private Thread.UncaughtExceptionHandler mDefaultExceptionHandler;
+
+//    /**
+//     * 使用Properties来保存设备的信息和错误堆栈信息
+//     */
+//    private final Properties mDeviceCrashInfo = new Properties();
 
 
 //    private MyServiceConnection conn;
@@ -52,15 +60,13 @@ public class AppCrashUtil implements Thread.UncaughtExceptionHandler {
 
 
     public static synchronized AppCrashUtil getInstance() {
-        if (null == INSTANCE) {
-            INSTANCE = new AppCrashUtil();
-        }
+        if (null == INSTANCE) INSTANCE = new AppCrashUtil();
         return INSTANCE;
     }
 
 
     public void init() {
-//        mContext = context;
+        mContext = AppUtils.getAppContext();
         mDefaultExceptionHandler = Thread.getDefaultUncaughtExceptionHandler();
         // set the default CatchExceptionUtil processor for the program
         Thread.setDefaultUncaughtExceptionHandler(this);
@@ -93,19 +99,37 @@ public class AppCrashUtil implements Thread.UncaughtExceptionHandler {
             mDefaultExceptionHandler.uncaughtException(thread, ex);
         } else {
             try {
-                Thread.sleep(1000);
+                Thread.sleep(3000); // 防止文件还未传完
             } catch (InterruptedException e) {
                 e.printStackTrace();
-            }
-
+            } finally{
 //            if(null != conn){
 //                mContext.unbindService(conn);
 //                conn = null;
 //            }
 
-            HomeApp.exitApp();
+                HomeApp.exitApp();
 //            android.os.Process.killProcess(android.os.Process.myPid());
-            System.exit(1);
+                System.exit(1);
+
+
+//                Intent intent = new Intent();
+//                intent.setAction("com.zkh.vendingcheck");
+//                intent.putExtra("info", "stopCheck");
+//                mContext.sendBroadcast(intent);
+//
+//                AlarmManager mgr = (AlarmManager) mContext.getSystemService(Context.ALARM_SERVICE);
+//                Intent intent1 = new Intent(mContext, MainActivity.class);
+//                intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                intent1.putExtra("crash", true);
+//                PendingIntent restartIntent = PendingIntent.getActivity(mContext, 0, intent1, PendingIntent.FLAG_ONE_SHOT);
+//                Objects.requireNonNull(mgr)
+//                       .set(AlarmManager.RTC, System.currentTimeMillis() + 10000, restartIntent); // 10秒钟后重启应用
+//
+//                android.os.Process.killProcess(android.os.Process.myPid());
+//                System.exit(0);
+//                System.gc();
+            }
         }
     }
 
@@ -120,7 +144,7 @@ public class AppCrashUtil implements Thread.UncaughtExceptionHandler {
         if (ex == null) return false;
 
         mExceptionMap.clear();
-        String msg = ex.getLocalizedMessage();
+        final String msg = ex.getLocalizedMessage();
 //        Logger.t("未处理异常").e(ex, "捕捉到的未知异常");
 
         new Thread() {
@@ -182,7 +206,8 @@ public class AppCrashUtil implements Thread.UncaughtExceptionHandler {
      */
     private String getExceptionInfo(Throwable ex) {
         StringBuilder sb = new StringBuilder();
-        for (Map.Entry<String, String> entry : mExceptionMap.entrySet()) {
+        Set<Map.Entry<String, String>> entries = mExceptionMap.entrySet();
+        for (Map.Entry<String, String> entry : entries) {
             String key = entry.getKey();
             String value = entry.getValue();
             sb.append(key).append("=").append(value).append("\r\n");
@@ -199,6 +224,64 @@ public class AppCrashUtil implements Thread.UncaughtExceptionHandler {
         String result = writer.toString();
         sb.append(result);
         return sb.toString();
+    }
+
+
+    /**
+     * Copied from "android.util.Log.getStackTraceInfo()" in order to avoid usage of Android stack
+     * in unit tests.
+     *
+     * @return Stack trace in form of String
+     */
+    static String getStackTraceInfo(Throwable tr){
+        if(tr == null) return "";
+
+        // This is to reduce the amount of log spew that apps do in the non-error
+        // condition of the network being unavailable.
+        Throwable t = tr;
+        while(t != null){
+            if(t instanceof UnknownHostException) return "";
+            t = t.getCause();
+        }
+
+        StringWriter sw = new StringWriter();
+        PrintWriter pw = new PrintWriter(sw);
+        tr.printStackTrace(pw);
+        pw.flush();
+        return sw.toString();
+    }
+
+
+    public static String getStackTrace(Throwable tr) {
+        // add the class name and any message passed to constructor
+        final StringBuilder result = new StringBuilder("BOO-BOO: ");
+        result.append(tr.toString());
+        final String NEW_LINE = System.getProperty("line.separator");
+        result.append(NEW_LINE);
+
+        // add each element of the stack trace
+        StackTraceElement[] stackTrace = tr.getStackTrace();
+        for (StackTraceElement element : stackTrace) {
+            result.append(element);
+            result.append(NEW_LINE);
+        }
+
+//        //使用反射来收集设备信息.在Build类中包含各种设备信息,
+//        //例如: 系统版本号,设备生产商 等帮助调试程序的有用信息
+//        //具体信息请参考后面的截图
+//        Field[] fields = Build.class.getDeclaredFields();
+//        for (Field field : fields) {
+//            try {
+//                field.setAccessible(true);
+//                mDeviceCrashInfo.put(field.getName(), "" + field.get(null));
+//                if (DEBUG) {
+//                    Log.d(TAG, field.getName() + " : " + field.get(null));
+//                }
+//            } catch (Exception e) {
+//                Log.e(TAG, "Error while collect crash info", e);
+//            }
+//        }
+        return result.toString();
     }
 
 

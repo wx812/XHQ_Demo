@@ -18,7 +18,7 @@ public class ChangeStatuWorker extends BaseCmdWorker<ChangeUsCmd>{
     }
 
     @Override
-    protected void localDealCmd(ChangeUsCmd cmd) throws Exception{
+    protected void localDealCmd(ChangeUsCmd cmd){
 //        UserBaseEntity user = UserBaseBuffer.getInstance().get(cmd.getUid());
 //        if (user == null) return;
 //        user.setUserStatu(cmd.getUs());

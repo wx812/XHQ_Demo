@@ -5,8 +5,8 @@ package com.xhq.demo.db.db_sql.interf;
  */
 public abstract class AbsDbWorker implements IDbWorker {
     @Override
-    public void doAfterDbCommit() throws Exception{}
+    public void doAfterDbCommit(){}
 
     @Override
-    public void doAfterDbRollback() throws Exception{}
+    public void doAfterDbRollback(){}
 }

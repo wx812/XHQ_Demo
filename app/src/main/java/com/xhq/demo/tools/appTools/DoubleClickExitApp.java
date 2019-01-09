@@ -5,7 +5,7 @@ import android.os.Looper;
 import android.view.KeyEvent;
 
 import com.xhq.demo.HomeApp;
-import com.xhq.demo.tools.ToastUtils;
+import com.xhq.demo.tools.uiTools.ToastUtils;
 
 
 public class DoubleClickExitApp {

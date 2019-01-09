@@ -10,7 +10,8 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 
 import com.xhq.demo.tools.StringUtils;
-import com.xhq.demo.tools.imageTools.ImageUtils;
+import com.xhq.demo.tools.appTools.AppUtils;
+import com.xhq.demo.tools.imageTools.ImageUtil;
 
 import java.io.File;
 import java.io.IOException;
@@ -165,14 +166,12 @@ public class CameraUtils {
     /**
      * 获得选中相册的图片路径
      *
-     * @param context 上下文
      * @param data    onActivityResult返回的Intent
-     * @return
      */
-    public static String getChoosedImagePath(Activity context, Intent data) {
+    public static String getChoosedImagePath(Intent data) {
         if (data == null) return null;
         String path = "";
-        ContentResolver resolver = context.getContentResolver();
+        ContentResolver resolver = AppUtils.getAppContext().getContentResolver();
         Uri originalUri = data.getData();
         if (null == originalUri) return null;
         String[] projection = {MediaStore.Images.Media.DATA};
@@ -186,9 +185,7 @@ public class CameraUtils {
                 e.printStackTrace();
             } finally {
                 try {
-                    if (!cursor.isClosed()) {
-                        cursor.close();
-                    }
+                    if (!cursor.isClosed()) cursor.close();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -211,6 +208,6 @@ public class CameraUtils {
         Bitmap photo = extras.getParcelable("data");
         File file = new File(filePath);
 //        if (ImageUtils.save(photo, file, Bitmap.CompressFormat.JPEG)) return file;
-        return ImageUtils.saveBitmap2File(photo,file);
+        return ImageUtil.saveBitmap2File(photo, file);
     }
 }

@@ -73,17 +73,17 @@ public class DimenFileGenTool{
 
                     w820.append(start).append(num * 2.56).append(end).append("\r\n");
                 }else{
-                    sw240.append(tempString).append("");
+                    sw240.append(tempString);
 
-                    sw480.append(tempString).append("");
+                    sw480.append(tempString);
 
-                    sw600.append(tempString).append("");
+                    sw600.append(tempString);
 
-                    sw720.append(tempString).append("");
+                    sw720.append(tempString);
 
-                    sw800.append(tempString).append("");
+                    sw800.append(tempString);
 
-                    w820.append(tempString).append("");
+                    w820.append(tempString);
 
                 }
                 line++;
@@ -133,54 +133,33 @@ public class DimenFileGenTool{
             writeFile(sw800file, sw800.toString());
 
             writeFile(w820file, w820.toString());
-
         }catch(IOException e){
-
             e.printStackTrace();
-
         }finally{
-
             if(reader != null){
-
                 try{
-
                     reader.close();
-
                 }catch(IOException e1){
-
                     e1.printStackTrace();
-
                 }
-
             }
-
         }
-
     }
 
 
     /**
      * 写入方法
      */
-
     public static void writeFile(String file, String text){
-
         PrintWriter out = null;
-
         try{
-
             out = new PrintWriter(new BufferedWriter(new FileWriter(file)));
-
             out.println(text);
-
         }catch(IOException e){
-
             e.printStackTrace();
-
+        }finally{
+            out.close();
         }
-
-        out.close();
-
     }
 
 }

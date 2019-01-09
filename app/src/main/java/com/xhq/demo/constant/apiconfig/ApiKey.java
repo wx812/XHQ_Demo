@@ -5,12 +5,33 @@ package com.xhq.demo.constant.apiconfig;
  * 时间:2017/8/3.
  */
 
-public class ApiKey {
+public interface ApiKey {
+
+
+    String SALT = "$X^Hrl#Cza"; // 测试环境, MD5加盐 --> 加密
+
+
+    String AUTH_TOKEN = "authToken";        // 授权码，MD5(customerCode+vendorCode+salt+yyyyMMdd)
+    String CUSTOMER_CODE = "customerCode";  // 客户编码
+    String VENDING_CODE = "vendorCode";      // 售货机编码
+
+    /**
+     * {"code":"0","data":[],"message":"success","result":0}
+     */
+
+    // 服务器返回的最外层 json 字段
+    String STATUS_CODE = "code";            // 服务器返回, 用于判断返回数据是否正确,
+    String STATUS_MSG = "message";          // 返回的 状态信息
+    String STATUS_RESULT = "result";        // 编码，兼容老版本，后期考虑去掉, 使用 code 替代
+    String DATA = "data";                   // 如果是请求数据, 就有这个字段. 如果是上传数据, 返回就没有这个字段
+
+
+    String PRODUCT_CODES = "productCodes";  // 查询虚拟货道
 
     /**
      * 公用网络请求传递的key
      */
-    public interface CommonUrlKey {
+    interface CommonUrlKey {
         // 通用必须的 请求字段
         String sk = "sk";                           //登录令牌
         String _sk = "_sk";                         //登录令牌
@@ -30,7 +51,7 @@ public class ApiKey {
     /**
      * 登陆界面
      */
-    public interface Login {
+    interface Login {
         String USER_NAME = "username";
         String PASSWORD = "password";
     }
@@ -38,7 +59,7 @@ public class ApiKey {
     /**
      * 注册页面，以及发送验证码请求的key
      */
-    public static class RegisterKey {
+    class RegisterKey {
 
         //发送的电话号码
         public static final String tel = "tel";
@@ -53,7 +74,7 @@ public class ApiKey {
     /**
      * home页面和民政一卡通页面请求的key
      */
-    public static class HomeKey {
+    class HomeKey {
 
         //请求图片的大小，如果是“2”为X2大小的图，“3”为X3大小的图
         public static final String scale = "scale";
@@ -70,7 +91,7 @@ public class ApiKey {
     /**
      * 上传图片请求的key
      */
-    public static class UpImgKey {
+    class UpImgKey {
 
         //图片路径
         public static final String path = "path";
@@ -105,14 +126,14 @@ public class ApiKey {
     /**
      * 下载图片
      */
-    public interface DownloadImg {
+    interface DownloadImg {
         String ATTACH_ID = "attachId";
     }
 
     /**
      * request params of the grant card inquire
      */
-    public interface GrantInquire {
+    interface GrantInquire {
         String AREA_ID = "area_id";          // 区划ID
         String PAGESHOW = "pageshow";        // 当前页数（第几页）
         String CARD_TYPE = "card_type";      // 卡片类型
@@ -123,14 +144,14 @@ public class ApiKey {
     /**
      * 卡片查询的key
      */
-    public static class InquireCard {
+    class InquireCard {
         public static final String PERSON_UID = "person_uid";
     }
 
     /**
      * 个人信息查询的key
      */
-    public interface Details {
+    interface Details {
         String TEL = "tel";
         String NAME = "name";
         String SEX = "sex";
@@ -149,7 +170,7 @@ public class ApiKey {
     /**
      * 检查二维码是否有效
      */
-    public interface ScanCheck {
+    interface ScanCheck {
         String BJT_NO = "bjt_no";
         String BANK_ACCOUNT_CODE = "bank_account_code";
 
@@ -158,7 +179,7 @@ public class ApiKey {
     /**
      * MugShot verify
      */
-    public interface MugShotVerify {
+    interface MugShotVerify {
         String PERSON_UID = "person_uid";               // myself ID Card number
         String PERSON_NAME = "person_name";             // myself ID Card name
     }
@@ -166,7 +187,7 @@ public class ApiKey {
     /**
      * 卡片激活
      */
-    public interface CardActivate {
+    interface CardActivate {
         String PERSON_UID = "person_uid";
         String PERSON_NAME = "person_name";
         String BANK_ACCOUNT_CODE = "bank_account_code";

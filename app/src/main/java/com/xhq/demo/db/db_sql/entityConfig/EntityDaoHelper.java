@@ -7,12 +7,12 @@ import com.xhq.demo.db.db_sql.entityConfig.ModelConfig.ModelConsts;
 import com.xhq.demo.db.db_sql.entityConfig.ModelConfig.ModelEntity;
 import com.xhq.demo.db.db_sql.entityConfig.ModelConfig.ModelEntityFactory;
 import com.xhq.demo.db.db_sql.entityConfig.ModelConfig.ModelField;
+import com.xhq.demo.tools.NumberUtil;
 import com.xhq.demo.tools.StringUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.sql.SQLException;
 import java.sql.Types;
 import java.text.MessageFormat;
 import java.util.ArrayList;
@@ -183,7 +183,7 @@ public abstract class EntityDaoHelper {
     /**
      * 从记录集中取出一条记录(新建一个Entity实例)
      */
-    public static void readEntityFromRs(AbsEntity bean, UtilCursor urs, String... fieldnames) throws SQLException{
+    public static void readEntityFromRs(AbsEntity bean, UtilCursor urs, String... fieldnames){
         bean.setNewRecord(false);
         ModelEntity modelEntity = getModelEntity(bean.getEntityName());
         if (modelEntity == null) return;
@@ -258,10 +258,10 @@ public abstract class EntityDaoHelper {
                     args[i++] = value;
                 }
                 if (mft == ModelConsts.FieldType.INT.value) {
-                    args[i++] = StringUtils.toInt(value);
+                    args[i++] = NumberUtil.toInt(value);
                 }
                 if (mft == ModelConsts.FieldType.NUMERIC.value) {
-                    args[i++] = StringUtils.toDouble(value);
+                    args[i++] = NumberUtil.toDouble(value);
                 }
             } else {
                 args[i++] = v;
@@ -313,7 +313,7 @@ public abstract class EntityDaoHelper {
     }
 
     //构建insert语句
-    public static SQLParam buildInsertSql(AbsEntity value) throws Exception{
+    public static SQLParam buildInsertSql(AbsEntity value){
         value.setLastTime(UtilCursor.nowDateTimeNumber());
 
         String entityName = value.getEntityName();
@@ -331,7 +331,7 @@ public abstract class EntityDaoHelper {
     }
 
     //构建update语句
-    public static SQLParam buildUpdateSql(AbsEntity value) throws Exception{
+    public static SQLParam buildUpdateSql(AbsEntity value){
         String entityName = value.getEntityName();
         if (entityName == null) {
 //            logger.e("Entity Class:" + value.getClass() + "没有实现方法getEntityName");
@@ -365,17 +365,14 @@ public abstract class EntityDaoHelper {
 
     /**
      * 根据字段类型，转换值
-     * @param value
-     * @param fieldType
-     * @return
      */
     private static Object getFieldValue(Object value, int fieldType) {
         String strValue = value != null ? value.toString() : "";
         if (fieldType == ModelConsts.FieldType.INT.value) {
-            return StringUtils.toInt(strValue);
+            return NumberUtil.toInt(strValue);
         }
         if (fieldType == ModelConsts.FieldType.NUMERIC.value) {
-            return StringUtils.toDouble(strValue);
+            return NumberUtil.toDouble(strValue);
         }
         return value;
     }

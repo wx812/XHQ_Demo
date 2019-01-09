@@ -38,7 +38,7 @@ public class GalleryLVMainActivity extends BaseActivity{
 
     @Override
     public void initView(){
-        listView = (ListView)findViewById(R.id.lv);
+        listView = findViewById(R.id.lv);
         for(int i = 0; i < 7; i++){
             titleList.add("List" + i);
         }

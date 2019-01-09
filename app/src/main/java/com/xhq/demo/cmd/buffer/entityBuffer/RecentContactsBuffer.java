@@ -49,7 +49,7 @@ public class RecentContactsBuffer extends AbsEntityBuffer<RecentContactsEntity> 
     /**
      * 本地刷新，所有数据；
      *
-     * @throws Exception
+     * @throws Exception SQLException
      */
     //在初始化缓存的时候把未读消息总数和未读加好友消息总数维护
     protected void localReload() throws Exception{
@@ -60,7 +60,7 @@ public class RecentContactsBuffer extends AbsEntityBuffer<RecentContactsEntity> 
         //未读消息总数
         dao.findAll(getSqlAddtion(), new IBeanWorker<RecentContactsEntity>() {
             @Override
-            public void doWork(RecentContactsEntity entity) throws Exception{
+            public void doWork(RecentContactsEntity entity){
                 try {
                     add(entity);
                     if(entity.getId().equals(entity.getGoupId()+entity.getUserId())){
@@ -68,7 +68,6 @@ public class RecentContactsBuffer extends AbsEntityBuffer<RecentContactsEntity> 
                     }else {
                         totalUnreadMsgNum += entity.getUnreadNum();
                     }
-
                 } catch (Exception e) {
                     e.printStackTrace();
                     throw e;
@@ -99,7 +98,7 @@ public class RecentContactsBuffer extends AbsEntityBuffer<RecentContactsEntity> 
 
     //未读加群消息+1
     public void decAddGroupUnreadNum(int count) {
-        addGroupUnreadNum = addGroupUnreadNum - count;
+        addGroupUnreadNum -= count;
     }
 
     //未读消息总数+1

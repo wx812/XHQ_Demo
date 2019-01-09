@@ -11,7 +11,7 @@ import com.xhq.demo.cmd.impl.DelFriCmd;
 public class DeleteFriendWorker extends BaseCmdWorker<DelFriCmd> {
 
     @Override
-    protected void localDealCmd(final DelFriCmd cmd) throws Exception{
+    protected void localDealCmd(final DelFriCmd cmd){
 //        UserBaseEntity a = UserBaseBuffer.getInstance().get(cmd.getUserId());
 //        LogUtil.e("DeleteFriendWorker");
 //        if (a != null) {
@@ -25,7 +25,7 @@ public class DeleteFriendWorker extends BaseCmdWorker<DelFriCmd> {
     }
 
     //保存指令
-    private void saveMsg(final DelFriCmd cmd) throws Exception{
+    private void saveMsg(final DelFriCmd cmd){
 
 //        UserBaseDao userBaseDao = new UserBaseDao();
 //

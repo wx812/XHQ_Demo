@@ -36,18 +36,18 @@ public abstract class AbsEntityDao<T extends AbsEntity> {
     }
 
     //读bean的方法
-    protected void readEntityFromRs(T bean, UtilCursor urs, String... fieldnames) throws SQLException{
+    protected void readEntityFromRs(T bean, UtilCursor urs, String... fieldnames){
         EntityDaoHelper.readEntityFromRs(bean, urs, fieldnames);
     }
 
-    public void insert(T value) throws Exception{
+    public void insert(T value){
         SQLParam sqlParam = EntityDaoHelper.buildInsertSql(value);
         if (sqlParam != null) {
             DBHelper.update(sqlParam.sql, sqlParam.paras);
         }
     }
 
-    public void batchInsert(List<T> list) throws Exception{
+    public void batchInsert(List<T> list){
         if (list.isEmpty()) return;
         T value = list.get(0);
         String entityName = value.getEntityName();
@@ -72,7 +72,7 @@ public abstract class AbsEntityDao<T extends AbsEntity> {
     }
 
     //批量更新
-    public void batchUpdate(List<T> list, String... fieldname) throws Exception{
+    public void batchUpdate(List<T> list, String... fieldname){
         if (list.isEmpty()) return;
         T value = list.get(0);
         String entityName = value.getEntityName();
@@ -120,13 +120,13 @@ public abstract class AbsEntityDao<T extends AbsEntity> {
         DBHelper.updateBatchSameSql(sql, listArgs);
     }
 
-    public void update(T value) throws Exception{
+    public void update(T value){
         SQLParam sqlParam = EntityDaoHelper.buildUpdateSql(value);
         if (sqlParam == null) return;
         DBHelper.update(sqlParam.sql, sqlParam.paras);
     }
 
-    public void insertOrUpdate (T value, AbsEntityBuffer absEntityBuffer) throws Exception{
+    public void insertOrUpdate (T value, AbsEntityBuffer absEntityBuffer){
         String id = value.getEntityId();
         AbsEntity absEntity = absEntityBuffer.get(id);
         if(absEntity != null){
@@ -138,7 +138,7 @@ public abstract class AbsEntityDao<T extends AbsEntity> {
     }
 
     // 主键都要更新的
-    public void updateWhere(T value, String where, Object... args) throws Exception{
+    public void updateWhere(T value, String where, Object... args){
         String entityName = value.getEntityName();
         if (entityName == null) {
             Log.e(TAG,"Entity Class:" + value.getClass() + "没有实现方法getEntityName");
@@ -164,7 +164,7 @@ public abstract class AbsEntityDao<T extends AbsEntity> {
     }
 
 
-    public void updateWhereEx(String where, String fieldname , Object... args) throws Exception{
+    public void updateWhereEx(String where, String fieldname , Object... args){
         String entityName = getEntityName();
 
         ModelEntity modelEntity = getModelEntity();
@@ -188,7 +188,7 @@ public abstract class AbsEntityDao<T extends AbsEntity> {
      * @param fieldname 要更新的字段名称数组(不区分大小写)
      * @return int 更新条数；
      */
-    public void update(T value, String... fieldname) throws Exception{
+    public void update(T value, String... fieldname){
         if (fieldname.length == 0)  update(value);
         String entityName = value.getEntityName();
         if (entityName == null) {
@@ -222,7 +222,7 @@ public abstract class AbsEntityDao<T extends AbsEntity> {
      * @param value 实体对象
      * @return int 删除条数；
      */
-    public void delete(T value) throws Exception{
+    public void delete(T value){
         String entityName = value.getEntityName();
         if (entityName == null) {
             return;
@@ -243,7 +243,7 @@ public abstract class AbsEntityDao<T extends AbsEntity> {
         DBHelper.update(sql, args);
     }
 
-    public void deleteByKey(String key) throws Exception{
+    public void deleteByKey(String key){
         String entityName = getEntityName();
         if (entityName == null) {
             return;
@@ -259,7 +259,7 @@ public abstract class AbsEntityDao<T extends AbsEntity> {
     /**
      * 删除实体的所有数据
      */
-    public void deleteAll() throws Exception{
+    public void deleteAll(){
         deleteAll(null);
     }
 
@@ -271,11 +271,11 @@ public abstract class AbsEntityDao<T extends AbsEntity> {
      * @param args  SQL的相关参数
      * @return T 如果SQL没有结果，会返回空
      */
-    public void deleteAll(String where, Object... args) throws Exception{
+    public void deleteAll(String where, Object... args){
         deleteAllEx("", where, args);
     }
 
-    public void deleteAllEx(String tb_alias, String where, Object... args) throws Exception{
+    public void deleteAllEx(String tb_alias, String where, Object... args){
         final String entityName = getEntityName();
         ModelEntity entity = getModelEntity();
         StringBuilder sql = new StringBuilder(64);
@@ -406,7 +406,7 @@ public abstract class AbsEntityDao<T extends AbsEntity> {
         final List<T> list = new ArrayList<>();
         findAll(tb_alias, where, new IBeanWorker<T>() {
             @Override
-            public void doWork(T bean) throws Exception{
+            public void doWork(T bean){
                 list.add(bean);
             }
         }, args);
@@ -493,7 +493,7 @@ public abstract class AbsEntityDao<T extends AbsEntity> {
         final List<T> list = new ArrayList<>();
         findAllFx(fieldnames, tb_alias, where, new IBeanWorker<T>() {
             @Override
-            public void doWork(T bean) throws Exception{
+            public void doWork(T bean){
                 list.add(bean);
             }
         }, args);
@@ -538,8 +538,8 @@ public abstract class AbsEntityDao<T extends AbsEntity> {
     }
 
     private class ResultSetExtractorOneRowImpl implements IDBCallback<T> {
-        private T entity = null;
-        private ModelEntity modelEntity = null;
+        private T entity;
+        private ModelEntity modelEntity;
 
         private ResultSetExtractorOneRowImpl(ModelEntity modelEntity, T entity) {
             this.modelEntity = modelEntity;
@@ -547,7 +547,7 @@ public abstract class AbsEntityDao<T extends AbsEntity> {
         }
 
         @Override
-        public T extractData(UtilCursor rs) throws Exception{
+        public T extractData(UtilCursor rs){
             if (rs.next()) {
                 readEntityFromRs(entity, rs);
             }

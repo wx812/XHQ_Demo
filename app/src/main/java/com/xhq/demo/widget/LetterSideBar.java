@@ -120,8 +120,6 @@ public class LetterSideBar extends View{
 
     /**
      * 向外公开的方法
-     *
-     * @param onTouchingLetterChangedListener
      */
     public void setOnTouchingLetterChangedListener(
             OnTouchingLetterChangedListener onTouchingLetterChangedListener){
@@ -135,7 +133,7 @@ public class LetterSideBar extends View{
      * @author coder
      */
     public interface OnTouchingLetterChangedListener{
-        public void onTouchingLetterChanged(String s);
+        void onTouchingLetterChanged(String s);
     }
 
 }

@@ -21,7 +21,7 @@ public class LogresWorker extends BaseAnswerCmdWorker<LogresCmd> {
     }
 
     @Override
-    protected void localDealCmd(LogresCmd cmd) throws Exception{
+    protected void localDealCmd(LogresCmd cmd){
         SPUtils.put(SPKey.USER_CONFIG, ApiKey.CommonUrlKey.sk, cmd.getSk());//保存sk;
         SPUtils.put(SPKey.USER_CONFIG, SPKey.USER_CODE, cmd.getUserCode());//保存居家号，后续以居家号初始化建表;
         SPUtils.put(SPKey.USER_CONFIG, SPKey.USER_STATE, 1);

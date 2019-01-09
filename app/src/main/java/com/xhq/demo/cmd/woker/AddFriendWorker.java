@@ -12,7 +12,7 @@ import com.xhq.demo.tools.StringUtils;
 
 public class AddFriendWorker extends BaseCmdWorker<AddFriendCmd> {
     @Override
-    protected void localDealCmd(AddFriendCmd cmd) throws Exception{
+    protected void localDealCmd(AddFriendCmd cmd){
         if (StringUtils.isEmpty(cmd.getGroupId())) {
             addFriend(cmd);
         }else {
@@ -20,7 +20,7 @@ public class AddFriendWorker extends BaseCmdWorker<AddFriendCmd> {
         }
     }
 
-    private void addFriend(final AddFriendCmd cmd) throws Exception{
+    private void addFriend(final AddFriendCmd cmd){
 //        AddFriendDao addFriendDao = new AddFriendDao();
 //        AddFriendEntity a = AddFriendBuffer.getInstance().get(cmd.getUserId());
 //        //添加加好友记录
@@ -66,7 +66,7 @@ public class AddFriendWorker extends BaseCmdWorker<AddFriendCmd> {
 //        }
     }
 
-    private void addGroup(final AddFriendCmd cmd) throws Exception{
+    private void addGroup(final AddFriendCmd cmd){
 //		LogUtil.e("addGroup  receive 1109");
 //        AddFriendDao addFriendDao = new AddFriendDao();
 //        AddFriendEntity addFriendEntity = AddFriendBuffer.getInstance().get(cmd.getGroupId()+cmd.getUserId());

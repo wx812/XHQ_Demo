@@ -61,8 +61,7 @@ public abstract class AbsEntityBuffer<E extends AbsEntity> {
      * 本地刷新，一般从数据库加载
      *
      * @param key 刷新指定key
-     * @return T
-     * @throws Exception
+     * @return E
      */
     protected E localReload(String key) throws Exception{
         final AbsEntityDao<E> dao = getEntityDao();
@@ -75,15 +74,13 @@ public abstract class AbsEntityBuffer<E extends AbsEntity> {
 
     /**
      * 本地刷新，所有数据；
-     *
-     * @throws Exception
      */
     protected void localReload() throws Exception{
                  clear();
         final AbsEntityDao<E> dao = getEntityDao();
         dao.findAll(getSqlAddtion(), new IBeanWorker<E>() {
             @Override
-            public void doWork(E entity) throws Exception{
+            public void doWork(E entity){
                 try {
                     add(entity);
 //                    put(entity.getEntityId(), entity);
@@ -129,7 +126,7 @@ public abstract class AbsEntityBuffer<E extends AbsEntity> {
         mapAll.put(key, obj);
     }
 
-    protected void innerRemove(final String key) throws Exception{
+    protected void innerRemove(final String key){
         doRemove(key);
         mapAll.remove(key);
     }
@@ -227,7 +224,7 @@ public abstract class AbsEntityBuffer<E extends AbsEntity> {
      * @return List
      */
     public List<E> getCacheList(Comparator<E> c) {
-        List<E> list = new ArrayList<E>();
+        List<E> list = new ArrayList<>();
         readLock();
         try {
             list.addAll(mapAll.values());

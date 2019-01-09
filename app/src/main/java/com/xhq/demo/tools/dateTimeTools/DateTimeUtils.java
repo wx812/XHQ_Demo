@@ -201,8 +201,8 @@ public class DateTimeUtils{
     public static final int HOUR = 3600000; // 时与毫秒的倍数
     public static final int DAY  = 86400000; // 天与毫秒的倍数
 
-    public static final String pattern_yMd = "yyyy-MM-dd";
-    public static final String pattern_yMdHms = "yyyy-MM-dd HH:mm:ss";
+    public static final String PATTERN_yMd = "yyyy-MM-dd";
+    public static final String PATTERN_yMdHms = "yyyy-MM-dd HH:mm:ss";
 
 
     /**
@@ -291,6 +291,9 @@ public class DateTimeUtils{
     }
 
 
+    /**
+     * use {@link #format2Date(String)} instead
+     */
     @Deprecated
     public static Date string2Date(String dateStr, String formatPattern){
         return new Date(string2Millis(dateStr, formatPattern));
@@ -302,7 +305,6 @@ public class DateTimeUtils{
      *
      * @param dateStr date time string
      * @param formatPattern format pattern of date time. eg: "y/m/d", "ymd", "y-m-d" etc.
-     * @return
      */
     public static Date parse2DateObj(@NonNull String dateStr, @NonNull String formatPattern){
         if(TextUtils.isEmpty(dateStr)) return null;
@@ -323,6 +325,9 @@ public class DateTimeUtils{
     }
 
 
+    /**
+     * use {@link #format2Long(String)}
+     */
     @Deprecated
     public static long string2Millis(String dateStr, String formatPattern){
         try{
@@ -341,7 +346,7 @@ public class DateTimeUtils{
      * @return {@link #format2yMd}
      */
     public static String format2yMd(Date date){
-        return format2String(date, pattern_yMd);
+        return format2String(date, PATTERN_yMd);
     }
 
 
@@ -352,7 +357,7 @@ public class DateTimeUtils{
      * @return the format eg: 2016-1-16
      */
     public static String format2yMd(long millis){
-        return format2String(millis, pattern_yMd);
+        return format2String(millis, PATTERN_yMd);
     }
 
 
@@ -363,7 +368,7 @@ public class DateTimeUtils{
      * @return {@link #format2yMdHms(long)}
      */
     public static String format2yMdHms(Date date){
-        return format2String(date, pattern_yMdHms);
+        return format2String(date, PATTERN_yMdHms);
     }
 
 
@@ -374,7 +379,7 @@ public class DateTimeUtils{
      * @return the format eg: 2016-1-16 13:04:11
      */
     public static String format2yMdHms(long millis){
-        return format2String(millis, pattern_yMdHms);
+        return format2String(millis, PATTERN_yMdHms);
     }
 
 
@@ -397,7 +402,7 @@ public class DateTimeUtils{
      * @return the format eg: 2016-1-16
      */
     public static String getCurrDate_yMd(){
-        return getCurrDateTime(pattern_yMd);
+        return getCurrDateTime(PATTERN_yMd);
     }
 
 
@@ -407,7 +412,7 @@ public class DateTimeUtils{
      * @return the format eg: 2016-1-16 13:04:11
      */
     public static String getCurrDateTime_yMdHms(){
-        return getCurrDateTime(pattern_yMdHms);
+        return getCurrDateTime(PATTERN_yMdHms);
     }
 
 
@@ -474,7 +479,7 @@ public class DateTimeUtils{
      */
     public static String getLastWeekDate(){
         Calendar c = Calendar.getInstance();
-        SimpleDateFormat format_yMd = new SimpleDateFormat(pattern_yMd, Locale.CHINA);
+        SimpleDateFormat format_yMd = new SimpleDateFormat(PATTERN_yMd, Locale.CHINA);
         c.setTime(new Date());
         c.add(Calendar.DATE, -6);
         Date d = c.getTime();
@@ -558,9 +563,6 @@ public class DateTimeUtils{
 
     /**
      * duration --> eg: long hours:minutes:seconds  --> String "00:00:00"
-     *
-     * @param duration
-     * @return
      */
     public static String getDurationString(long duration){
 //        long days = duration / DAY;
@@ -601,12 +603,8 @@ public class DateTimeUtils{
 
 
     public static String formatShowTime(String time, boolean show){
-        String showTime = null;
-
-        if(time.length() < 12){
-            return time;
-        }
-
+        String showTime;
+        if(time.length() < 12) return time;
         if(isCurrentDay(time)){
 //			showTime  = time.substring(11,16);
             showTime = time.substring(8, 10) + ":" + time.substring(10, 12);

@@ -27,6 +27,7 @@ import com.xhq.demo.HomeApp;
 import com.xhq.demo.R;
 import com.xhq.demo.constant.apiconfig.ApiKey;
 import com.xhq.demo.constant.apiconfig.ApiUrl;
+import com.xhq.demo.tools.appTools.AppUtils;
 import com.xhq.demo.tools.spTools.SPKey;
 import com.xhq.demo.tools.spTools.SPUtils;
 import com.xhq.demo.tools.uiTools.screen.ScreenUtils;
@@ -90,7 +91,7 @@ public class ImgUtilThdParty{
         Bitmap bitmap = Bitmap.createBitmap(widthPix, heightPix, Bitmap.Config.ARGB_8888);
         bitmap.setPixels(pixels, 0, widthPix, 0, 0, widthPix, heightPix);
 
-        if(logoBm != null) bitmap = ImageUtils.addLogo(bitmap, logoBm);
+        if(logoBm != null) bitmap = ImageUtil.addLogo(bitmap, logoBm);
         return bitmap;
 //        try{
 //                //必须使用compress方法将bitmap保存到文件中再进行读取。直接返回的bitmap是没有任何压缩的，内存消耗巨大！
@@ -168,7 +169,7 @@ public class ImgUtilThdParty{
         return new SimpleTarget<Bitmap>(){
             @Override
             public void onResourceReady(Bitmap resource, GlideAnimation glideAnimation){
-                Drawable drawable = new BitmapDrawable(resource);
+                Drawable drawable = new BitmapDrawable(AppUtils.getResources(),resource);
                 view.setBackground(drawable);
             }
         };

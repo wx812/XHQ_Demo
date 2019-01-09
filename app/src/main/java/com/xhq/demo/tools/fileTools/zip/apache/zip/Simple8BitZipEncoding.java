@@ -19,7 +19,6 @@
 
 package com.xhq.demo.tools.fileTools.zip.apache.zip;
 
-import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -102,13 +101,12 @@ class Simple8BitZipEncoding implements ZipEncoding{
      */
     public Simple8BitZipEncoding(final char[] highChars) {
         this.highChars = highChars.clone();
-        final List<Simple8BitChar> temp =
-            new ArrayList<Simple8BitChar>(this.highChars.length);
+        final List<Simple8BitChar> temp = new ArrayList<>(this.highChars.length);
 
         byte code = 127;
 
-        for (int i = 0; i < this.highChars.length; ++i) {
-            temp.add(new Simple8BitChar(++code, this.highChars[i]));
+        for(char highChar : this.highChars){
+            temp.add(new Simple8BitChar(++code, highChar));
         }
 
         Collections.sort(temp);
@@ -255,7 +253,7 @@ class Simple8BitZipEncoding implements ZipEncoding{
     /**
      * @see ZipEncoding#decode(byte[])
      */
-    public String decode(final byte[] data) throws IOException {
+    public String decode(final byte[] data){
         final char[] ret = new char[data.length];
 
         for (int i = 0; i < data.length; ++i) {

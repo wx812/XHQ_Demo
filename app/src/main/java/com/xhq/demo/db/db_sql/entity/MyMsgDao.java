@@ -26,7 +26,7 @@ public class MyMsgDao extends AbsEntityDao<MyMsgEntity>{
     }
 
     //保存指令
-    public static void saveMsg(BaseAnswerCmd cmd, int read_type, int send_type) throws Exception{
+    public static void saveMsg(BaseAnswerCmd cmd, int read_type, int send_type){
         int send_sign = ApiEnum.SendSignEnum.SENDDING.value;
         if(ApiEnum.SendTypeEnum.RECEIVE.value == send_type){
             send_sign = ApiEnum.SendSignEnum.SUCCESS.value;

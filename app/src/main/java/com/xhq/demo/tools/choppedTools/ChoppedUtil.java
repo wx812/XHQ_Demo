@@ -30,13 +30,8 @@ import android.text.style.ForegroundColorSpan;
 import com.xhq.demo.R;
 import com.xhq.demo.tools.appTools.AppUtils;
 
-import java.io.PrintWriter;
-import java.io.StringWriter;
-import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * <pre>
@@ -208,25 +203,7 @@ public class ChoppedUtil{
 
 
     /**
-     * 判断邮箱是否合法
-     *
-     * @param email
-     * @return
-     */
-    public static boolean isEmail(String email){
-        if(null == email || "".equals(email)) return false;
-        //Pattern p = Pattern.compile("\\w+@(\\w+.)+[a-z]{2,3}"); //简单匹配
-        Pattern p = Pattern.compile("\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*");//复杂匹配
-        Matcher m = p.matcher(email);
-        return m.matches();
-    }
-
-
-    /**
      * 打电话
-     *
-     * @param context
-     * @param phone
      */
     public static void makePhone(Context context, String phone){
         try{
@@ -244,30 +221,6 @@ public class ChoppedUtil{
         }
     }
 
-
-    /**
-     * 验证手机号是否存在
-     *
-     * @param mobiles
-     */
-    public static boolean isMobileNum(String mobiles){
-    /*
-    移动：134、135、136、137、138、139、150、151、157(TD)、158、159、187、188
-    联通：130、131、132、152、155、156、185、186
-    电信：133、153、180、189、（1349卫通）
-    虚拟运营商：17x
-    总结起来就是第一位必定为1，第二位必定为3或5或8，其他位置的可以为0-9
-    */
-        String telRegex = "[1][3578]\\d{9}";
-        //"[1]"代表第1位为数字1，"[3578]"代表第二位可以为3、5、7、8中的一个，"\\d{9}"代表后面是可以是0～9的数字，有9位。
-        return mobiles.matches(telRegex);
-    }
-
-
-    //隐藏手机号中间4位
-    public static String hideMobile(@NonNull String phone){
-        return phone.substring(0, phone.length() - (phone.substring(3)).length()) + "****" + phone.substring(7);
-    }
 
 
     //隐藏中间部分
@@ -326,8 +279,6 @@ public class ChoppedUtil{
 
     /**
      * 返回截取字段颜色
-     *
-     * @return
      */
     public static SpannableString setTextOtherColor(String str, int startNum, int endNum){
         SpannableString spannableString = new SpannableString(str);
@@ -339,8 +290,6 @@ public class ChoppedUtil{
 
     /**
      * 更新进程的Widget
-     *
-     * @param context
      */
     public static void updateProcessWidget(Context context) {
 //        AppWidgetManager awm = AppWidgetManager.getInstance(context);
@@ -369,11 +318,10 @@ public class ChoppedUtil{
     }
 
     public static String getBatteryStatus(Resources res, Intent batteryChangedIntent) {
-        final Intent intent = batteryChangedIntent;
 
-        int plugType = intent.getIntExtra(BatteryManager.EXTRA_PLUGGED, 0);
-        int status = intent.getIntExtra(BatteryManager.EXTRA_STATUS,
-                                        BatteryManager.BATTERY_STATUS_UNKNOWN);
+        int plugType = batteryChangedIntent.getIntExtra(BatteryManager.EXTRA_PLUGGED, 0);
+        int status = batteryChangedIntent.getIntExtra(BatteryManager.EXTRA_STATUS,
+                                                      BatteryManager.BATTERY_STATUS_UNKNOWN);
         String statusString;
         if (status == BatteryManager.BATTERY_STATUS_CHARGING) {
             statusString = (String)AppUtils.getAppContext().getText(R.string.battery_info_status_charging);
@@ -448,14 +396,6 @@ public class ChoppedUtil{
         } finally {
             structuredName.close();
         }
-    }
-
-
-    public static String getStackTrace(Throwable aThrowable) {
-        final Writer result = new StringWriter();
-        final PrintWriter printWriter = new PrintWriter(result);
-        aThrowable.printStackTrace(printWriter);
-        return result.toString();
     }
 
 

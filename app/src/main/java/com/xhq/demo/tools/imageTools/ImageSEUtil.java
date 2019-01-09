@@ -22,6 +22,7 @@ import android.renderscript.Element;
 import android.renderscript.RenderScript;
 import android.renderscript.ScriptIntrinsicBlur;
 import android.support.annotation.FloatRange;
+import android.support.annotation.NonNull;
 import android.widget.ImageView;
 
 import com.xhq.demo.tools.appTools.AppUtils;
@@ -30,7 +31,7 @@ import com.xhq.demo.tools.uiTools.screen.ScreenUtils;
 import java.io.File;
 import java.io.FileOutputStream;
 
-import static com.xhq.demo.tools.imageTools.ImageUtils.scaleBitmapBySample;
+import static com.xhq.demo.tools.imageTools.ImageUtil.scaleBitmapBySample;
 
 /**
  * <pre>
@@ -40,7 +41,7 @@ import static com.xhq.demo.tools.imageTools.ImageUtils.scaleBitmapBySample;
  *     Updt  : Description.
  * </pre>
  */
-public class ImageSEUtils{
+public class ImageSEUtil{
 
 
     /**
@@ -113,9 +114,8 @@ public class ImageSEUtils{
     /**
      * 旋转照片
      *
-     * @param bitmap
-     * @param degree
-     * @return
+     * @param bitmap 被旋转的 bitmap
+     * @param degree rotation degree
      */
     public static Bitmap rotateBitmap(Bitmap bitmap, int degree) {
         if (bitmap != null) {
@@ -134,7 +134,7 @@ public class ImageSEUtils{
         int screenH = ScreenUtils.getScreenH();
 
         Bitmap bm = scaleBitmapBySample(filePath, screenW, screenH);//获取一定尺寸的图片
-        int degree = ImageUtils.getRotateDegree(filePath);//获取相片拍摄角度
+        int degree = ImageUtil.getRotateDegree(filePath);//获取相片拍摄角度
 
         if (degree != 0) {//旋转照片角度，防止头像横着显示
             bm = rotateBitmap(bm, degree);
@@ -520,7 +520,7 @@ public class ImageSEUtils{
      * @return 模糊后的图片
      */
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
-    public static Bitmap renderScriptBlur(Bitmap src,
+    public static Bitmap renderScriptBlur(@NonNull Bitmap src,
                                           @FloatRange(from = 0, to = 25, fromInclusive = false) float radius){
         if(isEmptyBitmap(src)) return null;
         RenderScript rs = null;
@@ -528,8 +528,7 @@ public class ImageSEUtils{
             rs = RenderScript.create(AppUtils.getAppContext());
             rs.setMessageHandler(new RenderScript.RSMessageHandler());
             Allocation input = Allocation.createFromBitmap(rs, src, Allocation.MipmapControl.MIPMAP_NONE,
-                                                           Allocation
-                                                                   .USAGE_SCRIPT);
+                                                           Allocation.USAGE_SCRIPT);
             Allocation output = Allocation.createTyped(rs, input.getType());
             ScriptIntrinsicBlur blurScript = ScriptIntrinsicBlur.create(rs, Element.U8_4(rs));
             blurScript.setInput(input);
@@ -537,9 +536,7 @@ public class ImageSEUtils{
             blurScript.forEach(output);
             output.copyTo(src);
         }finally{
-            if(rs != null){
-                rs.destroy();
-            }
+            if(rs != null) rs.destroy();
         }
         return src;
     }
@@ -555,15 +552,9 @@ public class ImageSEUtils{
      */
     public static Bitmap stackBlur(Bitmap src, int radius, boolean recycle){
         Bitmap ret;
-        if(recycle){
-            ret = src;
-        }else{
-            ret = src.copy(src.getConfig(), true);
-        }
+        ret = recycle ? src : src.copy(src.getConfig(), true);
 
-        if(radius < 1){
-            return null;
-        }
+        if(radius < 1) return null;
 
         int w = ret.getWidth();
         int h = ret.getHeight();
@@ -641,9 +632,7 @@ public class ImageSEUtils{
                 goutSum -= sir[1];
                 boutSum -= sir[2];
 
-                if(y == 0){
-                    vMin[x] = Math.min(x + radius + 1, wm);
-                }
+                if(y == 0) vMin[x] = Math.min(x + radius + 1, wm);
                 p = pix[yw + vMin[x]];
 
                 sir[0] = (p & 0xff0000) >> 16;
@@ -701,9 +690,7 @@ public class ImageSEUtils{
                     boutSum += sir[2];
                 }
 
-                if(i < hm){
-                    yp += w;
-                }
+                if(i < hm) yp += w;
             }
             yi = x;
             stackPointer = radius;
@@ -722,9 +709,7 @@ public class ImageSEUtils{
                 goutSum -= sir[1];
                 boutSum -= sir[2];
 
-                if(x == 0){
-                    vMin[y] = Math.min(y + r1, hm) * w;
-                }
+                if(x == 0) vMin[y] = Math.min(y + r1, hm) * w;
                 p = x + vMin[y];
 
                 sir[0] = r[p];
@@ -762,11 +747,6 @@ public class ImageSEUtils{
 
     /**
      * 将YUV数据Bitmap byte[]数据转换成Bitmap图片
-     *
-     * @param data
-     * @param width
-     * @param height
-     * @return
      */
     public Bitmap yuvToBitmap(byte[] data, int width, int height){
         int frameSize = width * height;
@@ -839,11 +819,8 @@ public class ImageSEUtils{
 
     public static Bitmap decodeFrameToBitmap(byte[] frame){
         int[] colors = bitmapByteArrayToColor(frame);
-        if(colors == null){
-            return null;
-        }
-        Bitmap bmp = Bitmap.createBitmap(colors, 0, 1280, 1280, 720, Bitmap.Config.ARGB_8888);
-        return bmp;
+        if(colors == null) return null;
+        return Bitmap.createBitmap(colors, 0, 1280, 1280, 720, Bitmap.Config.ARGB_8888);
     }
 
 
@@ -854,11 +831,11 @@ public class ImageSEUtils{
     /**
      * 使用ColorFilter来改变亮度
      *
-     * @param imageview
-     * @param brightness
+     * @param iv 要改变的imageView
+     * @param brightness 亮度
      */
-    public static void changeBrightness(ImageView imageview, float brightness) {
-        imageview.setColorFilter(getBrightnessMatrixColorFilter(brightness));
+    public static void changeBrightness(ImageView iv, float brightness) {
+        iv.setColorFilter(getBrightnessMatrixColorFilter(brightness));
     }
     public static void changeBrightness(Drawable drawable, float brightness) {
         drawable.setColorFilter(getBrightnessMatrixColorFilter(brightness));

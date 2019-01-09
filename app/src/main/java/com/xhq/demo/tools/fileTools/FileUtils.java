@@ -1,5 +1,6 @@
 package com.xhq.demo.tools.fileTools;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -263,11 +264,8 @@ public class FileUtils{
     public static void deleteAllFile(final String filePath) {
         Thread t = new Thread(new Runnable() {
             public void run() {
-                // TODO Auto-generated method stub
                 File display = new File(filePath);
-                if (!display.exists()) {
-                    return;
-                }
+                if (!display.exists()) return;
                 File[] items = display.listFiles();
                 int i = display.listFiles().length;
                 for (int j = 0; j < i; j++) {
@@ -316,7 +314,7 @@ public class FileUtils{
      */
     public static StringBuilder readFile(@NonNull File file, @Nullable String charsetName){
         if(!file.isFile()) return null;
-        StringBuilder sb = new StringBuilder("");
+        StringBuilder sb = new StringBuilder();
         InputStreamReader isr = null;
         BufferedReader br = null;
         if(TextUtils.isEmpty(charsetName)) charsetName = "UTF-8";
@@ -570,9 +568,6 @@ public class FileUtils{
      *      getFolderName("/home/admin")      =   "/home"
      *      getFolderName("/home/admin/a.txt/b.mp3")  =   "/home/admin/a.txt"
      * </pre>
-     *
-     * @param filePath
-     * @return
      */
     public static String getFolderName(@NonNull String filePath){
         int filePos = filePath.lastIndexOf(File.separator);
@@ -721,7 +716,7 @@ public class FileUtils{
         return fileInfo;
     }
 
-    private static String ANDROID_SECURE = "/mnt/sdcard/.android_secure";
+    private static final String ANDROID_SECURE = "/mnt/sdcard/.android_secure";
     public static boolean isNormalFile(String fullName) {
         return !fullName.equals(ANDROID_SECURE);
     }
@@ -869,6 +864,7 @@ public class FileUtils{
      * @param objList object list
      * @param <T> T
      */
+    @SuppressLint("CheckResult")
     public static <T> void getObjFromFile(String filePath, final List<T> objList){
         File f = new File(filePath);
         if(f.exists() && !f.isDirectory()){
@@ -905,8 +901,8 @@ public class FileUtils{
         Context ctx = AppUtils.getAppContext();
         //保存在本地
         try{
-            // 通过openFileOutput方法得到一个输出流，方法参数为创建的文件名（不能有斜杠），操作模式
-            FileOutputStream fos = ctx.openFileOutput("oauth_1.out", Context.MODE_WORLD_READABLE);
+            // 通过openFileOutput方法得到一个输出流，方法参数为创建的文件名（不能有斜杠）
+            FileOutputStream fos = ctx.openFileOutput("oauth_1.out", Context.MODE_PRIVATE);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(oAuth_1);// 写入
             fos.close(); // 关闭输出流

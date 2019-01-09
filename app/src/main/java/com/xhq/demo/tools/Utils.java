@@ -14,7 +14,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.provider.Settings;
 import android.support.annotation.DrawableRes;
-import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.ArrayMap;
@@ -180,7 +179,6 @@ public class Utils{
     /**
      * 判断某个服务是否正在运行的方法
      *
-     * @param ctx
      * @param serviceName 是包名+服务的类名（例如：net.loonggg.testbackstage.TestService）
      * @return true代表正在运行，false代表服务没有正在运行
      */
@@ -203,30 +201,27 @@ public class Utils{
 
     /**
      * 6.0 以上版本 检测是否有定位权限  没有提示用户开启权限
-     *
-     * @param context
      */
-
-    public static void CheckLocationPermission(final Context context) {
+    public static void CheckLocationPermission(final Context ctx) {
         //android 6.0
         if (DeviceUtils.getSDK_VCode() >= Build.VERSION_CODES.M) {
-            int permission_fine = ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION);
-            int permission_coarse = ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION);
+            int permission_fine = ContextCompat.checkSelfPermission(ctx, Manifest.permission.ACCESS_FINE_LOCATION);
+            int permission_coarse = ContextCompat.checkSelfPermission(ctx, Manifest.permission.ACCESS_COARSE_LOCATION);
             if (permission_coarse != PackageManager.PERMISSION_GRANTED || permission_fine != PackageManager.PERMISSION_GRANTED) {
                 //第一次拒绝权限后弹出提示  有不再提醒按钮
-                if (!ActivityCompat.shouldShowRequestPermissionRationale((Activity) context,
+                if (!ActivityCompat.shouldShowRequestPermissionRationale((Activity) ctx,
                                                                          Manifest.permission.ACCESS_COARSE_LOCATION)) {
-                    DialogUtils.showMessageOKCancel(context, "居家app需要定位功能，请允许",
+                    DialogUtils.showMessageOKCancel(ctx, "居家app需要定位功能，请允许",
                                                     new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-                                    ActivityCompat.requestPermissions((Activity) context,
+                                    ActivityCompat.requestPermissions((Activity) ctx,
                                                                       new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
                                                                       REQUEST_LOCATION);
                                 }
                             });
                 } else {
-                    new AlertDialog.Builder(context)
+                    new AlertDialog.Builder(ctx)
                             .setTitle("请允许获取位置信息")
                             .setMessage("由于居家无法获取位置信息的权限，不能正常运行，请开启权限后再使用。\n设置路径：系统设置->居家->权限")
                             .setCancelable(false)
@@ -234,14 +229,14 @@ public class Utils{
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-                                    intent.setData(Uri.parse("package:" + context.getPackageName()));
-                                    ((Activity) context).startActivityForResult(intent, 1);
+                                    intent.setData(Uri.parse("package:" + ctx.getPackageName()));
+                                    ((Activity) ctx).startActivityForResult(intent, 1);
                                 }
                             })
                             .setNegativeButton("取消", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-                                    ((Activity) context).finish();
+                                    ((Activity) ctx).finish();
                                 }
                             })
                             .create()
@@ -362,10 +357,6 @@ public class Utils{
 
 
 
-
-
-
-
     /**
      * 百度定位需要多权限
      * 1、获取手机状态：
@@ -378,14 +369,11 @@ public class Utils{
      * 3、读写SD卡：
      * Manifest.permission.READ_EXTERNAL_STORAGE
      * Manifest.permission.WRITE_EXTERNAL_STORAGE
-     *
-     * @param context
-     * @return
      */
-    public static boolean hasLocPermission(Context context) {
+    public static boolean hasLocPermission(Context ctx) {
         if (DeviceUtils.getSDK_VCode() >= Build.VERSION_CODES.M) {
-            int permission_fine = ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION);
-            int permission_coarse = ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION);
+            int permission_fine = ContextCompat.checkSelfPermission(ctx, Manifest.permission.ACCESS_FINE_LOCATION);
+            int permission_coarse = ContextCompat.checkSelfPermission(ctx, Manifest.permission.ACCESS_COARSE_LOCATION);
 /*		int permission_phone_state = ContextCompat.checkSelfPermission(context, Manifest.permission.READ_PHONE_STATE);
 		int permission_write = ContextCompat.checkSelfPermission(context, Manifest.permission.WRITE_EXTERNAL_STORAGE);
 		int permission_read = ContextCompat.checkSelfPermission(context, Manifest.permission.READ_EXTERNAL_STORAGE);*/
@@ -420,7 +408,6 @@ public class Utils{
         }
         return denyPermissions;
     }
-
 
 
 
@@ -514,8 +501,7 @@ public class Utils{
      * @param shortCutName shortcut name
      * @param drawableResId shortcut icon resource id
      */
-    @NonNull
-	public static void createShortcuts(String shortCutActName, String shortCutName, @DrawableRes int drawableResId) {
+    public static void createShortcuts(String shortCutActName, String shortCutName, @DrawableRes int drawableResId) {
         Context ctx = AppUtils.getAppContext();
 		Intent shortcutIntent = new Intent("com.android.launcher.action.INSTALL_SHORTCUT");
 		shortcutIntent.putExtra("duplicate", false);    //是否允许重复创建
@@ -548,9 +534,6 @@ public class Utils{
 
     /**
      * 判断是否有快捷方式
-     *
-     * @param context
-     * @return
      */
     public static boolean hasShortCut(Context context) {
         boolean exist = false;
@@ -698,9 +681,5 @@ public class Utils{
 //			}
 //		});
 //	}
-
-
-
-
 
 }

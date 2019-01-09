@@ -13,7 +13,7 @@ import com.xhq.demo.constant.apiconfig.ApiEnum;
 
 public class AgreeJoinGroupWorker extends BaseCmdWorker<AgrAdminCmd> {
     @Override
-    protected void localDealCmd(final AgrAdminCmd cmd) throws Exception{
+    protected void localDealCmd(final AgrAdminCmd cmd){
 //        String gid = cmd.getGroupId();
 //        String uid = cmd.getUserId();
 //        AddFriendEntity addFriendEntity = AddFriendBuffer.getInstance().get(gid+uid);

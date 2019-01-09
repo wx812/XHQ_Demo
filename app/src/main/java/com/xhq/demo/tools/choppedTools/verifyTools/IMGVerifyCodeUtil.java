@@ -18,9 +18,10 @@ public class IMGVerifyCodeUtil{
 	private static IMGVerifyCodeUtil bpUtil;
 
 	private IMGVerifyCodeUtil() {
-	};
+	}
 
-	public static IMGVerifyCodeUtil getInstance() {
+
+    public static IMGVerifyCodeUtil getInstance() {
 		if (bpUtil == null) bpUtil = new IMGVerifyCodeUtil();
 		return bpUtil;
 	}

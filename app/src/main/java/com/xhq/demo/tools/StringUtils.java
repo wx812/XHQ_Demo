@@ -1,6 +1,7 @@
 package com.xhq.demo.tools;
 
 import android.annotation.SuppressLint;
+import android.graphics.Typeface;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -10,16 +11,19 @@ import android.util.SparseBooleanArray;
 import android.util.SparseIntArray;
 import android.util.SparseLongArray;
 
+import com.xhq.demo.tools.appTools.AppUtils;
+
 import org.apache.commons.lang.StringEscapeUtils;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.PrintWriter;
-import java.io.StringWriter;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Array;
 import java.math.BigDecimal;
-import java.net.UnknownHostException;
 import java.text.Collator;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -34,7 +38,6 @@ import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
 import static org.apache.commons.lang.StringUtils.isBlank;
-import static org.apache.commons.lang.StringUtils.trim;
 
 /**
  * integration of the commonly used string tools Api.<br>
@@ -52,6 +55,7 @@ public class StringUtils{
     public static final char SEPARATOR = '_';
     public static final String CHARSET_UTF8 = "UTF-8";
     public static final String SPACE = "";
+    public static final String IS_SPACE = " ";
     public static final String DOT = ".";
     public static final String COMMA = ",";
 
@@ -69,10 +73,9 @@ public class StringUtils{
 
 
     /**
-     * 判断对象是否为空 , TextUtils.isEmpty判断是并不能去除有空格的字符串:" "
-     *
-     * @param obj 对象
-     * @return {@code true}: 为空<br>{@code false}: 不为空
+     * judgement obj is empty
+     * @param obj object
+     * @return {@code true}: empty<br>{@code false}: no empty
      */
     @SuppressLint("ObsoleteSdkInt")
     public static boolean isEmpty(Object obj){
@@ -106,9 +109,7 @@ public class StringUtils{
         }
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2){
             // SparseLongArray require api greater than or equal 15
-            if(obj instanceof SparseLongArray && ((SparseLongArray)obj).size() == 0){
-                return true;
-            }
+            return obj instanceof SparseLongArray && ((SparseLongArray)obj).size() == 0;
         }
         return false;
     }
@@ -165,7 +166,7 @@ public class StringUtils{
 
     public static boolean equalsIgnoreCase(String a, @NonNull String b){
         boolean region = a.regionMatches(true, 0, b, 0, b.length());
-        return (a == b) || (a.length() == b.length()) && region;
+        return (a.equals(b)) || (a.length() == b.length()) && region;
     }
 
 
@@ -207,29 +208,36 @@ public class StringUtils{
     }
 
 
-    /**
-     * Copied from "android.util.Log.getStackTraceString()" in order to avoid usage of Android stack
-     * in unit tests.
-     *
-     * @return Stack trace in form of String
-     */
-    static String getStackTraceString(Throwable tr){
-        if(tr == null) return "";
+    public static Object copyObj(Object oldObj) {
+        Object obj = null;
+        try {
+            // Write the object out to a byte array
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            ObjectOutputStream out = new ObjectOutputStream(bos);
+            out.writeObject(oldObj);
+            out.flush();
+            out.close();
 
-        // This is to reduce the amount of log spew that apps do in the non-error
-        // condition of the network being unavailable.
-        Throwable t = tr;
-        while(t != null){
-            if(t instanceof UnknownHostException) return "";
-            t = t.getCause();
+            // Retrieve an input stream from the byte array and read
+            // a copy of the object back in.
+            ByteArrayInputStream bis = new ByteArrayInputStream(bos.toByteArray());
+            ObjectInputStream in = new ObjectInputStream(bis);
+            obj = in.readObject();
+        } catch (ClassNotFoundException | IOException e) {
+            e.printStackTrace();
         }
-
-        StringWriter sw = new StringWriter();
-        PrintWriter pw = new PrintWriter(sw);
-        tr.printStackTrace(pw);
-        pw.flush();
-        return sw.toString();
+        return obj;
     }
+
+
+    /**
+     * 获得字体文件
+     * @param path eg: "fonts/Avenir.ttc"
+     */
+    public static Typeface getFonts(String path) {
+        return Typeface.createFromAsset(AppUtils.getAppContext().getAssets(), path);
+    }
+
 
 
     /**
@@ -419,10 +427,57 @@ public class StringUtils{
 
 
     /**
+     * 去掉字符串头尾特定字符
+     * @param mode
+     * <li>1: 去掉头部特定字符；
+     * <li>2: 去掉尾部特定字符；
+     * <li>3: 去掉头尾特定字符；
+     * @param value 待处理的字符串
+     * @param chars 需要去掉的特定字符
+     */
+    private static String trim(int mode, String value, char... chars){
+        if(value == null || value.length() <= 0) return value;
+
+        int startIndex = 0, endIndex = value.length(), index = 0;
+        if(mode == 1 || mode == 3){ // trim头部
+            while(index < endIndex){
+                if(contains(chars, value.charAt(index++))){
+                    startIndex++;
+                    continue;
+                }
+                break;
+            }
+        }
+
+        if(startIndex >= endIndex) return "";
+        if(mode == 2 || mode == 3){ // trim尾部
+            index = endIndex - 1;
+            while(index >= 0){
+                if(contains(chars, value.charAt(index--))){
+                    endIndex--;
+                    continue;
+                }
+                break;
+            }
+        }
+
+        if(startIndex >= endIndex) return "";
+        if(startIndex == 0 && endIndex == value.length() - 1) return value;
+        return value.substring(startIndex, endIndex);
+    }
+
+
+    private static boolean contains(char[] chars, char chr){
+        if(chars == null || chars.length <= 0) return false;
+        for(char aChar : chars){
+            if(aChar == chr) return true;
+        }
+        return false;
+    }
+
+
+    /**
      * 判断是否都是纯数字
-     *
-     * @param str
-     * @return
      */
     public static boolean isNumeric(String str){
         if(TextUtils.isEmpty(str)) return false;
@@ -449,6 +504,11 @@ public class StringUtils{
     //函数功能: 整数
     public static boolean isNumber(String s){
         return s.matches("^[-+][0-9]\\d*$");
+    }
+
+
+    public static boolean isNum(String str) {
+        return str.matches("^[-+]?(([0-9]+)([.]([0-9]+))?|([.]([0-9]+))?)$");
     }
 
 
@@ -524,7 +584,6 @@ public class StringUtils{
      *
      * @param regex 正则表达式
      * @param str 匹配的字符串
-     * @return
      */
     public static boolean matchByWildcard(String regex, String str){
         if(regex == null || str == null){return false;}
@@ -567,7 +626,6 @@ public class StringUtils{
                 }
             }else{
                 if(c != '?' && c != str.charAt(i)){
-                    result = false;
                     if(back_i != 0){// 有通配符,但是匹配未成功,回溯
                         beforeStar = true;
                         i = back_i;
@@ -634,7 +692,7 @@ public class StringUtils{
      */
     public static String bytes2HexString(byte[] byteArray){
         if(isEmpty(byteArray)) return null;
-        StringBuilder stringBuilder = new StringBuilder("");
+        StringBuilder stringBuilder = new StringBuilder();
         for(byte aByteArray : byteArray){
             int v = aByteArray & 0xFF;
             String hv = Integer.toHexString(v);
@@ -736,9 +794,6 @@ public class StringUtils{
 
     /**
      * 格式化数字,控制显示长度, eg: 1W+, 100W+ etc.
-     *
-     * @param count
-     * @return
      */
     public static String formatMillion(int count){
         if(count / (10000 * 100) > 0){
@@ -753,13 +808,13 @@ public class StringUtils{
 
     public static String pinConvert(String pin) throws Exception{
         byte[] bytes = toHexString(pin);
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder buffer = new StringBuilder();
         for(byte _byte : bytes){
             String s = Integer.toHexString(_byte);
             if(s.length() > 1){
                 buffer.append(s);
             }else{
-                buffer.append("0" + s);
+                buffer.append("0").append(s);
             }
         }
         return buffer.toString();
@@ -805,17 +860,6 @@ public class StringUtils{
     }
 
 
-    public static String getRandom(){
-        Random r = new Random();
-        long num = Math.abs(r.nextLong() % 10000000000L);
-        String s = String.valueOf(num);
-        for(int i = 0; i < 10 - s.length(); i++){
-            s = String.format("0%s", s);
-        }
-        return s;
-    }
-
-
     public static boolean isChineseName(String name){
         boolean result = true;
         if(TextUtils.isEmpty(name)){
@@ -849,9 +893,6 @@ public class StringUtils{
 
     /**
      * 字符串转换成引用的字符串, eg: 中国人 --> "中国人"
-     *
-     * @param string
-     * @return
      */
     static String string2ReferenceStr(String string){
         return "\"" + string + "\"";
@@ -906,9 +947,6 @@ public class StringUtils{
 
     /**
      * 转换为字节数组
-     *
-     * @param str
-     * @return
      */
     public static byte[] str2Bytes(String str){
         if(str != null){
@@ -924,10 +962,7 @@ public class StringUtils{
 
 
     /**
-     * 转换为字节数组
-     *
-     * @param bytes
-     * @return
+     * 字节数组转换为字符串
      */
     public static String byte2String(byte[] bytes){
         try{
@@ -938,158 +973,7 @@ public class StringUtils{
     }
 
 
-    /**
-     * 转换为Double类型
-     */
-    public static Double toDouble(Object val){
-        if(val == null) return 0D;
-        try{
-            return Double.valueOf(trim(val.toString()));
-        }catch(Exception e){
-            return 0D;
-        }
-    }
 
-
-    /**
-     * 获取浮点数(有错误默认为0)，可以识别金额中的逗号格式
-     *
-     * @param str 带转换的字符串
-     * @return 浮点数
-     */
-    public static double toDouble(String str){
-        if(str == null){return 0.0;}
-        str = str.trim();
-        if(str.equals(SPACE)){return 0.0;}
-        str = str.replaceAll(",", SPACE).replaceAll("，", SPACE);
-        try{
-            return Double.valueOf(str);
-        }catch(Exception e){
-            return 0.0;
-        }
-    }
-
-
-    /**
-     * 转换为Float类型
-     */
-    public static Float toFloat(Object val){
-        return toDouble(val).floatValue();
-    }
-
-
-    /**
-     * 转换为Long类型
-     */
-    public static Long toLong(Object val){
-        return toDouble(val).longValue();
-    }
-
-
-    /**
-     * 得到Long 获取转换的Long值，有错返回0
-     *
-     * @param str 带转换的字符串
-     * @return long
-     */
-    public static long toLong(String str){
-        return toLong(str, 0L);
-    }
-
-
-    public static long toLong(String str, long defValue){
-        if(str == null){return defValue;}
-        str = str.trim();
-        if(str.equals(SPACE)){return defValue;}
-        str = str.replaceAll(COMMA, SPACE).replaceAll("，", SPACE);
-        try{
-            return Long.valueOf(str);
-        }catch(Exception e){
-            return defValue;
-        }
-    }
-
-
-    /**
-     * 转换为boolean
-     */
-    public static boolean toBoolean(String v, boolean b){
-        if(v == null) return b;
-        return "1".equals(v) || "true".equalsIgnoreCase(v) || "Y".equalsIgnoreCase(v) || "yes".equalsIgnoreCase(v);
-    }
-
-
-    /**
-     * 转换为Integer类型
-     */
-    public static Integer toInteger(Object val){
-        return toLong(val).intValue();
-    }
-
-
-
-    /**
-     * {@link String}转换为{@link Integer}类型。
-     * <p>转换不成功时返回defaultValue并记录info或者warn日志，不会抛出任何异常。
-     * <p>value等于null或者为空字符串，或者在转换过程中发生异常，均返回defaultValue，否则返回转换后的{@link Integer}值。
-     * @param value 要转换成{@link Integer}值的字符串。
-     * @param defaultValue 转换不成功时的默认值（可以为null，这种情况下转换不成功时将返回null值）。
-     * @return
-     */
-    public static Integer toInt(String value, Integer defaultValue) {
-        if (value == null || value.trim().length() <= 0)
-            return defaultValue;
-
-        // 字符串中包含小数点，Integer.valueOf会报异常，先转换为BigDecimal，返回其整数部分
-        if (value.indexOf('.') >= 0) {
-            try {
-                Double d = Double.valueOf(value);
-                return d.intValue();
-            } catch (Exception e) {
-                return defaultValue;
-            }
-        }
-
-        // 当做整数字符串处理
-        try {
-            return Integer.valueOf(value);
-        } catch (Exception e) {
-            return defaultValue;
-        }
-    }
-
-
-
-    /**
-     * 得到int 获取转换的int值，有错返回0
-     *
-     * @param str 带转换的字符串
-     * @return int
-     */
-    public static int toInt(String str){
-        return toInt(str, 0);
-    }
-
-
-    public static int toInt(String str, int defValue){
-        if(str == null){return defValue;}
-        str = str.trim();
-        if(str.equals(SPACE)){return defValue;}
-        str = str.replaceAll(COMMA, SPACE).replaceAll("，", SPACE);
-        if(str.contains(DOT))
-            str = str.substring(0, str.indexOf(DOT.charAt(0)));
-        try{
-            return Integer.valueOf(str);
-        }catch(Exception e){
-            return defValue;
-        }
-    }
-
-
-    // comma separated number
-    public static String toStringFromLong(long number){
-        return String.format(Locale.getDefault(), "%,d", number);
-    }
 
 
     /**
@@ -1123,9 +1007,6 @@ public class StringUtils{
 
     /**
      * 替换为手机识别的HTML，去掉样式及属性，保留回车。
-     *
-     * @param html
-     * @return
      */
     public static String replaceMobileHtml(String html){
         if(html == null){
@@ -1149,7 +1030,6 @@ public class StringUtils{
      *
      * @param str 目标字符串
      * @param length 截取长度
-     * @return
      */
     public static String abbr(String str, int length){
         if(str == null) return "";
@@ -1178,16 +1058,15 @@ public class StringUtils{
      *
      * @param param 目标字符串
      * @param length 截取长度
-     * @return
      */
     public static String abbr2(String param, int length){
         if(param == null) return "";
-        StringBuffer result = new StringBuffer();
+        StringBuilder result = new StringBuilder();
         int n = 0;
         char temp;
         boolean isCode = false; // 是不是HTML代码
         boolean isHTML = false; // 是不是HTML特殊字符,如&nbsp;
-        for(int i = 0; i < param.length(); i++){
+        for(int i = 0, len = param.length(); i < len; i++){
             temp = param.charAt(i);
             if(temp == '<'){
                 isCode = true;
@@ -1329,12 +1208,27 @@ public class StringUtils{
     }
 
 
+    public static String getRandom(){
+        Random r = new Random();
+        long num = Math.abs(r.nextLong() % 10000000000L);
+        String s = String.valueOf(num);
+        for(int i = 0; i < 10 - s.length(); i++){
+            s = String.format("0%s", s);
+        }
+        return s;
+    }
+
+
+    /**
+     * 获得随机数不超过max
+     */
+    public static int random(int max) {
+        return new Random().nextInt(max) % (max + 1);
+    }
+
+
     /**
      * 俩整型间随机数
-     *
-     * @param begin
-     * @param end
-     * @return
      */
     public static int random(int begin, int end){
         return new Random().nextInt((end - begin + 1)) + begin;
@@ -1343,13 +1237,9 @@ public class StringUtils{
 
     /**
      * InputStream convert to string
-     *
-     * @param in
-     * @return
-     * @throws IOException
      */
     public static String inputStream2String(InputStream in) throws IOException{
-        StringBuffer out = new StringBuffer();
+        StringBuilder out = new StringBuilder();
         byte[] b = new byte[4096];
         for(int n; (n = in.read(b)) != -1; ){
             out.append(new String(b, 0, n));
@@ -1358,12 +1248,26 @@ public class StringUtils{
     }
 
 
+    public static int compare(String s1, String s2) {
+        if (TextUtils.isEmpty(s1) && TextUtils.isEmpty(s2)) {
+            return 0;
+        }
+
+        if (TextUtils.isEmpty(s1) && !TextUtils.isEmpty(s2)) {
+            return -1;
+        }
+
+        if (!TextUtils.isEmpty(s1) && TextUtils.isEmpty(s2)) {
+            return 1;
+        }
+
+        return s1.compareTo(s2);
+    }
+
+
     /**
      * 字符串拼接
      * String 使用+  一次+运算会涉及到4个对象  使用StringBuilder会节省n-1次
-     *
-     * @param strings
-     * @return
      */
     public static String splitJoint(String... strings){
         int capacity = 0;
@@ -1377,6 +1281,9 @@ public class StringUtils{
         }
         return sb.toString();
     }
+
+
+
 
 //    public static String getFullPinYin(String source){
 //        if (!Arrays.asList(Collator.getAvailableLocales()).contains(Locale.CHINA)) {

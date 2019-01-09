@@ -79,10 +79,7 @@ public class IPAddrEditText extends LinearLayout implements View.OnFocusChangeLi
 				return false;
 			}
 
-			if (Integer.parseInt(string) > 255) {
-//				Toast.makeText(this.mContext, R.string.ipaddredittext_err, Toast.LENGTH_SHORT).show();
-				return false;
-			}
+            return Integer.parseInt(string) <= 255;
 		}
 
 		return true;
@@ -164,13 +161,8 @@ public class IPAddrEditText extends LinearLayout implements View.OnFocusChangeLi
 	}
 
 	public boolean equals(Object obj) {
-		if (obj == null || (!(obj instanceof IPAddrEditText))
-		        || (!((IPAddrEditText) obj).getText().equals(getText()))) {
-			return false;
-		}
-
-		return true;
-	}
+        return (obj instanceof IPAddrEditText) && (((IPAddrEditText)obj).getText().equals(getText()));
+    }
 
 	public boolean isFocusedByIpEditText() {
 		return (this.editText1.isFocused()) || (this.editText2.isFocused())
@@ -178,11 +170,9 @@ public class IPAddrEditText extends LinearLayout implements View.OnFocusChangeLi
 	}
 
 	public String getText() {
-		StringBuffer sb = new StringBuffer();
-		sb.append(this.editText1.getText()).append(".").append(this.editText2.getText())
-		        .append(".").append(this.editText3.getText()).append(".")
-		        .append(this.editText4.getText());
-		return sb.toString();
+        return String.valueOf(this.editText1.getText()) + "." + this.editText2.getText() +
+                "." + this.editText3.getText() + "." +
+                this.editText4.getText();
 	}
 
 	public boolean isFocusedByIpEditTextOne() {
@@ -238,7 +228,7 @@ public class IPAddrEditText extends LinearLayout implements View.OnFocusChangeLi
 
 		if (et != null) {
 			View v = focusSearch(et, View.FOCUS_LEFT);
-			if ((v != null) && ((v instanceof EditText))) {
+			if (v instanceof EditText) {
 				EditText et2 = (EditText) v;
 				if (et.getText().length() == 0) {
 					et2.requestFocus();
@@ -264,7 +254,7 @@ public class IPAddrEditText extends LinearLayout implements View.OnFocusChangeLi
 			if ((this.bError) || (str.equals(this.tmp)))
 				return;
 
-			StringBuffer sb = new StringBuffer();
+			StringBuilder sb = new StringBuilder();
 			for (int i = 0; i < len; i++) {
 				if (DIGITS.indexOf(str.charAt(i)) >= 0) {
 					sb.append(str.charAt(i));

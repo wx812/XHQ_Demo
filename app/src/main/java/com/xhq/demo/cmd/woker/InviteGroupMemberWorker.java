@@ -12,7 +12,7 @@ import com.xhq.demo.tools.StringUtils;
 
 public class InviteGroupMemberWorker extends BaseCmdWorker<InviteGroMemberCmd> {
     @Override
-    protected void localDealCmd(final InviteGroMemberCmd cmd) throws Exception{
+    protected void localDealCmd(final InviteGroMemberCmd cmd){
         if (!StringUtils.isEmpty(cmd.getGroupId())) {
 //            AddFriendEntity addFriendEntity = AddFriendBuffer.getInstance().get(cmd.getGroupId()+cmd.getUserId());
 //            AddFriendDao addFriendDao = new AddFriendDao();

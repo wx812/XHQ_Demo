@@ -64,10 +64,7 @@ public class WiFiUtils{
             wifiMgr.setWifiEnabled(true);
         }
 
-        if (!wifiMgr.isWifiEnabled()) {
-            wifiMgr.setWifiEnabled(true);
-        }
-
+        if (!wifiMgr.isWifiEnabled()) wifiMgr.setWifiEnabled(true);
         return wifiMgr.getWifiState();
     }
 
@@ -164,11 +161,10 @@ public class WiFiUtils{
 
     @Deprecated
     private static int getWiFiAPState() {
-//        WifiManager wifiManager = (WifiManager) context.getSystemService("wifi");
-        WifiManager wifiManager = getWifiMgr();
+        WifiManager wifiMgr = getWifiMgr();
         int apState = 0;
-        if (wifiManager != null) {
-//            apState = wifiManager.getWifiApState();
+        if (wifiMgr != null) {
+//            apState = wifiMgr.getWifiApState();
 //            LogDebug.d(TAG, "WIFI AP STATE:" + apState);
             return apState;
         }
@@ -228,33 +224,27 @@ public class WiFiUtils{
 
     @Deprecated
     @RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
-    public static boolean isNetworkEnable(Context context) {
+    public static boolean isNetworkEnable() {
         if (getWiFiAPState()== 12) {
             return false;
         }
         if (getWiFiAPState()== 13) {
             return true;
         }
-//        ConnectivityManager networkManager = (ConnectivityManager) context
-//                .getSystemService("connectivity");
-        ConnectivityManager networkManager = getConnMgr();
+        ConnectivityManager connMgr = getConnMgr();
 
-        NetworkInfo info = networkManager.getNetworkInfo(1);
+        NetworkInfo info = connMgr.getNetworkInfo(1);
 
         if ((info != null) && (info.isConnected())) {
 //            LogDebug.d(TAG, "isNetworkEnable 1");
             return true;
         }
-        info = networkManager.getNetworkInfo(6);
+        info = connMgr.getNetworkInfo(6);
         if (info == null) {
-            info = networkManager.getNetworkInfo(9);
+            info = connMgr.getNetworkInfo(9);
         }
 
-        if ((info != null) && (info.isConnected())) {
-//            LogDebug.d(TAG, "isNetworkEnable 2");
-            return true;
-        }
-        return false;
+        return (info != null) && (info.isConnected());
     }
 
 

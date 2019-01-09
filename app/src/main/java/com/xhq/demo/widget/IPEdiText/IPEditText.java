@@ -18,13 +18,11 @@ public class IPEditText extends IPAddrEditText {
 	public boolean check() {
 		if (!super.check())
 			return false;
-		if ((!checkFirstNum(this.editText1.getText().toString())) || (isContainsZero()))
-			return false;
-		return true;
-	}
+        return (checkFirstNum(this.editText1.getText().toString())) && (!isContainsZero());
+    }
 
 	protected boolean isContainsZero() {
-		String ip = getText().toString().trim();
+		String ip = getText().trim();
 //		LogDebug.i(TAG, "address = " + ip);
 		String et1 = this.editText1.getText().toString().trim();
 		String et2 = this.editText2.getText().toString().trim();
@@ -32,10 +30,8 @@ public class IPEditText extends IPAddrEditText {
 		String et4 = this.editText4.getText().toString().trim();
 		if (("0".equals(et1)) || ("0".equals(et4)))
 			return true;
-		if ((et1.startsWith("0")) || ((et2.startsWith("0")) && (et2.length() > 1))
-		        || ((et3.startsWith("0")) && (et3.length() > 1)) || (et4.startsWith("0")))
-			return true;
+        return (et1.startsWith("0")) || ((et2.startsWith("0")) && (et2.length() > 1))
+                || ((et3.startsWith("0")) && (et3.length() > 1)) || (et4.startsWith("0"));
 
-		return false;
-	}
+    }
 }

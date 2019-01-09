@@ -13,7 +13,7 @@ import android.view.View;
  * implementations of this abstract class: for newer devices,
  * {@link #getInstance} will return a {@link SystemUiHiderHoneycomb} instance,
  * while on older devices {@link #getInstance} will return a
- * {@link SystemUiHiderBase} instance.
+ * {@link SystemUiHider} instance.
  * <p>
  * For more on system bars, see <a href=
  * "http://developer.android.com/design/get-started/ui-overview.html#system-bars"
@@ -79,7 +79,7 @@ public abstract class SystemUiHider {
 	/**
 	 * Creates and returns an instance of {@link SystemUiHider} that is
 	 * appropriate for this device. The object will be either a
-	 * {@link SystemUiHiderBase} or {@link SystemUiHiderHoneycomb} depending on
+	 * {@link SystemUiHider} or {@link SystemUiHiderHoneycomb} depending on
 	 * the device.
 	 * 
 	 * @param activity
@@ -166,6 +166,6 @@ public abstract class SystemUiHider {
 		 * @param visible
 		 *            True if the system UI is visible.
 		 */
-		public void onVisibilityChange(boolean visible);
+        void onVisibilityChange(boolean visible);
 	}
 }

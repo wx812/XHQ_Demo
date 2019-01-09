@@ -1,6 +1,6 @@
 package com.xhq.demo.base.bean;
 
-import com.xhq.demo.tools.StringUtils;
+import com.xhq.demo.tools.NumberUtil;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -49,7 +49,7 @@ public abstract class BaseBean{
         Object o = data.get(fieldName);
         if (o == null) return defValue;
         if (o instanceof Number) return ((Number) o).doubleValue();
-        return StringUtils.toDouble(o.toString());
+        return NumberUtil.toDouble(o.toString());
     }
 
     public int getInt(String fieldName) {
@@ -60,7 +60,7 @@ public abstract class BaseBean{
         Object o = data.get(fieldName);
         if (o == null) return defValue;
         if (o instanceof Number) return ((Number) o).intValue();
-        return StringUtils.toInt(o.toString());
+        return NumberUtil.toInt(o.toString());
     }
 
     public long getLong(String fieldName) {
@@ -71,7 +71,7 @@ public abstract class BaseBean{
         Object o = data.get(fieldName);
         if (o == null) return defValue;
         if (o instanceof Number) return ((Number) o).longValue();
-        return StringUtils.toLong(o.toString());
+        return NumberUtil.toLong(o.toString());
     }
 
     public boolean getBool(String fieldName) {
@@ -81,7 +81,7 @@ public abstract class BaseBean{
     public boolean getBool(String fieldName, boolean defValue) {
         Object o = data.get(fieldName);
         if (o == null) return defValue;
-        return StringUtils.toBoolean(o.toString(), false);
+        return NumberUtil.toBool(o.toString(), false);
     }
 
     public void put(String fieldName, Object value) {

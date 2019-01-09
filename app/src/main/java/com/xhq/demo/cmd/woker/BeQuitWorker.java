@@ -25,7 +25,7 @@ public class BeQuitWorker extends BaseCmdWorker<BesQuitCmd>{
     }
 
     @Override
-    protected void localDealCmd(BesQuitCmd cmd) throws Exception{
+    protected void localDealCmd(BesQuitCmd cmd){
         if (!isShowing) {
             showLoginSqueezeDialog();
         }

@@ -14,22 +14,16 @@ public class DnsEditText extends IPAddrEditText {
 	}
 
 	private boolean checkDNS(String ipValue) {
-		if (!checkDnsFirstNum(this.editText1.getText().toString()))
-			return false;
-		return true;
-	}
+        return checkDnsFirstNum(this.editText1.getText().toString());
+    }
 
 	private boolean checkDnsFirstNum(String ipValue) {
 		if ((ipValue.length() >= 2) && (ipValue.startsWith("0")))
 			return false;
 
 		int ip = Integer.parseInt(ipValue);
-		if ((ip == 127) || (ip == 169) || (ip > 223)) {
-			return false;
-		}
-
-		return true;
-	}
+        return (ip != 127) && (ip != 169) && (ip <= 223);
+    }
 
 	public boolean check() {
 		if (isAllEmpty())

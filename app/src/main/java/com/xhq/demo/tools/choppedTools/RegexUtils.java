@@ -52,7 +52,8 @@ public class RegexUtils {
      * @return {@code true}: 匹配<br>{@code false}: 不匹配
      */
     public static boolean isMobileSimple(CharSequence input) {
-        return isMatch(REGEX_MOBILE_SIMPLE, input);
+//        return isMatch(REGEX_MOBILE_SIMPLE, input);
+        return input != null && input.length() > 0 && Pattern.matches(REGEX_MOBILE_SIMPLE, input);
     }
 
     /**
@@ -62,7 +63,8 @@ public class RegexUtils {
      * @return {@code true}: 匹配<br>{@code false}: 不匹配
      */
     public static boolean isMobileExact(CharSequence input) {
-        return isMatch(REGEX_MOBILE_EXACT, input);
+//        return isMatch(REGEX_MOBILE_EXACT, input);
+        return input != null && input.length() > 0 && Pattern.matches(REGEX_MOBILE_EXACT, input);
     }
 
     /**

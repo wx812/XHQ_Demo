@@ -39,9 +39,9 @@ public class CircleMenuMainActivity extends BaseActivity implements CircleLayout
 
 	@Override
 	public void initView() {
-		circleMenu = (CircleLayout)findViewById(R.id.main_circle_layout);
+		circleMenu = findViewById(R.id.main_circle_layout);
 
-		selectedTextView = (TextView)findViewById(R.id.main_selected_textView);
+		selectedTextView = findViewById(R.id.main_selected_textView);
 		selectedTextView.setText(((CircleImageView)circleMenu.getSelectedItem()).getName());
 		
 	}
