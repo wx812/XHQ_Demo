@@ -12,7 +12,7 @@ import com.xhq.demo.constant.apiconfig.ApiEnum;
 import com.xhq.demo.constant.apiconfig.ApiKey;
 import com.xhq.demo.constant.apiconfig.ApiUrl;
 import com.xhq.demo.tools.MapUtils;
-import com.xhq.demo.tools.fileTools.StorageUtils;
+import com.xhq.demo.tools.fileTools.StorageUtil;
 import com.xhq.demo.tools.spTools.SPKey;
 import com.xhq.demo.tools.spTools.SPUtils;
 
@@ -45,7 +45,7 @@ public class CrashModel{
         String accountStr = SPUtils.get(SPKey.USER_CONFIG, SPKey.USER_ACCOUNT, "");
         final String fileName = "Crash-" + accountStr + ".log";
 
-        File crashDir = StorageUtils.getAppCacheDir("crash");
+        File crashDir = StorageUtil.getAppCacheDir("crash");
         File[] crashFiles = crashDir.listFiles();
         for(File crashFile1 : crashFiles){
             if(crashFile1.getAbsoluteFile().isDirectory()) continue;

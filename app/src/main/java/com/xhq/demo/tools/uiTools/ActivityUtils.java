@@ -21,7 +21,7 @@ import android.util.ArrayMap;
 import com.xhq.demo.tools.IntentUtils;
 import com.xhq.demo.tools.appTools.AppUtils;
 import com.xhq.demo.tools.dateTimeTools.DateTimeUtils;
-import com.xhq.demo.tools.fileTools.StorageUtils;
+import com.xhq.demo.tools.fileTools.StorageUtil;
 
 import java.io.File;
 import java.io.IOException;
@@ -107,7 +107,7 @@ public class ActivityUtils {
         //只能识别jpg格式的
 
         String imgFileUrl;
-        File cacheDir = StorageUtils.getAppCacheDir("");
+        File cacheDir = StorageUtil.getAppCacheDir("");
         String imgFileName = "img-" + DateTimeUtils.getCurrDateTime_yMdHms() + ".jpg";
 
         File imageFile = new File(cacheDir, imgFileName);
@@ -142,7 +142,7 @@ public class ActivityUtils {
      */
     public void cropImageUriAfterKikat(Fragment fragment, Uri uri){
 
-        final String IMGPATH = StorageUtils.getExStoragePubDir(Environment.DIRECTORY_DCIM).getPath();
+        final String IMGPATH = StorageUtil.getExStoragePubDir(Environment.DIRECTORY_DCIM).getPath();
         final String CROP_IMAGE_FILE_NAME = "crop.jpg";           //用于保存裁剪后图片
         final int SET_ALBUM_PICTURE_KITKAT = 40;
         int mSize = 0;  //区分截图大小

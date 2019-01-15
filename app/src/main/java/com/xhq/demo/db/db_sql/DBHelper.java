@@ -10,7 +10,7 @@ import com.xhq.demo.db.db_sql.entityConfig.ModelConfig.ModelEntityFactory;
 import com.xhq.demo.db.db_sql.interf.IDBCallback;
 import com.xhq.demo.db.db_sql.interf.IDbWorker;
 import com.xhq.demo.tools.fileTools.FileUtils;
-import com.xhq.demo.tools.fileTools.StorageUtils;
+import com.xhq.demo.tools.fileTools.StorageUtil;
 
 import java.io.File;
 import java.util.List;
@@ -28,7 +28,7 @@ public class DBHelper extends SQLiteOpenHelper{
 
     //初始化数据库
     public static void init(String uc) throws Exception{
-        String sdDir = StorageUtils.getSDPath();
+        String sdDir = StorageUtil.getSDPath();
         if (!sdDir.equals("")) {
             //创建该APP的目录
             FileUtils.makeDirs(sdDir + "/" + APPDIR + "/" + uc);

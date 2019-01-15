@@ -45,7 +45,7 @@ import com.xhq.demo.R;
 import com.xhq.demo.tools.StringUtils;
 import com.xhq.demo.tools.appTools.AppUtils;
 import com.xhq.demo.tools.fileTools.IOUtil;
-import com.xhq.demo.tools.fileTools.StorageUtils;
+import com.xhq.demo.tools.fileTools.StorageUtil;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -74,7 +74,7 @@ import java.util.regex.Pattern;
  */
 public class ImageUtil{
 
-    public static final String DCIM_DIR = StorageUtils.getExStoragePubDir(Environment.DIRECTORY_DCIM).getPath();
+    public static final String DCIM_DIR = StorageUtil.getExStoragePubDir(Environment.DIRECTORY_DCIM).getPath();
 
     /**
      * judgment bitmap is empty
@@ -1249,7 +1249,7 @@ public class ImageUtil{
 
     public static boolean saveImageToGallery(Context ctx, Bitmap bmp, boolean isPng) {
         if (bmp == null) return false;
-        File appDir = new File(StorageUtils.getExStorageDir(), ctx.getString(R.string.app_name));
+        File appDir = new File(StorageUtil.getExStorageDir(), ctx.getString(R.string.app_name));
         if(!appDir.exists() && !appDir.mkdir()) return false;
         String fileName;
         fileName = isPng ? System.currentTimeMillis() + ".png" : System.currentTimeMillis() + ".jpg";

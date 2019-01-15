@@ -23,8 +23,8 @@ import android.util.DisplayMetrics;
 
 import com.xhq.demo.tools.ShellUtils;
 import com.xhq.demo.tools.fileTools.IOUtil;
-import com.xhq.demo.tools.netTools.NetUtils;
-import com.xhq.demo.tools.netTools.WiFiUtils;
+import com.xhq.demo.tools.netTools.NetUtil;
+import com.xhq.demo.tools.netTools.WiFiUtil;
 import com.xhq.demo.tools.uiTools.screen.ScreenUtils;
 
 import java.io.DataOutputStream;
@@ -241,7 +241,7 @@ public class DeviceUtils{
      * @return SIM 卡是否可用
      */
     public static boolean isSIMAvailable(){
-        TelephonyManager tm = NetUtils.getTelMgr();
+        TelephonyManager tm = NetUtil.getTelMgr();
         return null != tm && tm.getSimState() == TelephonyManager.SIM_STATE_READY;
     }
 
@@ -288,7 +288,7 @@ public class DeviceUtils{
     @SuppressLint({"HardwareIds", "MissingPermission"})
     @RequiresPermission(Manifest.permission.READ_PHONE_STATE)
     public static String getIMSI(){
-        TelephonyManager tm = NetUtils.getTelMgr();
+        TelephonyManager tm = NetUtil.getTelMgr();
         if(null != tm) return tm.getSubscriberId();
         return null;
     }
@@ -451,7 +451,7 @@ public class DeviceUtils{
     public static String getMacAddressByWifiInfo(){
         String macAddress = "02:00:00:00:00:00";
         try{
-            WifiManager wifiMgr = WiFiUtils.getWifiMgr();
+            WifiManager wifiMgr = WiFiUtil.getWifiMgr();
             WifiInfo info = (null == wifiMgr ? null : wifiMgr.getConnectionInfo());
             if(null != info){
                 if(!TextUtils.isEmpty(info.getMacAddress())){

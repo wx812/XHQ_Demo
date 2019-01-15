@@ -32,7 +32,7 @@ import java.util.regex.Pattern;
  *     desc  : 网络相关工具类
  * </pre>
  */
-public class NetUtils{
+public class NetUtil{
 
     public static final int NET_TYPE_NO = -1;
     public static final int NET_TYPE_WIFI = 0;
@@ -64,7 +64,6 @@ public class NetUtils{
     }
 
 
-
     public static ConnectivityManager getConnMgr(){
         Context ctx = AppUtils.getAppContext();
         return (ConnectivityManager)ctx.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -79,45 +78,43 @@ public class NetUtils{
 
 
     /**
-     * get activate network information
+     * 判断网络是否连接
      *
-     * @return NetworkInfo
+     * @return {@code true}: 是<br>{@code false}: 否
      */
     @RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
-    public static NetworkInfo getActiveNetworkInfo(){
-        return getConnMgr().getActiveNetworkInfo();
+    public static boolean isConnected(){
+        NetworkInfo info = getActiveNetworkInfo();
+        boolean netState = info.getState() == NetworkInfo.State.CONNECTED;
+        return info.isConnected() && netState;
     }
 
-    @RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
-    public static boolean isWifiConnected(){
-        return getActiveNetworkType() == NET_TYPE_WIFI;
-    }
 
     /**
-     * is it a mobile data connected
+     * 检测网络是否连接, 获取所有的网络信息, 检查已经连接的网络类型
      */
     @RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
-    public static boolean isMobileDataConnected() {
-        NetworkInfo info = getActiveNetworkInfo();
-        return info != null && info.isAvailable() && info.getType() == ConnectivityManager.TYPE_MOBILE;
+    public static boolean isNetConnected(){
+        ConnectivityManager cm = getConnMgr();
+        if(cm != null){
+            NetworkInfo[] infos = cm.getAllNetworkInfo();
+            if(infos != null){
+                for(NetworkInfo ni : infos){
+                    if(ni.isConnected()) return true;
+                }
+            }
+        }
+        return false;
     }
+
 
     /*
      * 判断网络是否可用̬
      */
-    public static boolean isEnableNetwork() {
+    public static boolean isEnableNetwork(){
         ConnectivityManager connMgr = getConnMgr();
         return Objects.requireNonNull(connMgr).getActiveNetworkInfo() != null
                 && connMgr.getActiveNetworkInfo().isAvailable();
-    }
-
-
-    /**
-     * 判断网络是否是4G
-     */
-    @RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
-    public static boolean is4GConnected(){
-        return getActiveNetworkType() == NET_TYPE_4G;
     }
 
 
@@ -142,67 +139,54 @@ public class NetUtils{
 
 
     /**
-     * 打开或关闭移动数据
+     * get activate network information
      *
-     * @param enabled {@code true}: 打开<br>{@code false}: 关闭
-     */
-    @RequiresPermission(Manifest.permission.MODIFY_PHONE_STATE)
-    public static void setDataEnable(boolean enabled){
-        try{
-            TelephonyManager tm = getTelMgr();
-            Method dataEnabled = tm.getClass().getDeclaredMethod("setDataEnabled", boolean.class);
-            if(null != dataEnabled){
-                dataEnabled.invoke(tm, enabled);
-            }
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-    }
-
-
-
-    /**
-     * 判断网络是否可用
-     */
-    @RequiresPermission(Manifest.permission.INTERNET)
-    public static boolean isAvailableByPing(){
-        final String cmd = "ping -c 1 -w 1 223.5.5.5";
-        ShellUtils.CommandResult result = ShellUtils.execCmd(cmd, false);
-//        if(result.errorMsg != null){
-//            Log.d("isAvailableByPing", result.errorMsg);
-//        }
-        return result.result == 0;
-    }
-
-
-    /**
-     * 判断网络是否连接
-     *
-     * @return {@code true}: 是<br>{@code false}: 否
+     * @return NetworkInfo
      */
     @RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
-    public static boolean isConnected(){
+    public static NetworkInfo getActiveNetworkInfo(){
+        return getConnMgr().getActiveNetworkInfo();
+    }
+
+
+    /**
+     * is it a mobile data
+     */
+    @RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
+    public static boolean isMobile(){
         NetworkInfo info = getActiveNetworkInfo();
-        boolean netState = info.getState() == NetworkInfo.State.CONNECTED;
-        return info.isConnected() && netState;
+        return info != null && info.isAvailable() && info.getType() == ConnectivityManager.TYPE_MOBILE;
     }
 
 
     /**
-     * 检测网络是否连接, 获取所有的网络信息, 检查已经连接的网络类型
+     * is it a mobile data connected
      */
     @RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
-    public static boolean isNetConnected() {
-        ConnectivityManager cm = getConnMgr();
-        if (cm != null) {
-            NetworkInfo[] infos = cm.getAllNetworkInfo();
-            if (infos != null) {
-                for (NetworkInfo ni : infos) {
-                    if (ni.isConnected()) return true;
-                }
-            }
-        }
-        return false;
+    public static boolean isMobileDataConnected(){
+        NetworkInfo info = getActiveNetworkInfo();
+        return isMobile() && info.isConnected();
+    }
+
+
+    /**
+     * 判断网络是否是4G
+     */
+    @RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
+    public static boolean is4GConnected(){
+        return getActiveNetworkType() == NET_TYPE_4G;
+    }
+
+
+    @RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
+    public static boolean isWifi(){
+        return getActiveNetworkType() == NET_TYPE_WIFI;
+    }
+
+
+    @RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
+    public static boolean isWifiConnected(){
+        return isWifi() && getActiveNetworkInfo().isConnected();
     }
 
 
@@ -222,10 +206,42 @@ public class NetUtils{
 
 
     /**
-     * 判断网址是否有效<br>
-     * 查看 webkit 自带URLUtil工具类{@link android.webkit.URLUtil#isValidUrl(String)}
+     * 打开或关闭移动数据
+     *
+     * @param enabled {@code true}: 打开<br>{@code false}: 关闭
      */
-    public static boolean isValidUrl(String link) {
+    @RequiresPermission(Manifest.permission.MODIFY_PHONE_STATE)
+    public static void setDataEnable(boolean enabled){
+        try{
+            TelephonyManager tm = getTelMgr();
+            Method dataEnabled = tm.getClass().getDeclaredMethod("setDataEnabled", boolean.class);
+            if(null != dataEnabled){
+                dataEnabled.invoke(tm, enabled);
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
+
+    /**
+     * 判断网络是否可用
+     */
+    @RequiresPermission(Manifest.permission.INTERNET)
+    public static boolean isAvailableByPing(){
+        final String cmd = "ping -c 1 -w 1 223.5.5.5";
+        ShellUtils.CommandResult result = ShellUtils.execCmd(cmd, false);
+//        if(result.errorMsg != null){
+//            Log.d("isAvailableByPing", result.errorMsg);
+//        }
+        return result.result == 0;
+    }
+
+
+    /**
+     * 判断网址是否有效<br> 查看 webkit 自带URLUtil工具类{@link android.webkit.URLUtil#isValidUrl(String)}
+     */
+    public static boolean isValidUrl(String link){
         String regex = "^(http://|https://)?((?:[A-Za-z0-9]+-[A-Za-z0-9]+|[A-Za-z0-9]+)\\.)+([A-Za-z]+)[/?:]?.*$";
         Pattern pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(link);
@@ -246,23 +262,22 @@ public class NetUtils{
 
 
     /**
-     * 获取运营商名称
-     * IMSI号前面3位460是国家，紧接着后面2位00. 01是中国联通，02是中国移动，03是中国电信。
+     * 获取运营商名称 IMSI号前面3位460是国家，紧接着后面2位00. 01是中国联通，02是中国移动，03是中国电信。
      *
      * @return operator name
      */
     @SuppressLint({"HardwareIds", "MissingPermission"})
     @RequiresPermission(Manifest.permission.READ_PHONE_STATE)
-    public static String getOperatorByIMSI() {
+    public static String getOperatorByIMSI(){
         String providersName = null;
         TelephonyManager tm = getTelMgr();
         String IMSI = tm.getSubscriberId();
-        if (StringUtils.isNullOrEmpty(IMSI)) return "未知";
-        if (IMSI.startsWith("46000") || IMSI.startsWith("46002")) {
+        if(StringUtils.isNullOrEmpty(IMSI)) return "未知";
+        if(IMSI.startsWith("46000") || IMSI.startsWith("46002")){
             providersName = "中国移动"; // China Mobile
-        } else if (IMSI.startsWith("46001")) {
+        }else if(IMSI.startsWith("46001")){
             providersName = "中国联通"; // China Unicom
-        } else if (IMSI.startsWith("46003")) {
+        }else if(IMSI.startsWith("46003")){
             providersName = "中国电信"; // China Telecom
         }
         return providersName;

@@ -6,7 +6,7 @@ import android.os.Looper;
 import android.util.ArrayMap;
 
 import com.xhq.demo.HomeApp;
-import com.xhq.demo.tools.fileTools.StorageUtils;
+import com.xhq.demo.tools.fileTools.StorageUtil;
 import com.xhq.demo.tools.spTools.SPKey;
 import com.xhq.demo.tools.spTools.SPUtils;
 import com.xhq.demo.tools.uiTools.ToastUtils;
@@ -294,7 +294,7 @@ public class AppCrashUtil implements Thread.UncaughtExceptionHandler {
      */
     private File saveExpInfo2File(String exceptionInfo, String fileName) {
 
-        File cacheDir = StorageUtils.getAppCacheDir("crash");
+        File cacheDir = StorageUtil.getAppCacheDir("crash");
         File exceptionFile = new File(cacheDir, fileName);
 
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd-HH-mm", Locale.CHINA);

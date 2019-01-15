@@ -19,7 +19,7 @@ import com.xhq.demo.bean.BaseDataBean;
 import com.xhq.demo.constant.apiconfig.ApiKey;
 import com.xhq.demo.tools.ErrorMessage;
 import com.xhq.demo.tools.encodeTools.EncryptUtils;
-import com.xhq.demo.tools.fileTools.StorageUtils;
+import com.xhq.demo.tools.fileTools.StorageUtil;
 
 import java.io.File;
 import java.net.ConnectException;
@@ -69,7 +69,7 @@ public abstract class HttpModel {
     @SuppressLint("CheckResult")
     protected void downloadFile(String url, Map<String, String> params, final String requestType) {
 
-        String jmzw_download = StorageUtils.getAppCacheDir("JMZW_DOWNLOAD").getAbsolutePath();
+        String jmzw_download = StorageUtil.getAppCacheDir("JMZW_DOWNLOAD").getAbsolutePath();
 
         OkGo.<File>get(url)
                 .cacheMode(CacheMode.NO_CACHE)

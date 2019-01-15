@@ -683,7 +683,7 @@ public class FileUtils{
         String type = "*/*";
         String name = file.getName();
         if(!name.contains(FILE_DOT_SEPARATOR)) return "1";
-        String end = name.substring(name.lastIndexOf(FILE_DOT_SEPARATOR), name.length())
+        String end = name.substring(name.lastIndexOf(FILE_DOT_SEPARATOR))
                          .toLowerCase()
                          .trim();
         for(String[] aMIME_MapTable : MIME_MAP_TABLE){
@@ -831,7 +831,7 @@ public class FileUtils{
      * @param <T> T
      */
     private static <T> void SaveObj2File(List<T> objList, final String fileName){
-        File zoningFile = new File(StorageUtils.getAppCacheDir(""), "zoningData.out");
+        File zoningFile = new File(StorageUtil.getAppCacheDir(""), "zoningData.out");
         if(null == objList || objList.isEmpty()) return;
         if(!zoningFile.exists()){
             Observable.fromArray(objList)
@@ -913,8 +913,8 @@ public class FileUtils{
         }
 
         //保存在sd卡
-        if(StorageUtils.isEnableSDCard()){
-            File sdCardDir = StorageUtils.getExStorageDir();
+        if(StorageUtil.isEnableSDCard()){
+            File sdCardDir = StorageUtil.getExStorageDir();
             File sdFile = new File(sdCardDir, "oauth_1.out");
             try{
                 FileOutputStream fos = new FileOutputStream(sdFile);

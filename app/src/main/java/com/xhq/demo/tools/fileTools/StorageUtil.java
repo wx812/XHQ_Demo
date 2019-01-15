@@ -1,10 +1,12 @@
 package com.xhq.demo.tools.fileTools;
 
+import android.Manifest;
 import android.annotation.TargetApi;
 import android.os.Build;
 import android.os.Environment;
 import android.os.StatFs;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresPermission;
 import android.text.TextUtils;
 import android.text.format.Formatter;
 import android.util.Log;
@@ -69,7 +71,7 @@ import java.util.ArrayList;
  *     Updt  : 2017/12/22.
  * </pre>
  */
-public class StorageUtils{
+public class StorageUtil{
 
 //        private static final String TAG = StorageUtils.class.getName();
 
@@ -79,7 +81,7 @@ public class StorageUtils{
      *
      * @return {@code true:} SD Available<br>{@code false:} unavailable
      */
-//    @RequiresPermission(Manifest.permission.MOUNT_UNMOUNT_FILESYSTEMS)
+    @RequiresPermission(Manifest.permission.MOUNT_UNMOUNT_FILESYSTEMS)
     public static boolean isEnableSDCard(){
         return Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState());
     }
@@ -237,7 +239,7 @@ public class StorageUtils{
 //            {Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE})
     public static File getAppExStorageDir(@Nullable String subPath, boolean cacheDirOrFilesDir){
         File exStorageDir = null;
-        if(StorageUtils.isEnableExternalStorage()){
+        if(StorageUtil.isEnableExternalStorage()){
             exStorageDir = cacheDirOrFilesDir ? getAppExCacheDir(subPath) : getAppExFilesDir(subPath);
             //  Some phones need to customize the directory
             if(exStorageDir == null) exStorageDir = customizeAppExCacheDir(subPath);
@@ -255,7 +257,7 @@ public class StorageUtils{
     public static File customizeAppExCacheDir(@Nullable String subPath){
         File exCacheDir;
         StringBuilder sb = new StringBuilder();
-        File externalStorageDir = StorageUtils.getExStorageDir();
+        File externalStorageDir = StorageUtil.getExStorageDir();
         String packageName = AppUtils.getAppContext().getPackageName();
         sb.append("Android/data/").append(packageName).append(File.separator)
           .append("cache").append(File.separator).append(subPath);
@@ -369,7 +371,11 @@ public class StorageUtils{
      */
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
     public static String getSDFreeSpace(){
-        return getAvailableSize(getAvailableSize(getSDPath()));
+        if(isEnableSDCard()){
+            return getAvailableSize(getAvailableSize(getSDPath()));
+        }else {
+            return "0";
+        }
     }
 
 
@@ -407,9 +413,9 @@ public class StorageUtils{
      * get sd card info
      */
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
-    public static StorageUtils.SDCardInfo getSDCardInfo(){
+    public static StorageUtil.SDCardInfo getSDCardInfo(){
         if(!isEnableSDCard()) return null;
-        StorageUtils.SDCardInfo sd = new StorageUtils.SDCardInfo();
+        StorageUtil.SDCardInfo sd = new StorageUtil.SDCardInfo();
         sd.isExist = true;
         StatFs sf = new StatFs(getSDPath());
         sd.totalBlocks = sf.getBlockCountLong();
@@ -454,7 +460,7 @@ public class StorageUtils{
     public static String getExSDCardPath(){
         File sdCardFile;
         String path = null;
-        if(StorageUtils.isEnableExternalStorage()){
+        if(StorageUtil.isEnableExternalStorage()){
             sdCardFile = new File(getExStorageDir().getAbsolutePath());
             return sdCardFile.getAbsolutePath();
         }

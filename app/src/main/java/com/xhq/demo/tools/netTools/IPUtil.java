@@ -38,8 +38,8 @@ import java.util.regex.Pattern;
  * @version: v1.0
  * @since: JDK 1.8
  */
-public class IPUtils{
-	private static final String TAG = IPUtils.class.getName();
+public class IPUtil{
+	private static final String TAG = IPUtil.class.getName();
 
 	public static boolean ipCheck(String ipString) {
 		if(TextUtils.isEmpty(ipString)) return false;

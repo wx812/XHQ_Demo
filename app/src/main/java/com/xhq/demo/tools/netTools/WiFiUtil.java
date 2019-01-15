@@ -19,8 +19,8 @@ import java.util.List;
 import java.util.Set;
 
 import static com.xhq.demo.tools.appTools.AppUtils.getAppContext;
-import static com.xhq.demo.tools.netTools.NetUtils.getConnMgr;
-import static com.xhq.demo.tools.netTools.NetUtils.isAvailableByPing;
+import static com.xhq.demo.tools.netTools.NetUtil.getConnMgr;
+import static com.xhq.demo.tools.netTools.NetUtil.isAvailableByPing;
 
 /**
  * <pre>
@@ -30,7 +30,7 @@ import static com.xhq.demo.tools.netTools.NetUtils.isAvailableByPing;
  *     Updt  : Description.
  * </pre>
  */
-public class WiFiUtils{
+public class WiFiUtil{
 
     @SuppressLint("WifiManagerLeak")
     public static WifiManager getWifiMgr(){
@@ -154,9 +154,10 @@ public class WiFiUtils{
     @Deprecated
     @RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
     public static boolean isWifiConnected() {
-        ConnectivityManager cm = getConnMgr();
-        return cm != null && cm.getActiveNetworkInfo() != null
-                && cm.getActiveNetworkInfo().getType() == ConnectivityManager.TYPE_WIFI;
+        ConnectivityManager connMgr = getConnMgr();
+        if(null == connMgr) return false;
+        NetworkInfo info = connMgr.getActiveNetworkInfo();
+        return info != null && info.getType() == ConnectivityManager.TYPE_WIFI && info.isConnected();
     }
 
     @Deprecated

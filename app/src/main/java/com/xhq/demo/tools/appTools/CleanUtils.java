@@ -1,7 +1,7 @@
 package com.xhq.demo.tools.appTools;
 
 import com.xhq.demo.tools.fileTools.FileUtils;
-import com.xhq.demo.tools.fileTools.StorageUtils;
+import com.xhq.demo.tools.fileTools.StorageUtil;
 
 import java.io.File;
 
@@ -74,7 +74,7 @@ public class CleanUtils {
      * @return {@code true}: 清除成功<br>{@code false}: 清除失败
      */
     public static boolean cleanExternalCache() {
-        return StorageUtils.isEnableSDCard() && FileUtils.deleteFilesInDir(AppUtils.getAppContext().getExternalCacheDir());
+        return StorageUtil.isEnableSDCard() && FileUtils.deleteFilesInDir(AppUtils.getAppContext().getExternalCacheDir());
     }
 
     /**

@@ -13,7 +13,7 @@ import com.xhq.demo.tools.NumberUtil;
 import com.xhq.demo.tools.StringUtils;
 import com.xhq.demo.tools.appTools.DeviceUtils;
 import com.xhq.demo.tools.dateTimeTools.DateTimeUtils;
-import com.xhq.demo.tools.netTools.NetUtils;
+import com.xhq.demo.tools.netTools.NetUtil;
 import com.xhq.demo.tools.spTools.SPKey;
 import com.xhq.demo.tools.spTools.SPUtils;
 
@@ -68,7 +68,7 @@ public class SocketManager {
 
     //初始化
     public synchronized void init(Context context) {
-        this.netMobile = NetUtils.getActiveNetworkType();
+        this.netMobile = NetUtil.getActiveNetworkType();
         if (socketClient != null) return;
         isAutoConnected = false;
         isForceDisconnected = false;
@@ -129,7 +129,7 @@ public class SocketManager {
             timerReconnect.cancel();
             timerReconnect = null;
         }//重连中
-        if (!NetUtils.isConnected()) return;//本身没有网络，不用重连
+        if (!NetUtil.isConnected()) return;//本身没有网络，不用重连
 
         isAutoConnected = true;
         isForceDisconnected = false;
