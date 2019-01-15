@@ -209,8 +209,10 @@ android {
             }
             // eg: jmzw_v1.0.0_release_2018-07-08-20-31.apk
             outputFileName = "${(apkAbbrName as String)}_v${versionName}_${variant.buildType.name}_${time}.apk"
-            def relativeRootDir = output.packageApplication.outputDirectory.toPath().relativize(rootDir.toPath()).toFile()
-            output.outputFileName = new File( "$relativeRootDir/release", outputFileName)
+            // variantOutput.getPackageApplication() --> variant.getPackageApplicationProvider()
+            // It will be removed at the end of 2019.
+//            def relativeRootDir = output.packageApplication.outputDirectory.toPath().relativize(rootDir.toPath()).toFile()
+//            output.outputFileName = new File( "$relativeRootDir/release", outputFileName)
         }
 
     }

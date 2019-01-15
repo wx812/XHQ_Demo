@@ -122,8 +122,7 @@ public class IPAddrEditText extends LinearLayout implements View.OnFocusChangeLi
 		String str2 = this.editText2.getText().toString();
 		String str3 = this.editText3.getText().toString();
 		String str4 = this.editText4.getText().toString();
-		return (ipStringisNull(str1)) || (ipStringisNull(str2)) || (ipStringisNull(str3))
-		        || (ipStringisNull(str4));
+		return (ipStringisNull(str1)) || (ipStringisNull(str2)) || (ipStringisNull(str3)) || (ipStringisNull(str4));
 	}
 
 	public void setZero() {
